@@ -8,7 +8,8 @@ import 'package:food/src/pages/home_page.dart';
 //para estasrutas haremos uso del packete get
 getAplicationRoutes() => [
       GetPage(
-        name: 'information',
+        //La direccion raiz será la pagina informativa
+        name: '/',
         page: () => InformationPage(),
       ),
       GetPage(
@@ -24,7 +25,7 @@ getAplicationRoutes() => [
         page: () => RegisterPage(),
       ),
       GetPage(
-        name: '/',
+        name: 'home',
         page: () => HomePage(),
       ),
     ];

@@ -12,21 +12,21 @@ class LoginController extends GetxController {
   //Inicio de sesion con email y passwort
   void signInWithEmailAndPassword() async {
     try {
-      final user = (await _auth.signInWithEmailAndPassword(
+      (await _auth.signInWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       ))
           .user;
       Get.snackbar(
         'Hola',
-        'Su ingreso ha sido exitoso',
+        'Ha ingresado correctamente',
       );
       print('Ingreso bien');
       Future.delayed(
         Duration(seconds: 2),
         () {
           Get.toNamed(
-            '/HomePage',
+            'home',
           );
         },
       );
@@ -34,6 +34,43 @@ class LoginController extends GetxController {
       Get.snackbar(
         'Fallo',
         'No puede ingresar',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
+  }
+
+  //Ingreso con Google
+  void signInWithGoogle() async {
+    try {
+      UserCredential userCredential;
+      final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+      final GoogleAuthCredential googleAuthCredential =
+          GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      userCredential = await _auth.signInWithCredential(googleAuthCredential);
+      final user = userCredential.user;
+      Get.snackbar(
+        'Hola',
+        '${user.uid} iniciaste sesión con Google',
+      );
+      print('Ingreso bien');
+      Future.delayed(
+        Duration(seconds: 2),
+        () {
+          Get.toNamed(
+            'home',
+          );
+        },
+      );
+    } catch (e) {
+      print(e);
+      Get.snackbar(
+        'Fallo',
+        'No se puedo acceder con su cuenta de Google: $e',
         snackPosition: SnackPosition.BOTTOM,
       );
     }
@@ -64,42 +101,5 @@ class LoginController extends GetxController {
     Get.toNamed(
       '/InformtionPage',
     );
-  }
-
-  //Ingreso con Google
-  void singInWithGoogle() async {
-    try {
-      UserCredential userCredential;
-      final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
-      final GoogleAuthCredential googleAuthCredential =
-          GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-      userCredential = await _auth.signInWithCredential(googleAuthCredential);
-      final user = userCredential.user;
-      Get.snackbar(
-        'Hola',
-        '${user.uid} iniciaste sesión con Google',
-      );
-      print('Ingreso bien');
-      Future.delayed(
-        Duration(seconds: 2),
-        () {
-          Get.toNamed(
-            'HomePage',
-          );
-        },
-      );
-    } catch (e) {
-      print(e);
-      Get.snackbar(
-        'Fallo',
-        'No se puedo acceder con su cuenta de Google: $e',
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    }
   }
 }

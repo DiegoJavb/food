@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:food/src/pages/register_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_signin_button/button_list.dart';
+import 'package:flutter_signin_button/button_view.dart';
+import 'package:food/src/controllers/register_controller.dart';
 import 'package:get/get.dart';
 
 class RegisterOpccionPage extends StatefulWidget {
@@ -8,6 +11,9 @@ class RegisterOpccionPage extends StatefulWidget {
 }
 
 class _RegisterOpccionPageState extends State<RegisterOpccionPage> {
+  final _controller = Get.put(RegisterController());
+  FirebaseAuth auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +35,28 @@ class _RegisterOpccionPageState extends State<RegisterOpccionPage> {
     );
   }
 
+  Widget _facebookRegister() {
+    return Container(
+      padding: const EdgeInsets.all(10.0),
+      child: SignInButton(
+        Buttons.Facebook,
+        text: 'Inicia con Facebook',
+        onPressed: () async {},
+      ),
+    );
+  }
+
+  Widget _googleRegister() {
+    return Container(
+      padding: const EdgeInsets.all(10.0),
+      child: SignInButton(
+        Buttons.GoogleDark,
+        text: 'Inicia con Google',
+        onPressed: () async {},
+      ),
+    );
+  }
+
   Widget _crearCuenta() {
     return FloatingActionButton.extended(
       heroTag: 'boton crear cuenta',
@@ -36,42 +64,6 @@ class _RegisterOpccionPageState extends State<RegisterOpccionPage> {
       backgroundColor: Colors.pink[100],
       onPressed: () {
         Get.toNamed('register');
-      },
-    );
-  }
-
-  Widget _facebookRegister() {
-    return TextButton(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          CircleAvatar(backgroundImage: AssetImage('assets/13.jpg')),
-          SizedBox(
-            width: 30.0,
-          ),
-          Text('Registro con Facebook')
-        ],
-      ),
-      onPressed: () {
-        print('presionado');
-      },
-    );
-  }
-
-  Widget _googleRegister() {
-    return TextButton(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          CircleAvatar(backgroundImage: AssetImage('assets/13.jpg')),
-          SizedBox(
-            width: 30.0,
-          ),
-          Text('Registro con Google')
-        ],
-      ),
-      onPressed: () {
-        print('presionado');
       },
     );
   }

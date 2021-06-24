@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      initialRoute: 'information',
+      initialRoute: '/',
       navigatorKey: Get.key,
       getPages: getAplicationRoutes(),
     );
