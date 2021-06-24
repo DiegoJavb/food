@@ -21,9 +21,9 @@ class _LoginPageState extends State<LoginPage> {
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
         children: <Widget>[
-          // _faceBookLogin(),
+          _faceBookLogin(),
           Divider(),
-          // _googleLogin(),
+          _googleLogin(),
           Divider(),
           Center(child: Text('Ó')),
           Divider(),
@@ -34,6 +34,42 @@ class _LoginPageState extends State<LoginPage> {
           _loginButton(),
         ],
       ),
+    );
+  }
+
+  Widget _faceBookLogin() {
+    return FlatButton(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          CircleAvatar(backgroundImage: AssetImage('assets/13.jpg')),
+          SizedBox(
+            width: 30.0,
+          ),
+          Text('Inicia con Facebook')
+        ],
+      ),
+      onPressed: () {
+        print('presionado');
+      },
+    );
+  }
+
+  Widget _googleLogin() {
+    return FlatButton(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          CircleAvatar(backgroundImage: AssetImage('assets/13.jpg')),
+          SizedBox(
+            width: 30.0,
+          ),
+          Text('Inicia con Google')
+        ],
+      ),
+      onPressed: () {
+        print('presionado');
+      },
     );
   }
 

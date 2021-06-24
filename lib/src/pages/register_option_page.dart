@@ -15,9 +15,9 @@ class _RegisterOpccionPageState extends State<RegisterOpccionPage> {
         padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
         children: <Widget>[
           Icon(Icons.home),
-          _faceBookLRegister(),
+          _facebookRegister(),
           Divider(),
-          _googleLogin(),
+          _googleRegister(),
           Divider(),
           Center(child: Text('Ó')),
           Divider(),
@@ -42,20 +42,38 @@ class _RegisterOpccionPageState extends State<RegisterOpccionPage> {
     );
   }
 
-  Widget _faceBookLRegister() {
-    return ElevatedButton(
-      child: Text(''),
+  Widget _facebookRegister() {
+    return FlatButton(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          CircleAvatar(backgroundImage: AssetImage('assets/13.jpg')),
+          SizedBox(
+            width: 30.0,
+          ),
+          Text('Registro con Facebook')
+        ],
+      ),
       onPressed: () {
-        print('object');
+        print('presionado');
       },
     );
   }
 
-  _googleLogin() {
-    return ElevatedButton(
-      child: Text(''),
+  Widget _googleRegister() {
+    return FlatButton(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          CircleAvatar(backgroundImage: AssetImage('assets/13.jpg')),
+          SizedBox(
+            width: 30.0,
+          ),
+          Text('Registro con Google')
+        ],
+      ),
       onPressed: () {
-        print('object');
+        print('presionado');
       },
     );
   }
