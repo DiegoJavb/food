@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -21,50 +20,12 @@ class _HomePageState extends State<HomePage> {
               delegate: SliverChildListDelegate(
                 [
                   _cardTipo1(),
-                  _cardTipo2(),
-                  _cardTipo2(),
                   _cardTipo1(),
-                  _cardTipo2(),
                 ],
               ),
             )
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _cardTipo2() {
-    final card = Container(
-      child: Column(
-        children: [
-          FadeInImage(
-            image: NetworkImage(
-                'https://s1.1zoom.me/big3/471/Painting_Art_Back_view_Photographer_575380_3840x2400.jpg'),
-            placeholder: AssetImage('assets/jar-loading.gif'),
-            fadeInDuration: Duration(milliseconds: 200),
-            height: 300.0,
-            fit: BoxFit.cover,
-          ),
-          Container(padding: EdgeInsets.all(10.0), child: Text('algo algo'))
-        ],
-      ),
-    );
-
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30.0),
-          color: Colors.white,
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-                color: Colors.black26,
-                blurRadius: 10.0,
-                spreadRadius: 2.0,
-                offset: Offset(2.0, 8.0))
-          ]),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(30.0),
-        child: card,
       ),
     );
   }

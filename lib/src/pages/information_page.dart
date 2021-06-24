@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food/src/pages/login_page.dart';
-import 'package:food/src/pages/register_option_page.dart';
+import 'package:get/get.dart';
 
 class InformationPage extends StatelessWidget {
   @override
@@ -16,7 +15,7 @@ class InformationPage extends StatelessWidget {
           child: Center(
             child: _mostrarInfo(),
           )),
-      floatingActionButton: _crearBotones(context),
+      floatingActionButton: _crearBotones(),
     );
   }
 
@@ -46,7 +45,7 @@ class InformationPage extends StatelessWidget {
     );
   }
 
-  Widget _crearBotones(BuildContext context) {
+  Widget _crearBotones() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
@@ -59,10 +58,7 @@ class InformationPage extends StatelessWidget {
           foregroundColor: Colors.black,
           backgroundColor: Colors.white,
           onPressed: () {
-            final route = MaterialPageRoute(builder: (context) {
-              return LoginPage();
-            });
-            Navigator.push(context, route);
+            Get.toNamed('login');
           },
         ),
         Expanded(
@@ -76,10 +72,7 @@ class InformationPage extends StatelessWidget {
           foregroundColor: Colors.black,
           backgroundColor: Colors.white,
           onPressed: () {
-            final route = MaterialPageRoute(builder: (context) {
-              return RegisterOpccionPage();
-            });
-            Navigator.push(context, route);
+            Get.toNamed('register_opt');
           },
         ),
       ],

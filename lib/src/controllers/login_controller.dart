@@ -46,7 +46,7 @@ class LoginController extends GetxController {
   }
 
   void signOut() async {
-    final User user = await _auth.currentUser;
+    final User user = _auth.currentUser;
     if (user == null) {
       Get.snackbar(
         'Salir',

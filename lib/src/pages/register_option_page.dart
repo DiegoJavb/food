@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food/src/pages/register_page.dart';
+import 'package:get/get.dart';
 
 class RegisterOpccionPage extends StatefulWidget {
   @override
@@ -34,16 +35,13 @@ class _RegisterOpccionPageState extends State<RegisterOpccionPage> {
       label: const Text('Crear cuenta'),
       backgroundColor: Colors.pink[100],
       onPressed: () {
-        final route = MaterialPageRoute(
-          builder: (context) => RegisterPage(),
-        );
-        Navigator.push(context, route);
+        Get.toNamed('register');
       },
     );
   }
 
   Widget _facebookRegister() {
-    return FlatButton(
+    return TextButton(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -61,7 +59,7 @@ class _RegisterOpccionPageState extends State<RegisterOpccionPage> {
   }
 
   Widget _googleRegister() {
-    return FlatButton(
+    return TextButton(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
