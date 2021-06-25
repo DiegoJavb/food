@@ -18,19 +18,24 @@ class RegisterController extends GetxController {
     super.dispose();
   }
 
-  void register() async {
+  void registerUserWithEmailAndPassword() async {
     final User user = (await _auth.createUserWithEmailAndPassword(
       email: emailController.text,
       password: passwordController.text,
     ))
         .user;
     if (user != null) {
+      Get.snackbar(
+        'Hola',
+        'Ha ingresado correctamente',
+      );
       success = true;
-      print('se registro');
       Future.delayed(
         Duration(seconds: 2),
         () {
-          Get.toNamed('/HomePage');
+          Get.toNamed(
+            'home',
+          );
         },
       );
       userEmail = user.email;

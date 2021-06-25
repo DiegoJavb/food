@@ -21,7 +21,6 @@ class LoginController extends GetxController {
         'Hola',
         'Ha ingresado correctamente',
       );
-      print('Ingreso bien');
       Future.delayed(
         Duration(seconds: 2),
         () {
