@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:food/src/controllers/register_controller.dart';
 import 'package:food/src/pages/home_page.dart';
+import 'package:get/get.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -9,92 +11,107 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  String _email = '';
-  String _password = '';
-
+  final _controller = Get.put(RegisterController());
   FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
-        children: <Widget>[
-          const Text(
-            'Registrate',
-            style: TextStyle(fontSize: 30.0),
-          ),
-          Divider(
-            height: 60.0,
-          ),
-          _createUser(),
-          Divider(),
-          _createPassword(),
-          Divider(
-            height: 30.0,
-          ),
-          _createAccountButton(),
-        ],
+      body: GetBuilder<RegisterController>(
+        builder: (_) {
+          return SingleChildScrollView(
+            child: Form(
+              key: _controller.formKey,
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    padding: const EdgeInsets.all(10.0),
+                    child: const Text(
+                      'Registrate',
+                      style: TextStyle(fontSize: 30.0),
+                    ),
+                  ),
+                  _createUser(),
+                  _createPassword(),
+                  _createAccountButton(_),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }
 
   Widget _createUser() {
-    return TextField(
-      autofocus: true,
-      keyboardType: TextInputType.emailAddress,
-      decoration: InputDecoration(
-        hintText: 'Ingresar con correo',
-        icon: Icon(Icons.person),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)),
+    return Container(
+      padding: const EdgeInsets.all(10.0),
+      child: TextFormField(
+        controller: _controller.emailController,
+        keyboardType: TextInputType.emailAddress,
+        decoration: InputDecoration(
+          hintText: 'Ingresa correo',
+          icon: Icon(Icons.person),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)),
+        ),
+        validator: (value) {
+          if (value.isEmpty) return 'Ingrese correo';
+          return null;
+        },
       ),
-      onChanged: (value) => setState(() {
-        _email = value;
-      }),
     );
   }
 
   Widget _createPassword() {
-    return TextField(
-      obscureText: true,
-      decoration: InputDecoration(
-        hintText: 'Contraseña',
-        icon: Icon(Icons.lock),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)),
+    return Container(
+      padding: const EdgeInsets.all(10.0),
+      child: TextFormField(
+        controller: _controller.passwordController,
+        obscureText: true,
+        decoration: InputDecoration(
+          hintText: 'Contraseña',
+          icon: Icon(Icons.lock),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)),
+        ),
+        validator: (value) {
+          if (value.isEmpty) return 'porfavor ingrese una contraseña';
+          return null;
+        },
       ),
-      onChanged: (value) => setState(() {
-        _password = value;
-      }),
     );
   }
 
-  Widget _createAccountButton() {
-    return FloatingActionButton.extended(
-      label: const Text('Registrarse'),
-      backgroundColor: Colors.pink[100],
-      onPressed: () async {
-        try {
-          UserCredential userCredential =
-              await auth.createUserWithEmailAndPassword(
-            email: _email.toString().trim(),
-            password: _password.toString().trim(),
-          );
-          final route = MaterialPageRoute(
-            builder: (context) {
-              return HomePage();
-            },
-          );
-          Navigator.push(context, route);
-        } catch (e) {
-          Fluttertoast.showToast(
-            msg: e.toString(),
-            toastLength: Toast.LENGTH_SHORT,
-            timeInSecForIosWeb: 6,
-            gravity: ToastGravity.CENTER,
-          );
-        }
-      },
+  Widget _createAccountButton(_) {
+    return Container(
+      padding: const EdgeInsets.all(10.0),
+      child: FloatingActionButton.extended(
+        label: const Text('Registrarse'),
+        backgroundColor: Colors.pink[100],
+        onPressed: () async {
+          _.registerUserWithEmailAndPassword();
+          // try {
+          //   UserCredential userCredential =
+          //       await auth.createUserWithEmailAndPassword(
+          //     email: _email.toString().trim(),
+          //     password: _password.toString().trim(),
+          //   );
+          //   final route = MaterialPageRoute(
+          //     builder: (context) {
+          //       return HomePage();
+          //     },
+          //   );
+          //   Navigator.push(context, route);
+          // } catch (e) {
+          //   Fluttertoast.showToast(
+          //     msg: e.toString(),
+          //     toastLength: Toast.LENGTH_SHORT,
+          //     timeInSecForIosWeb: 6,
+          //     gravity: ToastGravity.CENTER,
+          //   );
+          // }
+        },
+      ),
     );
   }
 }

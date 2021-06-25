@@ -1,22 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:food/src/pages/login_page.dart';
-import 'package:food/src/pages/register_option_page.dart';
+import 'package:get/get.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class InformationPage extends StatelessWidget {
+  CarouselSlider carouselSlider;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/13.jpg'),
-              fit: BoxFit.cover,
-            ),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/13.jpg'),
+            fit: BoxFit.cover,
           ),
-          child: Center(
-            child: _mostrarInfo(),
-          )),
-      floatingActionButton: _crearBotones(context),
+        ),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 20.0,
+            ),
+            FlutterLogo(
+              size: 200.0,
+            ),
+            CarouselSlider(
+              items: <Widget>[
+                _card(),
+                _card(),
+              ],
+              options: CarouselOptions(),
+            )
+          ],
+        ),
+      ),
+      floatingActionButton: _crearBotones(),
     );
   }
 
@@ -46,7 +63,7 @@ class InformationPage extends StatelessWidget {
     );
   }
 
-  Widget _crearBotones(BuildContext context) {
+  Widget _crearBotones() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
@@ -59,10 +76,7 @@ class InformationPage extends StatelessWidget {
           foregroundColor: Colors.black,
           backgroundColor: Colors.white,
           onPressed: () {
-            final route = MaterialPageRoute(builder: (context) {
-              return LoginPage();
-            });
-            Navigator.push(context, route);
+            Get.toNamed('login');
           },
         ),
         Expanded(
@@ -76,13 +90,42 @@ class InformationPage extends StatelessWidget {
           foregroundColor: Colors.black,
           backgroundColor: Colors.white,
           onPressed: () {
-            final route = MaterialPageRoute(builder: (context) {
-              return RegisterOpccionPage();
-            });
-            Navigator.push(context, route);
+            Get.toNamed('register_opt');
           },
         ),
       ],
+    );
+  }
+
+  Widget _card() {
+    final card = Container(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Container(
+            width: 250.0,
+            padding: EdgeInsets.all(20.0),
+            child: Text('algo algo'),
+          )
+        ],
+      ),
+    );
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30.0),
+          color: Colors.white,
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 10.0,
+              spreadRadius: 2.0,
+              offset: Offset(2.0, 8.0),
+            )
+          ]),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(30.0),
+        child: card,
+      ),
     );
   }
 }
