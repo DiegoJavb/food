@@ -1,4 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:food/src/controllers/login_controller.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -6,19 +11,40 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _controller = Get.put(LoginController());
+  FirebaseAuth auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Material(
+    return Scaffold(
+      drawer: _drawer(),
+      body: Material(
         child: CustomScrollView(
           slivers: <Widget>[
-            SliverPersistentHeader(
-              delegate: MySliverAppBar(expandedHeight: 180),
+            SliverAppBar(
+              automaticallyImplyLeading: true,
+              floating: true,
               pinned: true,
+              title: Text('Usuario'),
+              expandedHeight: 150.0,
+              flexibleSpace: Stack(
+                children: [
+                  Positioned.fill(
+                    child: Image.network(
+                      "https://images.pexels.com/photos/396547/pexels-photo-396547.jpeg?auto=compress&cs=tinysrgb&h=350",
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ],
+              ),
             ),
             SliverList(
               delegate: SliverChildListDelegate(
                 [
+                  _cardTipo1(),
+                  _cardTipo1(),
+                  _cardTipo1(),
+                  _cardTipo1(),
                   _cardTipo1(),
                   _cardTipo1(),
                 ],
@@ -58,57 +84,35 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-}
 
-class MySliverAppBar extends SliverPersistentHeaderDelegate {
-  final double expandedHeight;
-  MySliverAppBar({@required this.expandedHeight});
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Stack(
-      clipBehavior: Clip.none,
-      fit: StackFit.expand,
-      children: [
-        Image.network(
-          "https://images.pexels.com/photos/396547/pexels-photo-396547.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-          fit: BoxFit.cover,
-        ),
-        Center(
-          child: Opacity(
-            opacity: shrinkOffset / expandedHeight,
-            //Titulo que se mostrara en el app bar
-            child: Text(
-              "MySliverAppBar",
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w700,
-                fontSize: 23,
+  Widget _drawer() {
+    return Drawer(
+      child: GetBuilder<LoginController>(
+        init: LoginController(),
+        builder: (_) {
+          return ListView(
+            key: _controller.formKey,
+            children: [
+              ListTile(
+                title: Text('Usuario: '),
               ),
-            ),
-          ),
-        ),
-        Positioned(
-          top: 30.0,
-          child: Opacity(
-            opacity: (1 - shrinkOffset / expandedHeight),
-            child: CircleAvatar(
-              radius: 60.0,
-              child: FlutterLogo(),
-            ),
-          ),
-        )
-      ],
+              ListTile(
+                title: Text('Usuario: '),
+              ),
+              FloatingActionButton.extended(
+                heroTag: 'boton salir',
+                label: const Text('Salir'),
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.red,
+                onPressed: () async {
+                  _.signOut();
+                  // Get.toNamed('/');
+                },
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
-
-  @override
-  double get maxExtent => expandedHeight;
-
-  @override
-  double get minExtent => kToolbarHeight;
-
-  @override
-  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
 }

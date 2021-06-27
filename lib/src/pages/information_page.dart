@@ -37,32 +37,6 @@ class InformationPage extends StatelessWidget {
     );
   }
 
-  Widget _mostrarInfo() {
-    return Container(
-      height: 200.0,
-      width: 300.0,
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
-        ),
-        child: Column(
-          children: <Widget>[
-            ListTile(
-              title: Column(
-                children: <Widget>[
-                  Center(child: Text('Has ejercicio')),
-                  Divider(),
-                ],
-              ),
-              subtitle: Text(
-                  'Hacer ejercicio diariamente no solo te ayuda a despejar la mente, tambien aumenta tu energia y mantienes un estilo de vida saludable'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   Widget _crearBotones() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -105,7 +79,16 @@ class InformationPage extends StatelessWidget {
           Container(
             width: 250.0,
             padding: EdgeInsets.all(20.0),
-            child: Text('algo algo'),
+            child: ListTile(
+              title: Column(
+                children: <Widget>[
+                  Center(child: Text('Has ejercicio')),
+                  Divider(),
+                ],
+              ),
+              subtitle: Text(
+                  'Hacer ejercicio diariamente no solo te ayuda a despejar la mente, tambien aumenta tu energia y mantienes un estilo de vida saludable'),
+            ),
           )
         ],
       ),

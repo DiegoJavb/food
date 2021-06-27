@@ -58,7 +58,7 @@ class LoginController extends GetxController {
       );
       print('Ingreso bien');
       Future.delayed(
-        Duration(seconds: 2),
+        Duration(seconds: 3),
         () {
           Get.toNamed(
             'home',
@@ -95,10 +95,15 @@ class LoginController extends GetxController {
     Get.snackbar(
       'Salir',
       uid + ' ha salido con exito ',
-      snackPosition: SnackPosition.BOTTOM,
+      snackPosition: SnackPosition.TOP,
     );
-    Get.toNamed(
-      '/InformtionPage',
+    Future.delayed(
+      Duration(seconds: 3),
+      () {
+        Get.toNamed(
+          '/',
+        );
+      },
     );
   }
 }
