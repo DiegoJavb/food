@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-class InformationPage extends StatelessWidget {
+class InformationPage extends StatefulWidget {
+  @override
+  _InformationPageState createState() => _InformationPageState();
+}
+
+class _InformationPageState extends State<InformationPage> {
   CarouselSlider carouselSlider;
 
   @override

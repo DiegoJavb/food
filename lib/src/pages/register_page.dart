@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:food/src/controllers/register_controller.dart';
-import 'package:food/src/pages/home_page.dart';
 import 'package:get/get.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -90,26 +88,6 @@ class _RegisterPageState extends State<RegisterPage> {
         backgroundColor: Colors.pink[100],
         onPressed: () async {
           _.registerUserWithEmailAndPassword();
-          // try {
-          //   UserCredential userCredential =
-          //       await auth.createUserWithEmailAndPassword(
-          //     email: _email.toString().trim(),
-          //     password: _password.toString().trim(),
-          //   );
-          //   final route = MaterialPageRoute(
-          //     builder: (context) {
-          //       return HomePage();
-          //     },
-          //   );
-          //   Navigator.push(context, route);
-          // } catch (e) {
-          //   Fluttertoast.showToast(
-          //     msg: e.toString(),
-          //     toastLength: Toast.LENGTH_SHORT,
-          //     timeInSecForIosWeb: 6,
-          //     gravity: ToastGravity.CENTER,
-          //   );
-          // }
         },
       ),
     );
