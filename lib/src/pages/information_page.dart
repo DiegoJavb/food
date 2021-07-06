@@ -64,12 +64,13 @@ class _InformationPageState extends State<InformationPage> {
           ),
         ),
         FloatingActionButton.extended(
-          heroTag: 'reguster button',
+          heroTag: 'register button',
           label: const Text('Registrarse'),
           foregroundColor: Colors.black,
           backgroundColor: Colors.white,
           onPressed: () {
-            Get.toNamed('register_opt');
+            // Get.toNamed('register_opt');
+            Get.toNamed('welcome');
           },
         ),
       ],

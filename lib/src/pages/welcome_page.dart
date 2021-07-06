@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class WelcomePage extends StatefulWidget {
   @override
@@ -8,6 +9,7 @@ class WelcomePage extends StatefulWidget {
 enum SingingCharacter { lafayette, jefferson }
 
 class _WelcomePageState extends State<WelcomePage> {
+  int _value = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,8 +38,47 @@ class _WelcomePageState extends State<WelcomePage> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        heroTag: 'siguiente button',
+        label: const Text(
+          'Siguiente',
+          style: TextStyle(fontSize: 20.0),
+        ),
+        foregroundColor: Colors.black,
+        backgroundColor: Colors.white,
+        onPressed: () {
+          Get.toNamed('register_opt');
+        },
+      ),
     );
   }
 
-  _crearCheckBoxes() {}
+  Widget _crearCheckBoxes() {
+    return Container(
+      child: Column(
+        children: <Widget>[
+          RadioListTile(
+            value: 1,
+            groupValue: _value,
+            onChanged: (value) {
+              setState(() {
+                _value = value;
+              });
+            },
+            title: Text('Nutricionista'),
+          ),
+          RadioListTile(
+            value: 0,
+            groupValue: _value,
+            onChanged: (value) {
+              setState(() {
+                _value = value;
+              });
+            },
+            title: Text('Paciente'),
+          ),
+        ],
+      ),
+    );
+  }
 }
