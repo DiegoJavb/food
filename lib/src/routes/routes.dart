@@ -1,4 +1,5 @@
 import 'package:food/src/pages/information_page.dart';
+import 'package:food/src/pages/record_page.dart';
 import 'package:food/src/pages/register_option_page.dart';
 import 'package:food/src/pages/register_page.dart';
 import 'package:food/src/pages/welcome_page.dart';
@@ -32,5 +33,9 @@ getAplicationRoutes() => [
       GetPage(
         name: 'welcome',
         page: () => WelcomePage(),
+      ),
+      GetPage(
+        name: 'record',
+        page: () => RecordPage(),
       ),
     ];
