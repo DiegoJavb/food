@@ -42,10 +42,10 @@ class LoginController extends GetxController {
   void signInWithGoogle() async {
     try {
       UserCredential userCredential;
-      final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAccount googleUser = (await GoogleSignIn().signIn())!;
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
-      final GoogleAuthCredential googleAuthCredential =
+      final OAuthCredential googleAuthCredential =
           GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
@@ -54,7 +54,7 @@ class LoginController extends GetxController {
       final user = userCredential.user;
       Get.snackbar(
         'Hola',
-        '${user.uid} iniciaste sesión con Google',
+        '${user!.uid} iniciaste sesión con Google',
       );
       print('Ingreso bien');
       Future.delayed(
@@ -82,7 +82,7 @@ class LoginController extends GetxController {
   }
 
   void signOut() async {
-    final User user = _auth.currentUser;
+    final User? user = _auth.currentUser;
     if (user == null) {
       Get.snackbar(
         'Salir',
@@ -91,7 +91,7 @@ class LoginController extends GetxController {
       );
     }
     _signOut();
-    final String uid = user.uid;
+    final String uid = user!.uid;
     Get.snackbar(
       'Salir',
       uid + ' ha salido con exito ',

@@ -4,11 +4,11 @@ final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final CollectionReference _mainCollection = _firestore.collection('notes');
 
 class Database {
-  static String userUid;
+  static String? userUid;
 
   static Future<void> addItem({
-    final String title,
-    final String description,
+    required String title,
+    required String description,
   }) async {
     DocumentReference documentReferencer =
         _mainCollection.doc(userUid).collection('items').doc();
@@ -25,9 +25,9 @@ class Database {
   }
 
   static Future<void> updateItem({
-    final String title,
-    final String description,
-    final String docId,
+    required String title,
+    required String description,
+    required String docId,
   }) async {
     DocumentReference documentReferencer =
         _mainCollection.doc(userUid).collection('items').doc(docId);
@@ -51,7 +51,7 @@ class Database {
   }
 
   static Future<void> deleteItem({
-    final String docId,
+    required String docId,
   }) async {
     DocumentReference documentReferencer =
         _mainCollection.doc(userUid).collection('items').doc(docId);
