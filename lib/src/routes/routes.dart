@@ -1,3 +1,4 @@
+import 'package:food/src/pages/add_appointment_page.dart';
 import 'package:food/src/pages/information_page.dart';
 import 'package:food/src/pages/record_page.dart';
 import 'package:food/src/pages/register_option_page.dart';
@@ -37,5 +38,9 @@ getAplicationRoutes() => [
       GetPage(
         name: 'record',
         page: () => RecordPage(),
+      ),
+      GetPage(
+        name: 'addAppointment',
+        page: () => AddAppointmentPage(),
       ),
     ];

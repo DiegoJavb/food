@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:food/src/controllers/login_controller.dart';
+import 'package:food/src/utils/database.dart';
 import 'package:get/get.dart';
 
 class LoginPage extends StatefulWidget {
@@ -11,6 +12,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  // final TextEditingController _uidController = TextEditingController();
   final _controller = Get.put(LoginController());
   FirebaseAuth auth = FirebaseAuth.instance;
 

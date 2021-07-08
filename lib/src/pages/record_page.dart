@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // import 'package:firebase_core/firebase_core.dart';
 import 'package:food/src/res/custom_colors.dart';
 import 'package:food/src/widgets/item_list.dart';
+import 'package:get/get.dart';
 
 class RecordPage extends StatefulWidget {
   @override
@@ -9,15 +10,6 @@ class RecordPage extends StatefulWidget {
 }
 
 class _RecordPageState extends State<RecordPage> {
-  // final FocusNode _uidFocusNode = FocusNode();
-  //INICIALIZANDO FIREBASE
-  // Future<FirebaseApp> _initializeFirebase() async {
-  //   FirebaseApp firebaseApp = await Firebase.initializeApp();
-
-  //   return firebaseApp;
-  // }
-
-  //WIDGET
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +31,9 @@ class _RecordPageState extends State<RecordPage> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+          Get.toNamed('addAppointment');
+        },
       ),
     );
   }
