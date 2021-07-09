@@ -14,10 +14,10 @@ class AddAppointmentPage extends StatelessWidget {
         _descriptionFocusNode.unfocus();
       },
       child: Scaffold(
-        backgroundColor: CustomColors.firebaseNavy,
+        // backgroundColor: CustomColors.firebaseNavy,
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: CustomColors.firebaseNavy,
+          // backgroundColor: CustomColors.firebaseNavy,
         ),
         body: SafeArea(
           child: Padding(

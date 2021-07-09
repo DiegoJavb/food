@@ -54,8 +54,8 @@ class CustomFormField extends StatelessWidget {
         labelStyle: TextStyle(color: CustomColors.firebaseYellow),
         hintText: _hint,
         hintStyle: TextStyle(
-          color: CustomColors.firebaseGrey.withOpacity(0.5),
-        ),
+            // color: CustomColors.firebaseGrey.withOpacity(0.5),
+            ),
         errorStyle: TextStyle(
           color: Colors.redAccent,
           fontWeight: FontWeight.bold,
@@ -70,8 +70,8 @@ class CustomFormField extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
           borderSide: BorderSide(
-            color: CustomColors.firebaseGrey.withOpacity(0.5),
-          ),
+              // color: CustomColors.firebaseGrey.withOpacity(0.5),
+              ),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),

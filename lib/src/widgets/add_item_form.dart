@@ -58,7 +58,7 @@ class _AddItemFormState extends State<AddItemForm> {
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
-                          color: CustomColors.firebaseGrey,
+                          // color: CustomColors.firebaseGrey,
                           letterSpacing: 2,
                         ),
                       ),
@@ -99,7 +99,7 @@ class _AddItemFormState extends State<AddItemForm> {
         Text(
           'Title',
           style: TextStyle(
-            color: CustomColors.firebaseGrey,
+            // color: CustomColors.firebaseGrey,
             fontSize: 22.0,
             letterSpacing: 1,
             fontWeight: FontWeight.bold,
@@ -122,7 +122,7 @@ class _AddItemFormState extends State<AddItemForm> {
         Text(
           'Description',
           style: TextStyle(
-            color: CustomColors.firebaseGrey,
+            // color: CustomColors.firebaseGrey,
             fontSize: 22.0,
             letterSpacing: 1,
             fontWeight: FontWeight.bold,

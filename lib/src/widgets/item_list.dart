@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:food/src/res/custom_colors.dart';
 import 'package:food/src/utils/database.dart';
+import 'package:get/get.dart';
 
 class ItemList extends StatelessWidget {
   @override
@@ -14,6 +15,7 @@ class ItemList extends StatelessWidget {
         } else if (snapshot.hasData || snapshot.data != null) {
           return ListView.separated(
             separatorBuilder: (context, index) => SizedBox(height: 16.0),
+            //DESDE AQUI CUENTA EL NUMERO DE DOCUMENTOS EN LA BASE DE DATOS
             itemCount: snapshot.data!.docs.length,
             itemBuilder: (BuildContext context, int index) {
               var noteInfo = snapshot.data!.docs[index];
@@ -22,13 +24,21 @@ class ItemList extends StatelessWidget {
               String description = noteInfo['description'];
               return Ink(
                 decoration: BoxDecoration(
-                  color: CustomColors.firebaseGrey.withOpacity(0.1),
+                  color: CustomColors.firebaseGrey.withOpacity(1.0),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: ListTile(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
+                  // onTap: () => Get.to(
+                  //   'EditAppointmentPage',
+                  //   arguments: {
+                  //     'currentTitle': title,
+                  //     'currentDescription': description,
+                  //     'documentId': docID,
+                  //   },
+                  // ),
                   // onTap: () => Navigator.of(context).push(
                   //   MaterialPageRoute(
                   //     builder: (context) => EditScreen(
