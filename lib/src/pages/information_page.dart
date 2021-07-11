@@ -8,7 +8,7 @@ class InformationPage extends StatefulWidget {
 }
 
 class _InformationPageState extends State<InformationPage> {
-  CarouselSlider carouselSlider;
+  late CarouselSlider carouselSlider;
 
   @override
   Widget build(BuildContext context) {

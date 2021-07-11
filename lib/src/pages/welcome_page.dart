@@ -9,7 +9,7 @@ class WelcomePage extends StatefulWidget {
 enum SingingCharacter { lafayette, jefferson }
 
 class _WelcomePageState extends State<WelcomePage> {
-  int _value = 1;
+  Object _value = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +62,7 @@ class _WelcomePageState extends State<WelcomePage> {
             groupValue: _value,
             onChanged: (value) {
               setState(() {
-                _value = value;
+                _value = value!;
               });
             },
             title: Text('Nutricionista'),
@@ -72,7 +72,7 @@ class _WelcomePageState extends State<WelcomePage> {
             groupValue: _value,
             onChanged: (value) {
               setState(() {
-                _value = value;
+                _value = value!;
               });
             },
             title: Text('Paciente'),

@@ -8,8 +8,8 @@ class RegisterController extends GetxController {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  bool success;
-  String userEmail;
+  late bool success;
+  late String userEmail;
 
   void dispose() {
     //lipmia el controlador cuando el Widget esta dispuesto
@@ -19,11 +19,11 @@ class RegisterController extends GetxController {
   }
 
   void registerUserWithEmailAndPassword() async {
-    final User user = (await _auth.createUserWithEmailAndPassword(
+    final User? user = (await _auth.createUserWithEmailAndPassword(
       email: emailController.text,
       password: passwordController.text,
     ))
-        .user;
+        .user!;
     if (user != null) {
       Get.snackbar(
         'Hola',
@@ -38,7 +38,7 @@ class RegisterController extends GetxController {
           );
         },
       );
-      userEmail = user.email;
+      userEmail = user.email!;
     } else {
       success = false;
     }

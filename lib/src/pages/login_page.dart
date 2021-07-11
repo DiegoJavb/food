@@ -11,6 +11,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  // final TextEditingController _uidController = TextEditingController();
   final _controller = Get.put(LoginController());
   FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -81,8 +82,8 @@ class _LoginPageState extends State<LoginPage> {
           icon: Icon(Icons.person),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)),
         ),
-        validator: (value) {
-          if (value.isEmpty) return 'Ingrese un correo';
+        validator: (String? value) {
+          if (value != null) return 'Ingrese un correo';
           return null;
         },
         // onChanged: (value) => setState(() => _user = value),
@@ -101,8 +102,8 @@ class _LoginPageState extends State<LoginPage> {
           icon: Icon(Icons.lock),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)),
         ),
-        validator: (value) {
-          if (value.isEmpty) return 'porfavor ingrese una contraseña';
+        validator: (String? value) {
+          if (value != null) return 'porfavor ingrese una contraseña';
           return null;
         },
         // onChanged: (value) => setState(() => _password = value),
