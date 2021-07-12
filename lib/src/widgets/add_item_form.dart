@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food/src/res/custom_colors.dart';
-import 'package:food/src/utils/database.dart';
+import 'package:food/src/controllers/database_controller.dart';
 import 'package:food/src/utils/validator.dart';
 // import 'package:flutterfire_samples/utils/database.dart';
 
@@ -54,7 +54,7 @@ class _AddItemFormState extends State<AddItemForm> {
                     child: Padding(
                       padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
                       child: Text(
-                        'ADD ITEM',
+                        'Registrar cita',
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -68,19 +68,12 @@ class _AddItemFormState extends State<AddItemForm> {
                       widget.descriptionFocusNode.unfocus();
 
                       if (_addItemFormKey.currentState!.validate()) {
-                        setState(() {
-                          _isProcessing = true;
-                        });
-
+                        setState(() => _isProcessing = true);
                         await Database.addItem(
                           title: _titleController.text,
                           description: _descriptionController.text,
                         );
-
-                        setState(() {
-                          _isProcessing = false;
-                        });
-
+                        setState(() => _isProcessing = false);
                         Navigator.of(context).pop();
                       }
                     },
@@ -105,19 +98,8 @@ class _AddItemFormState extends State<AddItemForm> {
             fontWeight: FontWeight.bold,
           ),
         ),
+        _createTitle(),
         SizedBox(height: 8.0),
-        CustomFormField(
-          isLabelEnabled: false,
-          controller: _titleController,
-          focusNode: widget.titleFocusNode,
-          keyboardType: TextInputType.text,
-          inputAction: TextInputAction.next,
-          validator: (value) => Validator.validateField(
-            value: value,
-          ),
-          label: 'Title',
-          hint: 'Enter your note title',
-        ),
         SizedBox(height: 24.0),
         Text(
           'Description',
@@ -129,20 +111,39 @@ class _AddItemFormState extends State<AddItemForm> {
           ),
         ),
         SizedBox(height: 8.0),
-        CustomFormField(
-          maxLines: 10,
-          isLabelEnabled: false,
-          controller: _descriptionController,
-          focusNode: widget.descriptionFocusNode,
-          keyboardType: TextInputType.text,
-          inputAction: TextInputAction.done,
-          validator: (value) => Validator.validateField(
-            value: value,
-          ),
-          label: 'Description',
-          hint: 'Enter your note description',
-        ),
+        _createDescription(),
       ],
+    );
+  }
+
+  Widget _createTitle() {
+    return CustomFormField(
+      isLabelEnabled: false,
+      controller: _titleController,
+      focusNode: widget.titleFocusNode,
+      keyboardType: TextInputType.text,
+      inputAction: TextInputAction.next,
+      validator: (value) => Validator.validateField(
+        value: value,
+      ),
+      label: 'Title',
+      hint: 'Enter your note title',
+    );
+  }
+
+  Widget _createDescription() {
+    return CustomFormField(
+      maxLines: 10,
+      isLabelEnabled: false,
+      controller: _descriptionController,
+      focusNode: widget.descriptionFocusNode,
+      keyboardType: TextInputType.text,
+      inputAction: TextInputAction.done,
+      validator: (value) => Validator.validateField(
+        value: value,
+      ),
+      label: 'Description',
+      hint: 'Enter your note description',
     );
   }
 }

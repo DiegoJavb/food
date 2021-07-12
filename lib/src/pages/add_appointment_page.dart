@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food/src/res/custom_colors.dart';
+// import 'package:food/src/res/custom_colors.dart';
 import 'package:food/src/widgets/add_item_form.dart';
 
 class AddAppointmentPage extends StatelessWidget {
@@ -16,9 +16,9 @@ class AddAppointmentPage extends StatelessWidget {
       child: Scaffold(
         // backgroundColor: CustomColors.firebaseNavy,
         appBar: AppBar(
-          elevation: 0,
-          // backgroundColor: CustomColors.firebaseNavy,
-        ),
+            // elevation: 0,
+            // backgroundColor: CustomColors.firebaseNavy,
+            ),
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.only(
