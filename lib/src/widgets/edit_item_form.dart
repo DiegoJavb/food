@@ -46,7 +46,7 @@ class _EditItemFormState extends State<EditItemForm> {
   Widget build(BuildContext context) {
     return Form(
       key: _editItemFormKey,
-      child: Column(
+      child: ListView(
         children: [
           Padding(
             padding: const EdgeInsets.only(
@@ -59,7 +59,7 @@ class _EditItemFormState extends State<EditItemForm> {
               children: [
                 SizedBox(height: 24.0),
                 Text(
-                  'Title',
+                  'Asunto',
                   style: TextStyle(
                     // color: CustomColors.firebaseGrey,
                     fontSize: 22.0,
@@ -77,12 +77,12 @@ class _EditItemFormState extends State<EditItemForm> {
                   validator: (value) => Validator.validateField(
                     value: value,
                   ),
-                  label: 'Title',
-                  hint: 'Enter your note title',
+                  label: 'Asunto',
+                  hint: 'Ingrese el Asunto',
                 ),
                 SizedBox(height: 24.0),
                 Text(
-                  'Description',
+                  'Descripción',
                   style: TextStyle(
                     // color: CustomColors.firebaseGrey,
                     fontSize: 22.0,
@@ -120,9 +120,9 @@ class _EditItemFormState extends State<EditItemForm> {
                   width: double.maxFinite,
                   child: ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                        CustomColors.firebaseOrange,
-                      ),
+                      // backgroundColor: MaterialStateProperty.all(
+                      //   CustomColors.firebaseOrange,
+                      // ),
                       shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -154,7 +154,7 @@ class _EditItemFormState extends State<EditItemForm> {
                     child: Padding(
                       padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
                       child: Text(
-                        'UPDATE ITEM',
+                        'Actualizar',
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,

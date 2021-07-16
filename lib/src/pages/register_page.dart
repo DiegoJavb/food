@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:food/src/controllers/register_controller.dart';
+import 'package:food/src/res/custom_colors.dart';
 import 'package:get/get.dart';
 
 class RegisterPage extends StatefulWidget {
+  final String currentUser;
+  RegisterPage({required this.currentUser});
+
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
@@ -13,9 +17,15 @@ class _RegisterPageState extends State<RegisterPage> {
   FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: CustomColors.firebaseNavy,
+      ),
       body: GetBuilder<RegisterController>(
         builder: (_) {
           return SingleChildScrollView(
@@ -49,7 +59,7 @@ class _RegisterPageState extends State<RegisterPage> {
         controller: _controller.emailController,
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
-          hintText: 'Ingresa correo',
+          hintText: 'Ingrese correo',
           icon: Icon(Icons.person),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)),
         ),

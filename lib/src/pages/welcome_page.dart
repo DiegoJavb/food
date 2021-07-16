@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:food/src/pages/register_option_page.dart';
+import 'package:food/src/res/custom_colors.dart';
 import 'package:get/get.dart';
+import 'package:food/src/providers/role_pass.dart' as role;
 
 class WelcomePage extends StatefulWidget {
   @override
   _WelcomePageState createState() => _WelcomePageState();
 }
 
-enum SingingCharacter { lafayette, jefferson }
+enum SingingCharacter { nutricionista, paciente }
 
 class _WelcomePageState extends State<WelcomePage> {
   Object _value = 1;
+  String _role = 'nutritionist';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: CustomColors.firebaseNavy,
+      ),
       body: Center(
         child: Column(
           children: <Widget>[
@@ -47,7 +53,9 @@ class _WelcomePageState extends State<WelcomePage> {
         foregroundColor: Colors.black,
         backgroundColor: Colors.white,
         onPressed: () {
-          Get.toNamed('register_opt');
+          Get.to(
+            () => RegisterOpccionPage(roleUser: _role),
+          );
         },
       ),
     );
@@ -63,6 +71,8 @@ class _WelcomePageState extends State<WelcomePage> {
             onChanged: (value) {
               setState(() {
                 _value = value!;
+                _role = 'nutritionist';
+                role.rolUser = _role;
               });
             },
             title: Text('Nutricionista'),
@@ -73,6 +83,8 @@ class _WelcomePageState extends State<WelcomePage> {
             onChanged: (value) {
               setState(() {
                 _value = value!;
+                _role = 'patient';
+                role.rolUser = _role;
               });
             },
             title: Text('Paciente'),
