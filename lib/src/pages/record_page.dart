@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food/src/res/custom_colors.dart';
 // import 'package:firebase_core/firebase_core.dart';
 // import 'package:food/src/res/custom_colors.dart';
 import 'package:food/src/widgets/item_list.dart';
@@ -15,8 +16,7 @@ class _RecordPageState extends State<RecordPage> {
     return Scaffold(
       // backgroundColor: CustomColors.firebaseNavy,
       appBar: AppBar(
-        elevation: 0,
-        // backgroundColor: CustomColors.firebaseNavy,
+        backgroundColor: CustomColors.firebaseNavy,
         title: Text('Historial'),
       ),
       body: SafeArea(

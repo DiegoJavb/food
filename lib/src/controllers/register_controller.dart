@@ -1,10 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:food/src/controllers/database_user_controller.dart';
 import 'package:get/get.dart';
 
 class RegisterController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -12,7 +13,7 @@ class RegisterController extends GetxController {
   late String userEmail;
 
   void dispose() {
-    //lipmia el controlador cuando el Widget esta dispuesto
+    //limpia el controlador cuando el Widget esta dispuesto
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
@@ -25,6 +26,7 @@ class RegisterController extends GetxController {
     ))
         .user!;
     if (user != null) {
+      await DatabaseUser.addUser(name: user.email!);
       Get.snackbar(
         'Hola',
         'Ha ingresado correctamente',

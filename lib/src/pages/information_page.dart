@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:food/src/res/custom_colors.dart';
 import 'package:get/get.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 
 class InformationPage extends StatefulWidget {
   @override
@@ -8,33 +8,19 @@ class InformationPage extends StatefulWidget {
 }
 
 class _InformationPageState extends State<InformationPage> {
-  late CarouselSlider carouselSlider;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: CustomColors.firebaseNavy,
       body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/13.jpg'),
-            fit: BoxFit.cover,
-          ),
-        ),
         child: Column(
           children: [
-            SizedBox(
-              height: 20.0,
+            SizedBox(height: 100.0),
+            Image(
+              image: AssetImage('images/Healthy.png'),
             ),
-            FlutterLogo(
-              size: 200.0,
-            ),
-            CarouselSlider(
-              items: <Widget>[
-                _card(),
-                _card(),
-              ],
-              options: CarouselOptions(),
-            )
+            SizedBox(height: 20.0),
+            _card(),
           ],
         ),
       ),
@@ -79,21 +65,19 @@ class _InformationPageState extends State<InformationPage> {
 
   Widget _card() {
     final card = Container(
+      color: CustomColors.firebaseNavy,
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
           Container(
-            width: 250.0,
+            width: 300.0,
             padding: EdgeInsets.all(20.0),
             child: ListTile(
-              title: Column(
-                children: <Widget>[
-                  Center(child: Text('Has ejercicio')),
-                  Divider(),
-                ],
-              ),
               subtitle: Text(
-                  'Hacer ejercicio diariamente no solo te ayuda a despejar la mente, tambien aumenta tu energia y mantienes un estilo de vida saludable'),
+                'Recibe recomendaciones te tu nutricionista en tiempo real',
+                style: TextStyle(fontSize: 20.0),
+                textAlign: TextAlign.center,
+              ),
             ),
           )
         ],
@@ -101,16 +85,9 @@ class _InformationPageState extends State<InformationPage> {
     );
     return Container(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30.0),
-          color: Colors.white,
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.black26,
-              blurRadius: 10.0,
-              spreadRadius: 2.0,
-              offset: Offset(2.0, 8.0),
-            )
-          ]),
+        borderRadius: BorderRadius.circular(30.0),
+        color: Colors.white,
+      ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(30.0),
         child: card,

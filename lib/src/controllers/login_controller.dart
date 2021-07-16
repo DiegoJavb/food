@@ -1,12 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food/src/controllers/database_controller.dart';
+import 'package:food/src/controllers/database_user_controller.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -54,10 +55,12 @@ class LoginController extends GetxController {
       userCredential = await _auth.signInWithCredential(googleAuthCredential);
       final user = userCredential.user;
       Database.userUid = user!.email;
+      DatabaseUser.addUser(name: user.email!);
       Get.snackbar(
         'Hola',
         '${user.displayName} iniciaste sesión con Google',
       );
+
       print('Ingreso bien');
       Future.delayed(
         Duration(seconds: 3),
@@ -93,7 +96,7 @@ class LoginController extends GetxController {
       );
     }
     _signOut();
-    final String uid = user!.uid;
+    final String uid = user!.email!;
     Get.snackbar(
       'Salir',
       uid + ' ha salido con exito ',

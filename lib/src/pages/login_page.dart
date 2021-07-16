@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:food/src/controllers/login_controller.dart';
+import 'package:food/src/res/custom_colors.dart';
 import 'package:get/get.dart';
 
 class LoginPage extends StatefulWidget {
@@ -18,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(backgroundColor: CustomColors.firebaseNavy),
       body: GetBuilder<LoginController>(
         init: LoginController(),
         //este guion bajo hara referancia a los controladores de login
@@ -28,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
               key: _controller.formKey,
               child: Column(
                 children: <Widget>[
-                  _faceBookLogin(),
+                  // _faceBookLogin(),
                   _googleLogin(_),
                   Center(
                       child: Container(

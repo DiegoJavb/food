@@ -3,9 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:food/src/controllers/login_controller.dart';
+import 'package:food/src/pages/register_page.dart';
+import 'package:food/src/res/custom_colors.dart';
 import 'package:get/get.dart';
 
 class RegisterOpccionPage extends StatefulWidget {
+  final String roleUser;
+  RegisterOpccionPage({required this.roleUser});
   @override
   _RegisterOpccionPageState createState() => _RegisterOpccionPageState();
 }
@@ -17,7 +21,7 @@ class _RegisterOpccionPageState extends State<RegisterOpccionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(backgroundColor: CustomColors.firebaseNavy),
       body: GetBuilder<LoginController>(
         init: LoginController(),
         builder: (_) {
@@ -26,10 +30,16 @@ class _RegisterOpccionPageState extends State<RegisterOpccionPage> {
               key: _controller.formKey,
               child: Column(
                 children: <Widget>[
-                  FlutterLogo(
-                    size: 100.0,
+                  SizedBox(
+                    height: 20.0,
                   ),
-                  _facebookRegister(),
+                  Container(
+                    width: 250,
+                    child: Image(
+                      image: AssetImage('images/Healthy.png'),
+                    ),
+                  ),
+                  //_facebookRegister(),
                   _googleRegister(_),
                   Center(child: Text('Ó')),
                   _crearCuenta(),
@@ -73,9 +83,15 @@ class _RegisterOpccionPageState extends State<RegisterOpccionPage> {
         Buttons.Email,
         text: 'Registrate con correo',
         onPressed: () async {
-          Get.toNamed('register');
+          // Get.toNamed('register');
+          Get.to(
+            () => RegisterPage(
+              currentUser: widget.roleUser,
+            ),
+          );
         },
       ),
     );
   }
 }
+//

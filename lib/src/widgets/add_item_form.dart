@@ -90,7 +90,7 @@ class _AddItemFormState extends State<AddItemForm> {
       children: [
         SizedBox(height: 24.0),
         Text(
-          'Title',
+          'Asunto',
           style: TextStyle(
             // color: CustomColors.firebaseGrey,
             fontSize: 22.0,
@@ -102,7 +102,7 @@ class _AddItemFormState extends State<AddItemForm> {
         SizedBox(height: 8.0),
         SizedBox(height: 24.0),
         Text(
-          'Description',
+          'Detalle',
           style: TextStyle(
             // color: CustomColors.firebaseGrey,
             fontSize: 22.0,
@@ -127,7 +127,7 @@ class _AddItemFormState extends State<AddItemForm> {
         value: value,
       ),
       label: 'Title',
-      hint: 'Enter your note title',
+      hint: 'Ingrese el asunto',
     );
   }
 
@@ -143,7 +143,7 @@ class _AddItemFormState extends State<AddItemForm> {
         value: value,
       ),
       label: 'Description',
-      hint: 'Enter your note description',
+      hint: 'Detalle del asunto',
     );
   }
 }

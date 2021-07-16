@@ -15,6 +15,7 @@ class ItemList extends StatelessWidget {
           return Text('Something went wrong');
         } else if (snapshot.hasData || snapshot.data != null) {
           return ListView.separated(
+            padding: EdgeInsets.only(top: 16.0),
             separatorBuilder: (context, index) => SizedBox(height: 16.0),
 
             //DESDE AQUI CUENTA EL NUMERO DE DOCUMENTOS EN LA BASE DE DATOS

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food/src/controllers/database_controller.dart';
+import 'package:food/src/res/custom_colors.dart';
 import 'package:food/src/widgets/edit_item_form.dart';
 import 'package:get/get.dart';
 
@@ -29,6 +30,7 @@ class _EditAppointmentPageState extends State<EditAppointmentPage> {
       },
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: CustomColors.firebaseNavy,
           actions: [
             _isDeleting
                 ? Padding(
@@ -47,7 +49,7 @@ class _EditAppointmentPageState extends State<EditAppointmentPage> {
                 : IconButton(
                     icon: Icon(
                       Icons.delete,
-                      color: Colors.redAccent,
+                      color: Colors.red[400],
                       size: 32,
                     ),
                     onPressed: () => _showAlert(context),
@@ -76,39 +78,40 @@ class _EditAppointmentPageState extends State<EditAppointmentPage> {
 
   void _showAlert(BuildContext context) {
     showDialog(
-        context: context,
-        barrierDismissible: true,
-        builder: (context) {
-          return AlertDialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0),
-            ),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Text('Realmente quiere eliminar este registro'),
-              ],
-            ),
-            actions: <Widget>[
-              TextButton(
-                child: Text('Cancelar'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              TextButton(
-                child: Text('Aceptar'),
-                onPressed: () async {
-                  setState(() => _isDeleting = true);
-                  await Database.deleteItem(
-                    docId: widget.documentId,
-                  );
-                  setState(() => _isDeleting = false);
-                  Get.toNamed('record');
-                },
-              )
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text('Realmente quiere eliminar este registro'),
             ],
-          );
-        });
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancelar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Aceptar'),
+              onPressed: () async {
+                setState(() => _isDeleting = true);
+                await Database.deleteItem(
+                  docId: widget.documentId,
+                );
+                setState(() => _isDeleting = false);
+                Get.toNamed('record');
+              },
+            )
+          ],
+        );
+      },
+    );
   }
 }
