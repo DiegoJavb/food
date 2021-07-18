@@ -1,3 +1,3 @@
 library rol_user.global;
 
-String? rolUser;
+String rolUser = 'patient';

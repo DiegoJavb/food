@@ -6,10 +6,10 @@ import 'package:food/src/controllers/login_controller.dart';
 import 'package:food/src/pages/register_page.dart';
 import 'package:food/src/res/custom_colors.dart';
 import 'package:get/get.dart';
+import 'package:food/src/providers/role_pass.dart' as role;
 
 class RegisterOpccionPage extends StatefulWidget {
-  final String roleUser;
-  RegisterOpccionPage({required this.roleUser});
+  RegisterOpccionPage();
   @override
   _RegisterOpccionPageState createState() => _RegisterOpccionPageState();
 }
@@ -20,8 +20,9 @@ class _RegisterOpccionPageState extends State<RegisterOpccionPage> {
 
   @override
   Widget build(BuildContext context) {
+    print(role.rolUser);
     return Scaffold(
-      appBar: AppBar(backgroundColor: CustomColors.firebaseNavy),
+      appBar: AppBar(backgroundColor: CustomColors.foodNavy),
       body: GetBuilder<LoginController>(
         init: LoginController(),
         builder: (_) {
@@ -30,16 +31,13 @@ class _RegisterOpccionPageState extends State<RegisterOpccionPage> {
               key: _controller.formKey,
               child: Column(
                 children: <Widget>[
-                  SizedBox(
-                    height: 20.0,
-                  ),
+                  SizedBox(height: 20.0),
                   Container(
                     width: 250,
                     child: Image(
                       image: AssetImage('images/Healthy.png'),
                     ),
                   ),
-                  //_facebookRegister(),
                   _googleRegister(_),
                   Center(child: Text('Ó')),
                   _crearCuenta(),
@@ -48,17 +46,6 @@ class _RegisterOpccionPageState extends State<RegisterOpccionPage> {
             ),
           );
         },
-      ),
-    );
-  }
-
-  Widget _facebookRegister() {
-    return Container(
-      padding: const EdgeInsets.all(10.0),
-      child: SignInButton(
-        Buttons.Facebook,
-        text: 'Registrate con Facebook',
-        onPressed: () async {},
       ),
     );
   }
@@ -85,9 +72,7 @@ class _RegisterOpccionPageState extends State<RegisterOpccionPage> {
         onPressed: () async {
           // Get.toNamed('register');
           Get.to(
-            () => RegisterPage(
-              currentUser: widget.roleUser,
-            ),
+            () => RegisterPage(),
           );
         },
       ),

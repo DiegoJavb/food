@@ -1,60 +1,55 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:food/src/providers/role_pass.dart' as role;
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-late final CollectionReference _mainCollection = role.rolUser == 'patient'
-    ? _firestore.collection('patient')
-    : _firestore.collection('nutritionist');
+final CollectionReference _mainCollection = _firestore.collection('users');
 
 class DatabaseUser {
-  //Ingresar cita
-  static Future<void> addUser({required String name}) {
-    return _mainCollection
-        .add({
-          'name': name,
-        })
-        .then((value) => print("User Added"))
-        .catchError((error) => print("Failed to add user: $error"));
+  static String? userUid;
+
+  static Future<void> addUser({
+    required String email,
+    required String role,
+  }) async {
+    DocumentReference documentReference =
+        _mainCollection.doc(userUid).collection('user').doc();
+
+    Map<String, dynamic> data = <String, dynamic>{
+      'email': email,
+      'role': role,
+    };
+    await documentReference
+        .set(data)
+        .whenComplete(() => print("User added to the database"))
+        .catchError((e) => print(e));
   }
 
-  // //Actualizar cita
-  // static Future<void> updateItem({
-  //   required String title,
-  //   required String description,
-  //   required String docId,
-  // }) async {
-  //   DocumentReference documentReferencer =
-  //       _mainCollection.doc(userUid).collection('appointment').doc(docId);
+  static Stream<QuerySnapshot> readUser() {
+    print(userUid);
+    CollectionReference userCollection =
+        _mainCollection.doc(userUid).collection('user');
+    return userCollection.snapshots();
+  }
 
-  //   Map<String, dynamic> data = <String, dynamic>{
-  //     "title": title,
-  //     "description": description,
-  //   };
+  static Future<void> updateUser({
+    required String name,
+    required String weight,
+    required String height,
+    required String age,
+    required String docId,
+  }) async {
+    DocumentReference documentReferencer =
+        _mainCollection.doc(userUid).collection('user').doc(docId);
 
-  //   await documentReferencer
-  //       .update(data)
-  //       .whenComplete(() => print("Note item updated in the database"))
-  //       .catchError((e) => print(e));
-  // }
+    Map<String, dynamic> data = <String, dynamic>{
+      "name": name,
+      "weight": weight,
+      "height": height,
+      "age": age,
+    };
 
-  // //Leer cita
-  // static Stream<QuerySnapshot> readItems() {
-  //   CollectionReference notesItemCollection =
-  //       _mainCollection.doc(userUid).collection('appointment');
-
-  //   return notesItemCollection.snapshots();
-  // }
-
-  // //Eliminar cita
-  // static Future<void> deleteItem({
-  //   required String docId,
-  // }) async {
-  //   DocumentReference documentReferencer =
-  //       _mainCollection.doc(userUid).collection('appointment').doc(docId);
-
-  //   await documentReferencer
-  //       .delete()
-  //       .whenComplete(() => print('Note item deleted from the database'))
-  //       .catchError((e) => print(e));
-  // }
+    await documentReferencer
+        .update(data)
+        .whenComplete(() => print("usuario actualizado en la BDD"))
+        .catchError((e) => print(e));
+  }
 }

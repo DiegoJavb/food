@@ -11,7 +11,7 @@ class _InformationPageState extends State<InformationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColors.firebaseNavy,
+      backgroundColor: CustomColors.foodpink,
       body: Container(
         child: Column(
           children: [
@@ -65,7 +65,7 @@ class _InformationPageState extends State<InformationPage> {
 
   Widget _card() {
     final card = Container(
-      color: CustomColors.firebaseNavy,
+      color: CustomColors.foodpink,
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [

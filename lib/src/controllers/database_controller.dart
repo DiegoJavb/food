@@ -14,7 +14,7 @@ class Database {
   }) async {
     DocumentReference documentReferencer =
         _mainCollection.doc(userUid).collection('appointment').doc();
-
+    print('documentReferencer: $documentReferencer');
     Map<String, dynamic> data = <String, dynamic>{
       "title": title,
       "description": description,
@@ -32,9 +32,10 @@ class Database {
     required String description,
     required String docId,
   }) async {
+    print(userUid);
     DocumentReference documentReferencer =
         _mainCollection.doc(userUid).collection('appointment').doc(docId);
-
+    print('documentReferencer: $documentReferencer');
     Map<String, dynamic> data = <String, dynamic>{
       "title": title,
       "description": description,
@@ -50,7 +51,7 @@ class Database {
   static Stream<QuerySnapshot> readItems() {
     CollectionReference notesItemCollection =
         _mainCollection.doc(userUid).collection('appointment');
-
+    print('notesItemCollection: $notesItemCollection');
     return notesItemCollection.snapshots();
   }
 
@@ -60,7 +61,7 @@ class Database {
   }) async {
     DocumentReference documentReferencer =
         _mainCollection.doc(userUid).collection('appointment').doc(docId);
-
+    print('documentReferencer: $documentReferencer');
     await documentReferencer
         .delete()
         .whenComplete(() => print('Note item deleted from the database'))

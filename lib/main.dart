@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:food/src/routes/routes.dart';
 
@@ -20,6 +21,14 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       navigatorKey: Get.key,
       getPages: getAplicationRoutes(),
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('en', 'US'),
+        const Locale('es', 'ES'),
+      ],
     );
   }
 }

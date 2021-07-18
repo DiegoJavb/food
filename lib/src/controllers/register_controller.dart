@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:food/src/controllers/database_user_controller.dart';
 import 'package:get/get.dart';
+import 'package:food/src/providers/role_pass.dart' as role;
+
+import 'database_controller.dart';
 
 class RegisterController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -13,7 +16,6 @@ class RegisterController extends GetxController {
   late String userEmail;
 
   void dispose() {
-    //limpia el controlador cuando el Widget esta dispuesto
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
@@ -26,7 +28,13 @@ class RegisterController extends GetxController {
     ))
         .user!;
     if (user != null) {
-      await DatabaseUser.addUser(name: user.email!);
+      print(role.rolUser);
+      DatabaseUser.userUid = user.email;
+      Database.userUid = user.email;
+      await DatabaseUser.addUser(
+        email: user.email!,
+        role: role.rolUser,
+      );
       Get.snackbar(
         'Hola',
         'Ha ingresado correctamente',

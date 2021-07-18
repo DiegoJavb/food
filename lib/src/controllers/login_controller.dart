@@ -4,6 +4,7 @@ import 'package:food/src/controllers/database_controller.dart';
 import 'package:food/src/controllers/database_user_controller.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:food/src/providers/role_pass.dart' as role;
 
 class LoginController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -23,6 +24,8 @@ class LoginController extends GetxController {
         'Hola',
         'Ha ingresado correctamente',
       );
+      DatabaseUser.userUid = emailController.text;
+      Database.userUid = emailController.text;
       Future.delayed(
         Duration(seconds: 2),
         () {
@@ -55,7 +58,10 @@ class LoginController extends GetxController {
       userCredential = await _auth.signInWithCredential(googleAuthCredential);
       final user = userCredential.user;
       Database.userUid = user!.email;
-      DatabaseUser.addUser(name: user.email!);
+      await DatabaseUser.addUser(
+        email: user.email!,
+        role: role.rolUser,
+      );
       Get.snackbar(
         'Hola',
         '${user.displayName} iniciaste sesión con Google',

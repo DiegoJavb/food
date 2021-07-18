@@ -14,9 +14,9 @@ class _RecordPageState extends State<RecordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: CustomColors.firebaseNavy,
+      // backgroundColor: CustomColors.foodNavy,
       appBar: AppBar(
-        backgroundColor: CustomColors.firebaseNavy,
+        backgroundColor: CustomColors.foodNavy,
         title: Text('Historial'),
       ),
       body: SafeArea(
