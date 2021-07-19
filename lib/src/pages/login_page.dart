@@ -19,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: CustomColors.firebaseNavy),
+      appBar: AppBar(backgroundColor: CustomColors.foodNavy),
       body: GetBuilder<LoginController>(
         init: LoginController(),
         //este guion bajo hara referancia a los controladores de login
@@ -44,17 +44,6 @@ class _LoginPageState extends State<LoginPage> {
             padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
           );
         },
-      ),
-    );
-  }
-
-  Widget _faceBookLogin() {
-    return Container(
-      padding: const EdgeInsets.all(10.0),
-      child: SignInButton(
-        Buttons.Facebook,
-        text: 'Inicia con Facebook',
-        onPressed: () async {},
       ),
     );
   }

@@ -30,7 +30,7 @@ class _EditAppointmentPageState extends State<EditAppointmentPage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: CustomColors.firebaseNavy,
+          backgroundColor: CustomColors.foodNavy,
           actions: [
             _isDeleting
                 ? Padding(

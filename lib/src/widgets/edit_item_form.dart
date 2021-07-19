@@ -49,11 +49,7 @@ class _EditItemFormState extends State<EditItemForm> {
       child: ListView(
         children: [
           Padding(
-            padding: const EdgeInsets.only(
-              left: 8.0,
-              right: 8.0,
-              bottom: 24.0,
-            ),
+            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -112,7 +108,7 @@ class _EditItemFormState extends State<EditItemForm> {
                   padding: const EdgeInsets.all(16.0),
                   child: CircularProgressIndicator(
                     valueColor: AlwaysStoppedAnimation<Color>(
-                      CustomColors.firebaseOrange,
+                      CustomColors.foodpink,
                     ),
                   ),
                 )

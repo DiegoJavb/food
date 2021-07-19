@@ -9,16 +9,17 @@ class WelcomePage extends StatefulWidget {
   _WelcomePageState createState() => _WelcomePageState();
 }
 
-enum SingingCharacter { nutricionista, paciente }
+enum SingingCharacter { nutritionist, patient }
 
 class _WelcomePageState extends State<WelcomePage> {
   Object _value = 1;
-  String _role = 'nutritionist';
+  String _role = 'patient';
   @override
   Widget build(BuildContext context) {
+    print(role.rolUser);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: CustomColors.firebaseNavy,
+        backgroundColor: CustomColors.foodNavy,
       ),
       body: Center(
         child: Column(
@@ -54,7 +55,7 @@ class _WelcomePageState extends State<WelcomePage> {
         backgroundColor: Colors.white,
         onPressed: () {
           Get.to(
-            () => RegisterOpccionPage(roleUser: _role),
+            () => RegisterOpccionPage(),
           );
         },
       ),
@@ -66,7 +67,7 @@ class _WelcomePageState extends State<WelcomePage> {
       child: Column(
         children: <Widget>[
           RadioListTile(
-            value: 1,
+            value: 0,
             groupValue: _value,
             onChanged: (value) {
               setState(() {
@@ -78,7 +79,7 @@ class _WelcomePageState extends State<WelcomePage> {
             title: Text('Nutricionista'),
           ),
           RadioListTile(
-            value: 0,
+            value: 1,
             groupValue: _value,
             onChanged: (value) {
               setState(() {

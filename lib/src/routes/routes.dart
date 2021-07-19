@@ -17,14 +17,6 @@ getAplicationRoutes() => [
         name: 'login',
         page: () => LoginPage(),
       ),
-      // GetPage(
-      //   name: 'register_opt',
-      //   page: () => RegisterOpccionPage(),
-      // ),
-      // GetPage(
-      //   name: 'register',
-      //   page: () => RegisterPage(),
-      // ),
       GetPage(
         name: 'home',
         page: () => HomePage(),

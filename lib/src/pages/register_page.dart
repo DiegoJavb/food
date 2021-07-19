@@ -3,10 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:food/src/controllers/register_controller.dart';
 import 'package:food/src/res/custom_colors.dart';
 import 'package:get/get.dart';
+import 'package:food/src/providers/role_pass.dart' as role;
 
 class RegisterPage extends StatefulWidget {
-  final String currentUser;
-  RegisterPage({required this.currentUser});
+  RegisterPage();
 
   @override
   _RegisterPageState createState() => _RegisterPageState();
@@ -22,9 +22,10 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Widget build(BuildContext context) {
+    print(role.rolUser);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: CustomColors.firebaseNavy,
+        backgroundColor: CustomColors.foodNavy,
       ),
       body: GetBuilder<RegisterController>(
         builder: (_) {
