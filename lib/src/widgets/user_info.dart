@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food/src/controllers/database_user_controller.dart';
 import 'package:food/src/controllers/login_controller.dart';
+import 'package:food/src/pages/contactos_page.dart';
 import 'package:food/src/pages/edit_user_page.dart';
 import 'package:food/src/res/custom_colors.dart';
 import 'package:get/get.dart';
@@ -17,6 +18,7 @@ class _UserInfoState extends State<UserInfo> {
   late String weight;
   late String height;
   late String age;
+  late String email;
   final _controller = Get.put(LoginController());
 
   @override
@@ -34,16 +36,16 @@ class _UserInfoState extends State<UserInfo> {
                   if (snapshot.hasError) {
                     return Text('Something went wrong');
                   } else if (snapshot.hasData || snapshot.data != null) {
-                    print(
-                      'informacion de usuario: ${snapshot.data!.docs[0].data()!}',
-                    );
                     var userInfo = snapshot.data!.docs[0].data();
+                    print(
+                      'informacion de usuario: $userInfo',
+                    );
                     docId = snapshot.data!.docs[0].id;
                     name = (userInfo as dynamic)['name'];
                     weight = (userInfo as dynamic)['weight'];
                     height = (userInfo as dynamic)['height'];
                     age = (userInfo as dynamic)['age'];
-                    String email = (userInfo as dynamic)['email'];
+                    email = (userInfo as dynamic)['email'];
                     String role = (userInfo as dynamic)['role'];
                     print('id del documento $docId');
                     return UserAccountsDrawerHeader(
@@ -77,8 +79,17 @@ class _UserInfoState extends State<UserInfo> {
                     currentheight: height,
                     currentweight: weight,
                     currentName: name,
+                    currentEmail: email,
                     documentId: docId,
                   ));
+                },
+              ),
+              Divider(),
+              ListTile(
+                leading: Icon(Icons.search),
+                title: Text('Contactos'),
+                onTap: () {
+                  Get.to(() => ContactPage());
                 },
               ),
               Divider(),
