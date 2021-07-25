@@ -57,10 +57,18 @@ class LoginController extends GetxController {
       );
       userCredential = await _auth.signInWithCredential(googleAuthCredential);
       final user = userCredential.user;
-      Database.userUid = user!.email;
+      print('UID del usuario que quiere ingresar: ${user!.uid}');
+      Database.userUid = user.email;
+      DatabaseUser.userUid = user.email;
       await DatabaseUser.addUser(
         email: user.email!,
         role: role.rolUser,
+        docId: user.uid,
+      );
+      await DatabaseUser.addUserOnListUsers(
+        email: user.email!,
+        name: user.displayName!,
+        docId: user.uid,
       );
       Get.snackbar(
         'Hola',

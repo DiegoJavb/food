@@ -38,18 +38,13 @@ class ItemList extends StatelessWidget {
           );
         }
         return Center(
-          child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(
-              CustomColors.foodpink,
-            ),
-          ),
+          child: CircularProgressIndicator(),
         );
       },
     );
   }
 
   Widget _createItem(String title, String description, docID) {
-    print(description);
     return ListTile(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),

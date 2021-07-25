@@ -12,16 +12,18 @@ class _InformationPageState extends State<InformationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: CustomColors.foodpink,
-      body: Container(
-        child: Column(
-          children: [
-            SizedBox(height: 100.0),
-            Image(
-              image: AssetImage('images/Healthy.png'),
-            ),
-            SizedBox(height: 20.0),
-            _card(),
-          ],
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            children: [
+              SizedBox(height: 100.0),
+              Image(
+                image: AssetImage('images/Healthy.png'),
+              ),
+              SizedBox(height: 20.0),
+              _card(),
+            ],
+          ),
         ),
       ),
       floatingActionButton: _crearBotones(),

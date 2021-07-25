@@ -9,10 +9,11 @@ class EditUserPage extends StatefulWidget {
   final String currentweight;
   final String currentheight;
   final String currentage;
+  final String currentEmail;
   final String documentId;
   const EditUserPage({
     // required this.titleFocusNode,
-    // required this.descriptionFocusNode,
+    required this.currentEmail,
     required this.currentName,
     required this.currentweight,
     required this.currentheight,
@@ -66,7 +67,7 @@ class _EditUserPageState extends State<EditUserPage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Header(
-                  height: 150.0,
+                  height: 170.0,
                   userImage: 'images/userPhoto.jpg',
                   backgroundImage: 'images/background.jpg',
                 ),
@@ -106,6 +107,11 @@ class _EditUserPageState extends State<EditUserPage> {
                                 height: _heightController.text,
                                 name: _nameController.text,
                                 weight: _weightController.text,
+                              );
+                              await DatabaseUser.addUserOnListUsers(
+                                name: _nameController.text,
+                                email: widget.currentEmail,
+                                docId: widget.documentId,
                               );
                               setState(() => _isProcessing = false);
                               Navigator.of(context).pop();
@@ -236,10 +242,18 @@ class Header extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              Icon(
-                Icons.camera_alt,
+              FloatingActionButton(
+                backgroundColor: Color(0XFFFFF),
+                child: Icon(
+                  Icons.camera_alt,
+                ),
+                onPressed: () {},
               ),
-              Icon(Icons.upload_file),
+              FloatingActionButton(
+                backgroundColor: Color(0XFFFFF),
+                child: Icon(Icons.upload_sharp),
+                onPressed: () {},
+              ),
             ],
           )
         ],
