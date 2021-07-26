@@ -1,8 +1,27 @@
-# food
+# Eat Healthy (Come Saludablemente)
 
-A new Flutter project.
+El siguiente proyecto muestra el desarrollo de una Aplicación Móvil, que permite a los usuarios llevar un registro sobre los alimentos que ingieren en base a un análisis elaborado por un Nutricionista.
 
-## Getting Started
+**Video demostrativo**
+
+**Realizado por:**
+
+- Diego Bacuy
+
+## 1. Herramientas de Desarrollo
+### FLUTTER
+
+La aplicación móvil será nativa híbrida por lo que Flutter es un buen framework para este tipo de aplicaciones. Al ser modular, permite separar la lógica del negocio de las interfaces de usuario.
+
+### FIREBASE
+
+Firebase es una plataforma cuya función es desarrollar y facilitar la creación de apps de elevada calidad de una forma rápida, ya que provee una gran cantidad de micro-servicios que permiten el desarrollo de la aplicación en su totalidad.
+
+## 2. Estructura y arquitectura
+
+## 3. Funcionalidades principales
+
+## 4. 
 
 This project is a starting point for a Flutter application.
 
