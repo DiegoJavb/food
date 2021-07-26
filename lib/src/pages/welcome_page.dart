@@ -13,7 +13,7 @@ enum SingingCharacter { nutritionist, patient }
 
 class _WelcomePageState extends State<WelcomePage> {
   Object _value = 1;
-  String _role = 'patient';
+  String _role = 'Paciente';
   @override
   Widget build(BuildContext context) {
     print(role.rolUser);
@@ -72,7 +72,7 @@ class _WelcomePageState extends State<WelcomePage> {
             onChanged: (value) {
               setState(() {
                 _value = value!;
-                _role = 'nutritionist';
+                _role = 'Nutricionista';
                 role.rolUser = _role;
               });
             },
@@ -84,7 +84,7 @@ class _WelcomePageState extends State<WelcomePage> {
             onChanged: (value) {
               setState(() {
                 _value = value!;
-                _role = 'patient';
+                _role = 'Paciente';
                 role.rolUser = _role;
               });
             },

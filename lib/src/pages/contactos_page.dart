@@ -9,7 +9,7 @@ class ContactPage extends StatefulWidget {
 }
 
 class _ContactPageState extends State<ContactPage> {
-  final _userController = TextEditingController();
+  // final _userController = TextEditingController();
   final ValueChanged<String> onChanged = (value) {};
   String name = '';
   String query = '';
@@ -19,7 +19,7 @@ class _ContactPageState extends State<ContactPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Contactos'),
+        title: Text('Usuarios'),
       ),
       body: SingleChildScrollView(
         child: Column(

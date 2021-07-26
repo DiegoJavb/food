@@ -26,13 +26,14 @@ class ItemList extends StatelessWidget {
               String docID = snapshot.data!.docs[index].id;
               String title = noteInfo['title'];
               String description = noteInfo['description'];
+              String contact = noteInfo['contact'];
 
               return Ink(
                 decoration: BoxDecoration(
                   color: CustomColors.firebaseGrey.withOpacity(1.0),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
-                child: _createItem(title, description, docID),
+                child: _createItem(title, description, contact, docID),
               );
             },
           );
@@ -44,7 +45,7 @@ class ItemList extends StatelessWidget {
     );
   }
 
-  Widget _createItem(String title, String description, docID) {
+  Widget _createItem(String title, String description, String contact, docID) {
     return ListTile(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
@@ -53,6 +54,7 @@ class ItemList extends StatelessWidget {
         () => EditAppointmentPage(
           currentDescription: description,
           currentTitle: title,
+          currentContact: contact,
           documentId: docID,
         ),
       ),

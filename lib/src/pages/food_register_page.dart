@@ -78,7 +78,7 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  final _addFoodFormKey = GlobalKey<FormState>();
+  // final _addFoodFormKey = GlobalKey<FormState>();
   late int units;
   late String food;
   late double quantity;
