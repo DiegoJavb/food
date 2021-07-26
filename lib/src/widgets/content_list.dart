@@ -94,7 +94,9 @@ class Contentlist extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(10.0),
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed('recomendation');
+              },
               child: Text(
                 'recomendaciones',
                 style: TextStyle(fontSize: 20.0),

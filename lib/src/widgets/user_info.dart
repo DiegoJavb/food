@@ -3,7 +3,6 @@ import 'package:food/src/controllers/database_user_controller.dart';
 import 'package:food/src/controllers/login_controller.dart';
 import 'package:food/src/pages/contactos_page.dart';
 import 'package:food/src/pages/edit_user_page.dart';
-import 'package:food/src/pages/food_register_page.dart';
 import 'package:food/src/pages/my_contacts_page.dart';
 import 'package:food/src/res/custom_colors.dart';
 import 'package:get/get.dart';
@@ -110,7 +109,7 @@ class _UserInfoState extends State<UserInfo> {
               ListTile(
                 leading: Icon(Icons.send),
                 title: Text('Realizar consulta'),
-                onTap: () => Get.to(() => FoodRegisterPage()),
+                // onTap: () => Get.to(() => FoodRegisterPage()),
               ),
               Divider(),
               FloatingActionButton.extended(
