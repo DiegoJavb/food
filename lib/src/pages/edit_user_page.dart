@@ -3,8 +3,6 @@ import 'package:food/src/controllers/database_user_controller.dart';
 import 'package:food/src/res/custom_colors.dart';
 
 class EditUserPage extends StatefulWidget {
-  // final FocusNode titleFocusNode;
-  // final FocusNode descriptionFocusNode;
   final String currentName;
   final String currentweight;
   final String currentheight;
@@ -12,7 +10,6 @@ class EditUserPage extends StatefulWidget {
   final String currentEmail;
   final String documentId;
   const EditUserPage({
-    // required this.titleFocusNode,
     required this.currentEmail,
     required this.currentName,
     required this.currentweight,
@@ -67,9 +64,9 @@ class _EditUserPageState extends State<EditUserPage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Header(
-                  height: 170.0,
-                  userImage: 'images/userPhoto.jpg',
-                  backgroundImage: 'images/background.jpg',
+                  height: 170.0, userName: _nameController.text,
+                  // userImage: 'images/userPhoto.jpg',
+                  // backgroundImage: 'images/background.jpg',
                 ),
                 Container(
                   padding:
@@ -211,24 +208,25 @@ class _EditUserPageState extends State<EditUserPage> {
 
 class Header extends StatelessWidget {
   final double height;
-  final String userImage;
-  final String backgroundImage;
+  final String userName;
+  // final String backgroundImage;
   const Header({
     required this.height,
-    required this.userImage,
-    required this.backgroundImage,
+    required this.userName,
+    // required this.userImage,
+    // required this.backgroundImage,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(this.backgroundImage),
-          fit: BoxFit.cover,
-        ),
-      ),
+      // decoration: BoxDecoration(
+      //   image: DecorationImage(
+      //     image: AssetImage(this.backgroundImage),
+      //     fit: BoxFit.cover,
+      //   ),
+      // ),
       height: this.height,
       padding: EdgeInsets.only(bottom: 10.0),
       child: Column(
@@ -236,26 +234,27 @@ class Header extends StatelessWidget {
         children: <Widget>[
           UserPhoto(
             size: 90.0,
-            userImage: this.userImage,
+            userName: this.userName,
+            // userImage: this.userImage,
           ),
           SizedBox(height: 5.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              FloatingActionButton(
-                backgroundColor: Color(0XFFFFF),
-                child: Icon(
-                  Icons.camera_alt,
-                ),
-                onPressed: () {},
-              ),
-              FloatingActionButton(
-                backgroundColor: Color(0XFFFFF),
-                child: Icon(Icons.upload_sharp),
-                onPressed: () {},
-              ),
-            ],
-          )
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //   children: <Widget>[
+          //     FloatingActionButton(
+          //       backgroundColor: Color(0XFFFFF),
+          //       child: Icon(
+          //         Icons.camera_alt,
+          //       ),
+          //       onPressed: () {},
+          //     ),
+          //     FloatingActionButton(
+          //       backgroundColor: Color(0XFFFFF),
+          //       child: Icon(Icons.upload_sharp),
+          //       onPressed: () {},
+          //     ),
+          //   ],
+          // )
         ],
       ),
     );
@@ -263,22 +262,28 @@ class Header extends StatelessWidget {
 }
 
 class UserPhoto extends StatelessWidget {
-  final String userImage;
+  final String userName;
   final double size;
   const UserPhoto({
-    required this.userImage,
+    // required this.userImage,
     required this.size,
+    required this.userName,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      child: Text(
+        this.userName[0],
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 60.0),
+      ),
       decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('images/userPhoto.jpg'),
-          fit: BoxFit.cover,
-        ),
+        // image: DecorationImage(
+        //   image: AssetImage('images/userPhoto.jpg'),
+        //   fit: BoxFit.cover,
+        // ),
         shape: BoxShape.circle,
         border: Border.all(color: CustomColors.foodNavy, width: 4),
       ),
