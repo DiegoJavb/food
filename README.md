@@ -1,4 +1,4 @@
-# Eat Healthy (Come Saludablemente)
+# Eat Healthy
 
 El siguiente proyecto muestra el desarrollo de una Aplicación Móvil, que permite a los usuarios llevar un registro sobre los alimentos que ingieren en base a un análisis elaborado por un Nutricionista.
 
@@ -15,13 +15,27 @@ La aplicación móvil será nativa híbrida por lo que Flutter es un buen framew
 
 ### FIREBASE
 
-Firebase es una plataforma cuya función es desarrollar y facilitar la creación de apps de elevada calidad de una forma rápida, ya que provee una gran cantidad de micro-servicios que permiten el desarrollo de la aplicación en su totalidad.
+Firebase es una plataforma cuya función es desarrollar y facilitar la creación de apps de elevada calidad de una forma rápida, ya que provee una gran cantidad de micro-servicios que permiten el desarrollo de la aplicación en su totalidad. Entre las herramientas, que ofrece firebase se utilizo el almacenamiento de datos firestore, storage para las imagenes y hosting para su despliegue.
 
 ## 2. Estructura y arquitectura
+### - Arquitectura
+La arquitectura de la aplicación movil se muestra en la siguiente imagen
+![image](https://user-images.githubusercontent.com/42130200/127058102-7a10a3ef-a83e-4e89-ab96-dbe9dc32c24a.png)
+
+### - Estructura
+La estructura de la base de datos, se muestra en la siguiente imagen.
+![image](https://user-images.githubusercontent.com/42130200/127058746-f033d74d-b893-4c43-a2d8-bfcc7015a04b.png)
+
 
 ## 3. Funcionalidades principales
+En el desarrollo de la Aplicación Móvil, se pudo recolectar los requerimientos y funcionalidades. A continuación se muestran algunos de los más importantes.
 
-## 4. 
+### - iniciar sesión y registro de usuarios
+
+## 4. Versiones de Desarrollo
+## 5. Instalación
+## 6. Anexos
+En el siguiente link, se encuentra toda la documentación como Manual Técnico, Manual de Instalación, Informe Técnico y los diferentes anexos del proyecto. [Documentación](https://github.com/DiegoJavb/Documentacion_Tesis.git)
 
 This project is a starting point for a Flutter application.
 
