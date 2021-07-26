@@ -7,11 +7,14 @@ import 'package:get/get.dart';
 class EditAppointmentPage extends StatefulWidget {
   final String currentTitle;
   final String currentDescription;
+  final String currentContact;
   final String documentId;
-  EditAppointmentPage(
-      {required this.currentTitle,
-      required this.currentDescription,
-      required this.documentId});
+  EditAppointmentPage({
+    required this.currentTitle,
+    required this.currentDescription,
+    required this.currentContact,
+    required this.documentId,
+  });
 
   @override
   _EditAppointmentPageState createState() => _EditAppointmentPageState();
@@ -20,6 +23,7 @@ class EditAppointmentPage extends StatefulWidget {
 class _EditAppointmentPageState extends State<EditAppointmentPage> {
   final FocusNode _titleFocusNode = FocusNode();
   final FocusNode _descriptionFocusNode = FocusNode();
+  final FocusNode _contactFocusNode = FocusNode();
   bool _isDeleting = false;
   @override
   Widget build(BuildContext context) {
@@ -27,6 +31,7 @@ class _EditAppointmentPageState extends State<EditAppointmentPage> {
       onTap: () {
         _titleFocusNode.unfocus();
         _descriptionFocusNode.unfocus();
+        _contactFocusNode.unfocus();
       },
       child: Scaffold(
         appBar: AppBar(
@@ -67,8 +72,10 @@ class _EditAppointmentPageState extends State<EditAppointmentPage> {
               documentId: widget.documentId,
               titleFocusNode: _titleFocusNode,
               descriptionFocusNode: _descriptionFocusNode,
+              contactFocusNode: _contactFocusNode,
               currentTitle: widget.currentTitle,
               currentDescription: widget.currentDescription,
+              currentContact: widget.currentContact,
             ),
           ),
         ),

@@ -9,10 +9,12 @@ import 'custom_form_field.dart';
 class AddItemForm extends StatefulWidget {
   final FocusNode titleFocusNode;
   final FocusNode descriptionFocusNode;
+  final FocusNode contactFocusNode;
 
   const AddItemForm({
     required this.titleFocusNode,
     required this.descriptionFocusNode,
+    required this.contactFocusNode,
   });
   @override
   _AddItemFormState createState() => _AddItemFormState();
@@ -25,6 +27,8 @@ class _AddItemFormState extends State<AddItemForm> {
 
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _contactController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -35,7 +39,7 @@ class _AddItemFormState extends State<AddItemForm> {
             padding: const EdgeInsets.only(
               left: 8.0,
               right: 8.0,
-              bottom: 24.0,
+              bottom: 15.0,
             ),
             child: _crearForm(),
           ),
@@ -66,12 +70,14 @@ class _AddItemFormState extends State<AddItemForm> {
                     onPressed: () async {
                       widget.titleFocusNode.unfocus();
                       widget.descriptionFocusNode.unfocus();
+                      widget.contactFocusNode.unfocus();
 
                       if (_addItemFormKey.currentState!.validate()) {
                         setState(() => _isProcessing = true);
                         await Database.addItem(
                           title: _titleController.text,
                           description: _descriptionController.text,
+                          contact: _contactController.text,
                         );
                         setState(() => _isProcessing = false);
                         Navigator.of(context).pop();
@@ -88,29 +94,32 @@ class _AddItemFormState extends State<AddItemForm> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 24.0),
+        SizedBox(height: 20.0),
         Text(
           'Asunto',
           style: TextStyle(
-            // color: CustomColors.firebaseGrey,
-            fontSize: 22.0,
-            letterSpacing: 1,
+            fontSize: 20.0,
             fontWeight: FontWeight.bold,
           ),
         ),
         _createTitle(),
-        SizedBox(height: 8.0),
-        SizedBox(height: 24.0),
+        SizedBox(height: 20.0),
         Text(
-          'Detalle',
+          'Contacto',
           style: TextStyle(
-            // color: CustomColors.firebaseGrey,
-            fontSize: 22.0,
-            letterSpacing: 1,
+            fontSize: 20.0,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 8.0),
+        _createContact(),
+        SizedBox(height: 20.0),
+        Text(
+          'Detalle',
+          style: TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         _createDescription(),
       ],
     );
@@ -144,6 +153,21 @@ class _AddItemFormState extends State<AddItemForm> {
       ),
       label: 'Description',
       hint: 'Detalle del asunto',
+    );
+  }
+
+  Widget _createContact() {
+    return CustomFormField(
+      isLabelEnabled: false,
+      controller: _contactController,
+      focusNode: widget.contactFocusNode,
+      keyboardType: TextInputType.text,
+      inputAction: TextInputAction.done,
+      validator: (value) => Validator.validateField(
+        value: value,
+      ),
+      label: 'Nutricionista',
+      hint: 'Ingrese el nombre del nutricionista',
     );
   }
 }

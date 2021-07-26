@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:food/src/res/custom_colors.dart';
-// import 'package:food/src/res/custom_colors.dart';
 import 'package:food/src/widgets/add_item_form.dart';
 
 class AddAppointmentPage extends StatelessWidget {
   final FocusNode _titleFocusNode = FocusNode();
   final FocusNode _descriptionFocusNode = FocusNode();
+  final FocusNode _contactFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -13,11 +13,10 @@ class AddAppointmentPage extends StatelessWidget {
       onTap: () {
         _titleFocusNode.unfocus();
         _descriptionFocusNode.unfocus();
+        _contactFocusNode.unfocus();
       },
       child: Scaffold(
-        // backgroundColor: CustomColors.foodNavy,
         appBar: AppBar(
-          // elevation: 0,
           backgroundColor: CustomColors.foodNavy,
         ),
         body: SafeArea(
@@ -30,6 +29,7 @@ class AddAppointmentPage extends StatelessWidget {
             child: AddItemForm(
               titleFocusNode: _titleFocusNode,
               descriptionFocusNode: _descriptionFocusNode,
+              contactFocusNode: _contactFocusNode,
             ),
           ),
         ),

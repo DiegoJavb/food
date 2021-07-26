@@ -4,10 +4,10 @@ import 'package:food/src/controllers/login_controller.dart';
 import 'package:food/src/pages/contactos_page.dart';
 import 'package:food/src/pages/edit_user_page.dart';
 import 'package:food/src/pages/food_register_page.dart';
+import 'package:food/src/pages/my_contacts_page.dart';
 import 'package:food/src/res/custom_colors.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:food/src/providers/role_pass.dart' as role;
 
 class UserInfo extends StatefulWidget {
   @override
@@ -21,6 +21,7 @@ class _UserInfoState extends State<UserInfo> {
   late String height;
   late String age;
   late String email;
+  late String role = '';
   final _controller = Get.put(LoginController());
 
   @override
@@ -48,7 +49,7 @@ class _UserInfoState extends State<UserInfo> {
                     height = (userInfo as dynamic)['height'];
                     age = (userInfo as dynamic)['age'];
                     email = (userInfo as dynamic)['email'];
-                    String role = (userInfo as dynamic)['role'];
+                    role = (userInfo as dynamic)['role'];
                     print('id del documento $docId');
                     return UserAccountsDrawerHeader(
                       decoration: BoxDecoration(color: CustomColors.foodNavy),
@@ -97,11 +98,12 @@ class _UserInfoState extends State<UserInfo> {
               Divider(),
               ListTile(
                 leading: Icon(Icons.supervised_user_circle),
-                title: role.rolUser == 'patient'
-                    ? Text('Pacientes')
-                    : Text('Administradores'),
+                title: Text('Contactos'),
+                // title: role == 'nutritionist'
+                //     ? Text('Pacientes')
+                //     : Text('Nutricionistas'),
                 onTap: () {
-                  Get.to(() => ContactPage());
+                  Get.to(() => MyContactsPage());
                 },
               ),
               Divider(),

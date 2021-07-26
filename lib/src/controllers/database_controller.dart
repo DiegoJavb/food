@@ -11,11 +11,13 @@ class Database {
   static Future<void> addItem({
     required String title,
     required String description,
+    required String contact,
   }) async {
     DocumentReference documentReferencer =
         _mainCollection.doc(userUid).collection('appointment').doc();
     print('documentReferencer: $documentReferencer');
     Map<String, dynamic> data = <String, dynamic>{
+      "contact": contact,
       "title": title,
       "description": description,
     };
@@ -29,6 +31,7 @@ class Database {
   //Actualizar cita
   static Future<void> updateItem({
     required String title,
+    required String contact,
     required String description,
     required String docId,
   }) async {
@@ -38,6 +41,7 @@ class Database {
     print('documentReferencer: $documentReferencer');
     Map<String, dynamic> data = <String, dynamic>{
       "title": title,
+      "contact": contact,
       "description": description,
     };
 

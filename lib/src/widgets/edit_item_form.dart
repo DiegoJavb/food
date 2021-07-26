@@ -8,16 +8,20 @@ import 'custom_form_field.dart';
 class EditItemForm extends StatefulWidget {
   final FocusNode titleFocusNode;
   final FocusNode descriptionFocusNode;
+  final FocusNode contactFocusNode;
   //ESTOS SON LOS QUE ME TRAIGO
   final String currentTitle;
   final String currentDescription;
+  final String currentContact;
   final String documentId;
 
   const EditItemForm({
     required this.titleFocusNode,
     required this.descriptionFocusNode,
+    required this.contactFocusNode,
     required this.currentTitle,
     required this.currentDescription,
+    required this.currentContact,
     required this.documentId,
   });
   @override
@@ -31,6 +35,8 @@ class _EditItemFormState extends State<EditItemForm> {
 
   late TextEditingController _titleController;
   late TextEditingController _descriptionController;
+  late TextEditingController _contactController;
+
   @override
   void initState() {
     _titleController = TextEditingController(
@@ -39,6 +45,9 @@ class _EditItemFormState extends State<EditItemForm> {
 
     _descriptionController = TextEditingController(
       text: widget.currentDescription,
+    );
+    _contactController = TextEditingController(
+      text: widget.currentContact,
     );
     super.initState();
   }
@@ -53,17 +62,14 @@ class _EditItemFormState extends State<EditItemForm> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 24.0),
+                SizedBox(height: 20.0),
                 Text(
                   'Asunto',
                   style: TextStyle(
-                    // color: CustomColors.firebaseGrey,
-                    fontSize: 22.0,
-                    letterSpacing: 1,
+                    fontSize: 20.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 8.0),
                 CustomFormField(
                   isLabelEnabled: false,
                   controller: _titleController,
@@ -76,17 +82,34 @@ class _EditItemFormState extends State<EditItemForm> {
                   label: 'Asunto',
                   hint: 'Ingrese el Asunto',
                 ),
-                SizedBox(height: 24.0),
+                SizedBox(height: 20.0),
                 Text(
-                  'Descripción',
+                  'Contacto',
                   style: TextStyle(
-                    // color: CustomColors.firebaseGrey,
-                    fontSize: 22.0,
-                    letterSpacing: 1,
+                    fontSize: 20.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 8.0),
+                CustomFormField(
+                  isLabelEnabled: false,
+                  controller: _contactController,
+                  focusNode: widget.contactFocusNode,
+                  keyboardType: TextInputType.text,
+                  inputAction: TextInputAction.done,
+                  validator: (value) => Validator.validateField(
+                    value: value,
+                  ),
+                  label: 'contact',
+                  hint: 'Enter your contact',
+                ),
+                SizedBox(height: 20.0),
+                Text(
+                  'Descripción',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 CustomFormField(
                   maxLines: 10,
                   isLabelEnabled: false,
@@ -128,6 +151,7 @@ class _EditItemFormState extends State<EditItemForm> {
                     onPressed: () async {
                       widget.titleFocusNode.unfocus();
                       widget.descriptionFocusNode.unfocus();
+                      widget.contactFocusNode.unfocus();
 
                       if (_editItemFormKey.currentState!.validate()) {
                         setState(() {
@@ -138,6 +162,7 @@ class _EditItemFormState extends State<EditItemForm> {
                           docId: widget.documentId,
                           title: _titleController.text,
                           description: _descriptionController.text,
+                          contact: _contactController.text,
                         );
 
                         setState(() {
