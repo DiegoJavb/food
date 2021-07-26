@@ -7,7 +7,7 @@ final CollectionReference _allUserCollection =
 
 class DatabaseUser {
   static String? userUid;
-
+  //BASE DE DATOS DE USUARIOS
   static Future<void> addUser({
     required String email,
     required String role,
@@ -56,6 +56,7 @@ class DatabaseUser {
         .catchError((e) => print(e));
   }
 
+  //BASE DE DATOS PARA CONTACTOS
   static Future<void> addContact({
     required String name,
     required String email,
@@ -89,7 +90,7 @@ class DatabaseUser {
     return userCollection.snapshots();
   }
 
-  //Datos de los usuarios totales
+  //BASE DE DATOS UUARIOS TOTALES
   static Future<void> addUserOnListUsers({
     required String name,
     required String email,
@@ -110,6 +111,32 @@ class DatabaseUser {
 
   static Stream<QuerySnapshot> readUsersOfListUsers() {
     CollectionReference userCollection = _allUserCollection;
+    return userCollection.snapshots();
+  }
+
+  //BASE DE DATOS PARA EL CONSUMO ALIMENTICIO
+  static Future<void> addRecomendation({
+    required String units,
+    required String food,
+    required String quantity,
+  }) async {
+    DocumentReference documentReference =
+        _mainCollection.doc(userUid).collection('recomendations').doc();
+
+    Map<String, dynamic> data = <String, dynamic>{
+      'unidades': units,
+      'food': food,
+      'Cantidad': quantity,
+    };
+    await documentReference
+        .set(data)
+        .whenComplete(() => print("User added to the database"))
+        .catchError((e) => print(e));
+  }
+
+  static Stream<QuerySnapshot> readRecomendation() {
+    CollectionReference userCollection =
+        _mainCollection.doc(userUid).collection('recomendations');
     return userCollection.snapshots();
   }
 }
