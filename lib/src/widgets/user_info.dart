@@ -3,9 +3,11 @@ import 'package:food/src/controllers/database_user_controller.dart';
 import 'package:food/src/controllers/login_controller.dart';
 import 'package:food/src/pages/contactos_page.dart';
 import 'package:food/src/pages/edit_user_page.dart';
+import 'package:food/src/pages/food_register_page.dart';
 import 'package:food/src/res/custom_colors.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:food/src/providers/role_pass.dart' as role;
 
 class UserInfo extends StatefulWidget {
   @override
@@ -87,7 +89,17 @@ class _UserInfoState extends State<UserInfo> {
               Divider(),
               ListTile(
                 leading: Icon(Icons.search),
-                title: Text('Contactos'),
+                title: Text('Lista de usuarios'),
+                onTap: () {
+                  Get.to(() => ContactPage());
+                },
+              ),
+              Divider(),
+              ListTile(
+                leading: Icon(Icons.supervised_user_circle),
+                title: role.rolUser == 'patient'
+                    ? Text('Pacientes')
+                    : Text('Administradores'),
                 onTap: () {
                   Get.to(() => ContactPage());
                 },
@@ -96,7 +108,7 @@ class _UserInfoState extends State<UserInfo> {
               ListTile(
                 leading: Icon(Icons.send),
                 title: Text('Realizar consulta'),
-                onTap: () {},
+                onTap: () => Get.to(() => FoodRegisterPage()),
               ),
               Divider(),
               FloatingActionButton.extended(
