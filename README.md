@@ -17,6 +17,14 @@ La aplicación móvil será nativa híbrida por lo que Flutter es un buen framew
 
 Firebase es una plataforma cuya función es desarrollar y facilitar la creación de apps de elevada calidad de una forma rápida, ya que provee una gran cantidad de micro-servicios que permiten el desarrollo de la aplicación en su totalidad. Entre las herramientas, que ofrece firebase se utilizo el almacenamiento de datos firestore, storage para las imagenes y hosting para su despliegue.
 
+### 1.1 BurnDown chart
+
+A continuacion se muestra como ha ido creciendo el proyecto desde su inicio
+
+
+![image](https://user-images.githubusercontent.com/42130200/127097020-f8b794ed-8f27-4f16-ac0f-d5cf6e0c83d9.png)
+![image](https://user-images.githubusercontent.com/42130200/127097026-4ebb99ce-cdda-4cf3-a9d6-6e74ca3eeb9a.png)
+
 ## 2. Estructura y arquitectura
 ### - Arquitectura
 La arquitectura de la aplicación movil se muestra en la siguiente imagen
