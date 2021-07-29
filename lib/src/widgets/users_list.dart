@@ -30,9 +30,11 @@ class _UsersListState extends State<UsersList> {
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (BuildContext context, int index) {
                 userInfo = snapshot.data!.docs[index];
-                String docId = snapshot.data!.docs[index].id;
+                // String docId = snapshot.data!.docs[index].id;
                 email = userInfo!['email'];
-                userInfo['name'] == null ? name = '' : name = userInfo['name'];
+                userInfo['name'] == null
+                    ? name = 'Usuario'
+                    : name = userInfo['name'];
                 if (userInfo['email'] == DatabaseUser.userUid) {
                   return SizedBox();
                 } else {
@@ -40,8 +42,8 @@ class _UsersListState extends State<UsersList> {
                     leading: Icon(Icons.person),
                     title: Text(name),
                     subtitle: Text(email),
-                    trailing:
-                        CheckContact(docId: docId, email: email, name: name),
+                    // trailing:
+                    //     CheckContact(docId: docId, email: email, name: name),
                     // trailing: TextButton(
                     //   child: Text('Agregar'),
                     //   // child: CheckContact(

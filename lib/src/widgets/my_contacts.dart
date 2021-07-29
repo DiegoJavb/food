@@ -30,7 +30,9 @@ class _MyContactsState extends State<MyContacts> {
                 var userInfo = snapshot.data!.docs[index];
                 String userId = snapshot.data!.docs[index].id;
                 String email = userInfo['email'];
-                userInfo['name'] == null ? name = '' : name = userInfo['name'];
+                userInfo['name'] == null
+                    ? name = 'Usuario'
+                    : name = userInfo['name'];
                 return Ink(
                   decoration: BoxDecoration(
                     color: CustomColors.firebaseGrey.withOpacity(1.0),
