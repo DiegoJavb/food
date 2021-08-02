@@ -11,161 +11,100 @@ class Contentlist extends StatelessWidget {
     return SliverList(
       delegate: SliverChildListDelegate(
         [
-          SizedBox(height: 20.0),
-          Container(
-            padding: EdgeInsets.only(left: 10.0, right: 10.0),
-            child: _cardTipo1(),
-          ),
-          SizedBox(height: 20.0),
-          Container(
-            padding: EdgeInsets.only(left: 10.0, right: 10.0),
-            child: _cardTipo2(),
-          ),
-          SizedBox(height: 20.0),
-          Container(
-            padding: EdgeInsets.only(left: 10.0, right: 10.0),
-            child: _cardTipo3(),
-          ),
+          _cardHistorial(),
+          _cardRecomendaciones(),
+          _cardNoticias(),
         ],
       ),
     );
   }
 
-  Widget _cardTipo1() {
-    final card = Container(
-      width: 250.0,
-      child: Row(
-        children: [
-          FadeInImage(
-            image: NetworkImage(
-                'https://s1.1zoom.me/big3/471/Painting_Art_Back_view_Photographer_575380_3840x2400.jpg'),
-            placeholder: AssetImage('assets/jar-loading.gif'),
-            fadeInDuration: Duration(milliseconds: 200),
-            height: 80.0,
-            fit: BoxFit.cover,
+  Container _cardHistorial() {
+    return Container(
+      height: 250.0,
+      child: InkWell(
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('images/cherries.jpg'),
+              fit: BoxFit.cover,
+            ),
           ),
-          Container(
-            padding: EdgeInsets.all(10.0),
-            child: TextButton(
-              onPressed: () {
-                Get.toNamed('record');
-              },
-              child: Text(
-                'Historial',
-                style: TextStyle(fontSize: 20.0),
+          child: Center(
+            child: Text(
+              'HISTORIAL',
+              style: TextStyle(
+                fontSize: 30.0,
+                color: Colors.white,
+                letterSpacing: 2.0,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
-        ],
-      ),
-    );
-
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30.0),
-          color: Colors.white,
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-                color: Colors.black26,
-                blurRadius: 10.0,
-                spreadRadius: 2.0,
-                offset: Offset(2.0, 8.0))
-          ]),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(30.0),
-        child: card,
+        ),
+        onTap: () {
+          Get.toNamed('record');
+        },
       ),
     );
   }
 
-  Widget _cardTipo2() {
-    final card = Container(
-      width: 250.0,
-      child: Row(
-        children: [
-          FadeInImage(
-            image: NetworkImage(
-                'https://s1.1zoom.me/big3/471/Painting_Art_Back_view_Photographer_575380_3840x2400.jpg'),
-            placeholder: AssetImage('assets/jar-loading.gif'),
-            fadeInDuration: Duration(milliseconds: 200),
-            height: 80.0,
-            fit: BoxFit.cover,
+  Container _cardRecomendaciones() {
+    return Container(
+      height: 250.0,
+      child: InkWell(
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('images/onions.jpg'),
+              fit: BoxFit.cover,
+            ),
           ),
-          Container(
-            padding: EdgeInsets.all(10.0),
-            child: TextButton(
-              onPressed: () {
-                Get.toNamed('recomendation');
-              },
-              child: Text(
-                'recomendaciones',
-                style: TextStyle(fontSize: 20.0),
+          child: Center(
+            child: Text(
+              'RECOMENDACIONES',
+              style: TextStyle(
+                fontSize: 30.0,
+                color: Colors.black,
+                letterSpacing: 2.0,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
-        ],
-      ),
-    );
-
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30.0),
-          color: Colors.white,
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-                color: Colors.black26,
-                blurRadius: 10.0,
-                spreadRadius: 2.0,
-                offset: Offset(2.0, 8.0))
-          ]),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(30.0),
-        child: card,
+        ),
+        onTap: () {
+          Get.toNamed('recomendation');
+        },
       ),
     );
   }
 
-  Widget _cardTipo3() {
-    final card = Container(
-      width: 250.0,
-      child: Row(
-        children: [
-          FadeInImage(
-            image: NetworkImage(
-                'https://s1.1zoom.me/big3/471/Painting_Art_Back_view_Photographer_575380_3840x2400.jpg'),
-            placeholder: AssetImage('assets/jar-loading.gif'),
-            fadeInDuration: Duration(milliseconds: 200),
-            height: 80.0,
-            fit: BoxFit.cover,
+  Container _cardNoticias() {
+    return Container(
+      height: 250.0,
+      child: InkWell(
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('images/dark.jpg'),
+              fit: BoxFit.cover,
+            ),
           ),
-          Container(
-            padding: EdgeInsets.all(10.0),
-            child: TextButton(
-              onPressed: () {},
-              child: Text(
-                'Noticias',
-                style: TextStyle(fontSize: 20.0),
+          child: Center(
+            child: Text(
+              'NOTICIAS',
+              style: TextStyle(
+                fontSize: 30.0,
+                color: Colors.white,
+                letterSpacing: 2.0,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
-        ],
-      ),
-    );
-
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30.0),
-          color: Colors.white,
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-                color: Colors.black26,
-                blurRadius: 10.0,
-                spreadRadius: 2.0,
-                offset: Offset(2.0, 8.0))
-          ]),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(30.0),
-        child: card,
+        ),
+        onTap: () {
+          Get.toNamed('recomendation');
+        },
       ),
     );
   }
