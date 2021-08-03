@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:food/src/widgets/my_contacts.dart';
 import 'package:food/src/widgets/search_users.dart';
 import 'package:food/src/widgets/users_list.dart';
 
@@ -13,7 +12,6 @@ class _ContactPageState extends State<ContactPage> {
   final ValueChanged<String> onChanged = (value) {};
   String name = '';
   String query = '';
-  bool _isSearching = false;
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +22,7 @@ class _ContactPageState extends State<ContactPage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            _isSearching
-                ? Container(
-                    child: MyContacts(),
-                  )
-                : Container(
-                    child: UsersList(),
-                  ),
+            UsersList(),
           ],
         ),
       ),
