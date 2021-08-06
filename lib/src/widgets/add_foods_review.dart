@@ -24,7 +24,7 @@ class AddFoodsReview extends StatefulWidget {
 class _AddFoodsReviewState extends State<AddFoodsReview> {
   final _addFoodReviewFormKey = GlobalKey<FormState>();
   bool _isProcessing = false;
-  String dropdownValue = 'Uno';
+  String dropdownValue = 'Un';
   final TextEditingController _breakfastController = TextEditingController();
   final TextEditingController _lunchController = TextEditingController();
   final TextEditingController _dinnerController = TextEditingController();
@@ -48,43 +48,32 @@ class _AddFoodsReviewState extends State<AddFoodsReview> {
               : Container(
                   width: double.maxFinite,
                   child: FloatingActionButton.extended(
-                      elevation: 0,
-                      label: Text(
-                        'Siguiente',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    elevation: 0,
+                    label: Text(
+                      'Siguiente',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
                       ),
-                      onPressed: () {
-                        widget.breakfastFocusNode.unfocus();
-                        widget.lunchFocusNode.unfocus();
-                        widget.dinnerFocusNode.unfocus();
-                        widget.snackFocusNode.unfocus();
-                        if (_addFoodReviewFormKey.currentState!.validate()) {
-                          Get.to(
-                            () => SelectContactToSendPage(
-                              daysToReview: dropdownValue,
-                              breakfast: _breakfastController.text,
-                              lunch: _lunchController.text,
-                              dinner: _dinnerController.text,
-                              snack: _snackController.text,
-                            ),
-                          );
-                        }
+                    ),
+                    onPressed: () {
+                      widget.breakfastFocusNode.unfocus();
+                      widget.lunchFocusNode.unfocus();
+                      widget.dinnerFocusNode.unfocus();
+                      widget.snackFocusNode.unfocus();
+                      if (_addFoodReviewFormKey.currentState!.validate()) {
+                        Get.to(
+                          () => SelectContactToSendPage(
+                            daysToReview: dropdownValue,
+                            breakfast: _breakfastController.text,
+                            lunch: _lunchController.text,
+                            dinner: _dinnerController.text,
+                            snack: _snackController.text,
+                          ),
+                        );
                       }
-                      // onPressed: () async {
-                      //   widget.breakfastFocusNode.unfocus();
-                      //   widget.lunchFocusNode.unfocus();
-                      //   widget.dinnerFocusNode.unfocus();
-                      //   widget.snackFocusNode.unfocus();
-                      //   if (_addFoodReviewFormKey.currentState!.validate()) {
-                      //     setState(() => _isProcessing = true);
-
-                      //     setState(() => _isProcessing = false);
-                      //   }
-                      // },
-                      ),
+                    },
+                  ),
                 ),
         ],
       ),
@@ -98,7 +87,49 @@ class _AddFoodsReviewState extends State<AddFoodsReview> {
         SizedBox(
           height: 20.0,
         ),
-        _myDropDownWidget(dropdownValue),
+        // _myDropDownWidget(dropdownValue),
+        Row(
+          children: [
+            Text('Resumen de:', style: TextStyle(fontSize: 16.0)),
+            Expanded(child: SizedBox()),
+            Container(
+              child: DropdownButton<String>(
+                value: dropdownValue,
+                icon: const Icon(Icons.arrow_downward),
+                iconSize: 24,
+                elevation: 16,
+                style: const TextStyle(color: Colors.deepPurple),
+                underline: Container(
+                  height: 2,
+                  color: Colors.deepPurpleAccent,
+                ),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    dropdownValue = newValue!;
+                  });
+                },
+                items: <String>['Un', 'Tres', 'Cinco', 'Siete']
+                    .map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(
+                      value,
+                      style: TextStyle(fontSize: 16.0),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+            SizedBox(
+              width: 15.0,
+            ),
+            Text(
+              'días',
+              style: TextStyle(fontSize: 16.0),
+            )
+          ],
+        ),
+
         SizedBox(
           height: 20.0,
         ),
@@ -198,43 +229,4 @@ class _AddFoodsReviewState extends State<AddFoodsReview> {
       hint: 'Detalle aperitivos',
     );
   }
-
-  Widget _myDropDownWidget(String dropdownValue) {
-    return DropdownButton<String>(
-      value: dropdownValue,
-      icon: const Icon(Icons.arrow_drop_down),
-      iconSize: 20.0,
-      elevation: 16,
-      style: const TextStyle(color: Colors.deepPurple),
-      underline: Container(
-        height: 2,
-        color: Colors.deepPurpleAccent,
-      ),
-      onChanged: (String? newValue) {
-        setState(() {
-          dropdownValue = newValue!;
-        });
-      },
-      items: <String>['Uno', 'Tres', 'Cinco', 'Siete']
-          .map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
-    );
-  }
 }
-// return CustomFormField(
-//       maxLines: 10,
-//       isLabelEnabled: false,
-//       controller: _breakfastController,
-//       focusNode: widget.breakfastFocusNode,
-//       keyboardType: TextInputType.text,
-//       inputAction: TextInputAction.done,
-//       validator: (value) => Validator.validateField(
-//         value: value,
-//       ),
-//       label: 'Desayuno',
-//       hint: 'Detalle desayuno',
-//     );

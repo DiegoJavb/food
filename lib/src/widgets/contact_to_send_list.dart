@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:food/src/controllers/database_controller.dart';
 import 'package:food/src/controllers/database_user_controller.dart';
 import 'package:food/src/res/custom_colors.dart';
 
@@ -10,7 +11,7 @@ class ContactToSendList extends StatefulWidget {
 
 class _ContactToSendListState extends State<ContactToSendList> {
   String name = '';
-
+  String currentUser = Database.userUid!;
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -35,7 +36,9 @@ class _ContactToSendListState extends State<ContactToSendList> {
                   color: CustomColors.firebaseGrey.withOpacity(1.0),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
-                child: _createUser(userId, email, name),
+                child: InkWell(
+                  child: _createUser(userId, email, name),
+                ),
               );
             },
           );
@@ -52,7 +55,7 @@ class _ContactToSendListState extends State<ContactToSendList> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
       ),
-      onTap: () {},
+      onTap: () => _createDialog(context, email),
       leading: Icon(Icons.person),
       title: Text(
         name,
@@ -66,4 +69,37 @@ class _ContactToSendListState extends State<ContactToSendList> {
       ),
     );
   }
+}
+
+void _createDialog(BuildContext context, String email) {
+  showDialog(
+    context: context,
+    barrierDismissible: true,
+    builder: (context) {
+      return AlertDialog(
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text('Esta a punto de enviar este detalle alimenticio a:\n'),
+            Text('$email', style: TextStyle(fontWeight: FontWeight.bold)),
+            Text('\nDesea Continuar?\n'),
+          ],
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: Text('No'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          TextButton(
+            child: Text('Si'),
+            onPressed: () {},
+          ),
+        ],
+      );
+    },
+  );
 }
