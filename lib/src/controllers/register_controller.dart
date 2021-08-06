@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:food/src/controllers/database_evaluation.dart';
 import 'package:food/src/controllers/database_user_controller.dart';
 import 'package:get/get.dart';
 import 'package:food/src/providers/role_pass.dart' as role;
@@ -31,6 +32,7 @@ class RegisterController extends GetxController {
     if (user != null) {
       print(role.rolUser);
       DatabaseUser.userUid = user.email;
+      DatabaseEvaluations.userUid = user.email;
       Database.userUid = user.email;
       await DatabaseUser.addUser(
         email: user.email!,

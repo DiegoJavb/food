@@ -1,10 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food/src/controllers/database_controller.dart';
+import 'package:food/src/controllers/database_evaluation.dart';
 import 'package:food/src/controllers/database_user_controller.dart';
 import 'package:food/src/res/custom_colors.dart';
+import 'package:get/get.dart';
 
 class ContactToSendList extends StatefulWidget {
+  final String daysToReview;
+  final String breakfast;
+  final String lunch;
+  final String dinner;
+  final String snack;
+  ContactToSendList({
+    required this.breakfast,
+    required this.daysToReview,
+    required this.lunch,
+    required this.dinner,
+    required this.snack,
+  }) : super();
   @override
   _ContactToSendListState createState() => _ContactToSendListState();
 }
@@ -55,7 +69,15 @@ class _ContactToSendListState extends State<ContactToSendList> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
       ),
-      onTap: () => _createDialog(context, email),
+      onTap: () => _createDialog(
+        context,
+        email,
+        widget.daysToReview,
+        widget.breakfast,
+        widget.lunch,
+        widget.dinner,
+        widget.snack,
+      ),
       leading: Icon(Icons.person),
       title: Text(
         name,
@@ -71,7 +93,15 @@ class _ContactToSendListState extends State<ContactToSendList> {
   }
 }
 
-void _createDialog(BuildContext context, String email) {
+void _createDialog(
+  BuildContext context,
+  String email,
+  String daysToReview,
+  String breakfast,
+  String lunch,
+  String dinner,
+  String snack,
+) {
   showDialog(
     context: context,
     barrierDismissible: true,
@@ -96,7 +126,25 @@ void _createDialog(BuildContext context, String email) {
           ),
           TextButton(
             child: Text('Si'),
-            onPressed: () {},
+            onPressed: () {
+              DatabaseEvaluations.addFood(
+                days: daysToReview,
+                breakfast: breakfast,
+                lunch: lunch,
+                dinner: dinner,
+                snack: snack,
+                toUser: email,
+              );
+              Get.snackbar(
+                'Envio',
+                'Su registro se ha enviado con éxito',
+              );
+              Future.delayed(Duration(seconds: 2), () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              });
+            },
           ),
         ],
       );

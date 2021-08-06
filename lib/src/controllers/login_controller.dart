@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food/src/controllers/database_controller.dart';
+import 'package:food/src/controllers/database_evaluation.dart';
 import 'package:food/src/controllers/database_user_controller.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -25,6 +26,7 @@ class LoginController extends GetxController {
         'Ha ingresado correctamente',
       );
       DatabaseUser.userUid = emailController.text;
+      DatabaseEvaluations.userUid = emailController.text;
       Database.userUid = emailController.text;
       Future.delayed(
         Duration(seconds: 2),
@@ -58,8 +60,9 @@ class LoginController extends GetxController {
       userCredential = await _auth.signInWithCredential(googleAuthCredential);
       final user = userCredential.user;
       print('UID del usuario que quiere ingresar: ${user!.uid}');
-      Database.userUid = user.email;
       DatabaseUser.userUid = user.email;
+      Database.userUid = user.email;
+      DatabaseEvaluations.userUid = user.email;
       await DatabaseUser.addUser(
         email: user.email!,
         role: role.rolUser,

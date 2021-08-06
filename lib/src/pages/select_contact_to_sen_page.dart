@@ -27,7 +27,13 @@ class _SelectContactToSendPageState extends State<SelectContactToSendPage> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: ContactToSendList(),
+          child: ContactToSendList(
+            daysToReview: widget.daysToReview,
+            breakfast: widget.breakfast,
+            lunch: widget.lunch,
+            dinner: widget.dinner,
+            snack: widget.snack,
+          ),
         ),
       ),
     );
