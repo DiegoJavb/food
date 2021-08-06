@@ -23,8 +23,15 @@ class _HomePageState extends State<HomePage> {
               automaticallyImplyLeading: true,
               floating: true,
               pinned: true,
-              title: Text('Usuario'),
-              expandedHeight: 150.0,
+              centerTitle: true,
+              title: Text(
+                'Contenido',
+                style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              expandedHeight: 100.0,
               flexibleSpace: Stack(
                 children: [
                   Positioned.fill(

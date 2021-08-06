@@ -63,11 +63,35 @@ class _EditUserPageState extends State<EditUserPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Header(
-                  height: 170.0, userName: _nameController.text,
-                  // userImage: 'images/userPhoto.jpg',
-                  // backgroundImage: 'images/background.jpg',
+                Container(
+                  height: 150,
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+                  child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    child: Text(
+                      widget.currentEmail[0].toUpperCase(),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 60.0),
+                    ),
+                    decoration: BoxDecoration(
+                      // image: DecorationImage(
+                      //   image: AssetImage('images/userPhoto.jpg'),
+                      //   fit: BoxFit.cover,
+                      // ),
+                      shape: BoxShape.circle,
+                      border:
+                          Border.all(color: CustomColors.foodNavy, width: 4),
+                    ),
+                    width: 90.0,
+                    height: 90.0,
+                    margin: EdgeInsets.only(bottom: 5.0),
+                  ),
                 ),
+                // Header(
+                //   height: 150.0,
+                //   userName: _nameController.text,
+                // ),
                 Container(
                   padding:
                       EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
@@ -228,34 +252,31 @@ class Header extends StatelessWidget {
       //   ),
       // ),
       height: this.height,
-      padding: EdgeInsets.only(bottom: 10.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          UserPhoto(
-            size: 90.0,
-            userName: this.userName,
-            // userImage: this.userImage,
-          ),
-          SizedBox(height: 5.0),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //   children: <Widget>[
-          //     FloatingActionButton(
-          //       backgroundColor: Color(0XFFFFF),
-          //       child: Icon(
-          //         Icons.camera_alt,
-          //       ),
-          //       onPressed: () {},
-          //     ),
-          //     FloatingActionButton(
-          //       backgroundColor: Color(0XFFFFF),
-          //       child: Icon(Icons.upload_sharp),
-          //       onPressed: () {},
-          //     ),
-          //   ],
-          // )
-        ],
+      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+      child: Container(
+        child: UserPhoto(
+          size: 90.0,
+          userName: this.userName,
+          // userImage: this.userImage,
+        ),
+        // SizedBox(height: 5.0),
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //   children: <Widget>[
+        //     FloatingActionButton(
+        //       backgroundColor: Color(0XFFFFF),
+        //       child: Icon(
+        //         Icons.camera_alt,
+        //       ),
+        //       onPressed: () {},
+        //     ),
+        //     FloatingActionButton(
+        //       backgroundColor: Color(0XFFFFF),
+        //       child: Icon(Icons.upload_sharp),
+        //       onPressed: () {},
+        //     ),
+        //   ],
+        // )
       ),
     );
   }

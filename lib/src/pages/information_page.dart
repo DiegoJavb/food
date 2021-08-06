@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:food/src/res/custom_colors.dart';
 import 'package:get/get.dart';
 
 class InformationPage extends StatefulWidget {
@@ -11,9 +10,14 @@ class _InformationPageState extends State<InformationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColors.foodpink,
-      body: SingleChildScrollView(
-        child: Container(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('images/info.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: SingleChildScrollView(
           child: Column(
             children: [
               SizedBox(height: 100.0),
@@ -22,6 +26,10 @@ class _InformationPageState extends State<InformationPage> {
               ),
               SizedBox(height: 20.0),
               _card(),
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                height: 250.0,
+              ),
             ],
           ),
         ),
@@ -47,9 +55,7 @@ class _InformationPageState extends State<InformationPage> {
           },
         ),
         Expanded(
-          child: SizedBox(
-            width: 10.0,
-          ),
+          child: SizedBox(),
         ),
         FloatingActionButton.extended(
           heroTag: 'register button',
@@ -66,33 +72,22 @@ class _InformationPageState extends State<InformationPage> {
   }
 
   Widget _card() {
-    final card = Container(
-      color: CustomColors.foodpink,
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Container(
-            width: 300.0,
-            padding: EdgeInsets.all(20.0),
-            child: ListTile(
-              subtitle: Text(
-                'Recibe recomendaciones te tu nutricionista en tiempo real',
-                style: TextStyle(fontSize: 20.0),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          )
-        ],
-      ),
-    );
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30.0),
-        color: Colors.white,
-      ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(30.0),
-        child: card,
+        child: Container(
+          width: 300.0,
+          padding: EdgeInsets.all(20.0),
+          child: Text(
+            'Recibe recomendaciones te tu nutricionista en tiempo real',
+            style: TextStyle(
+              fontSize: 25.0,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
       ),
     );
   }

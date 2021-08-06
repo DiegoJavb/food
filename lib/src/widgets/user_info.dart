@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food/src/controllers/database_user_controller.dart';
 import 'package:food/src/controllers/login_controller.dart';
+import 'package:food/src/pages/add_food_to_send_page.dart';
 import 'package:food/src/pages/contactos_page.dart';
 import 'package:food/src/pages/edit_user_page.dart';
 import 'package:food/src/pages/my_contacts_page.dart';
@@ -109,7 +110,7 @@ class _UserInfoState extends State<UserInfo> {
               ListTile(
                 leading: Icon(Icons.send),
                 title: Text('Realizar consulta'),
-                // onTap: () => Get.to(() => FoodRegisterPage()),
+                onTap: () => Get.to(() => AddFoodToSendPage()),
               ),
               Divider(),
               FloatingActionButton.extended(
