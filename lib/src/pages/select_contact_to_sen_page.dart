@@ -7,12 +7,14 @@ class SelectContactToSendPage extends StatefulWidget {
   final String lunch;
   final String dinner;
   final String snack;
+  final String currentName;
   const SelectContactToSendPage({
     required this.daysToReview,
     required this.breakfast,
     required this.lunch,
     required this.dinner,
     required this.snack,
+    required this.currentName,
   });
   @override
   _SelectContactToSendPageState createState() =>
@@ -33,6 +35,7 @@ class _SelectContactToSendPageState extends State<SelectContactToSendPage> {
             lunch: widget.lunch,
             dinner: widget.dinner,
             snack: widget.snack,
+            currentName: widget.currentName,
           ),
         ),
       ),

@@ -5,6 +5,7 @@ import 'package:food/src/pages/add_food_to_send_page.dart';
 import 'package:food/src/pages/contactos_page.dart';
 import 'package:food/src/pages/edit_user_page.dart';
 import 'package:food/src/pages/my_contacts_page.dart';
+import 'package:food/src/pages/notifications_page.dart';
 import 'package:food/src/res/custom_colors.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -40,9 +41,6 @@ class _UserInfoState extends State<UserInfo> {
                     return Text('Something went wrong');
                   } else if (snapshot.hasData || snapshot.data != null) {
                     var userInfo = snapshot.data!.docs[0].data();
-                    print(
-                      'informacion de usuario: $userInfo',
-                    );
                     docId = snapshot.data!.docs[0].id;
                     name = (userInfo as dynamic)['name'];
                     weight = (userInfo as dynamic)['weight'];
@@ -50,11 +48,10 @@ class _UserInfoState extends State<UserInfo> {
                     age = (userInfo as dynamic)['age'];
                     email = (userInfo as dynamic)['email'];
                     role = (userInfo as dynamic)['role'];
-                    print('id del documento $docId');
                     return UserAccountsDrawerHeader(
                       decoration: BoxDecoration(color: CustomColors.foodNavy),
                       accountEmail: Text(email),
-                      accountName: Text(role),
+                      accountName: Text(name),
                       currentAccountPicture: CircleAvatar(
                         backgroundColor: Colors.blueGrey[100],
                         child: Text(
@@ -99,9 +96,6 @@ class _UserInfoState extends State<UserInfo> {
               ListTile(
                 leading: Icon(Icons.supervised_user_circle),
                 title: Text('Contactos'),
-                // title: role == 'nutritionist'
-                //     ? Text('Pacientes')
-                //     : Text('Nutricionistas'),
                 onTap: () {
                   Get.to(() => MyContactsPage());
                 },
@@ -110,7 +104,13 @@ class _UserInfoState extends State<UserInfo> {
               ListTile(
                 leading: Icon(Icons.send),
                 title: Text('Realizar consulta'),
-                onTap: () => Get.to(() => AddFoodToSendPage()),
+                onTap: () => Get.to(() => AddFoodToSendPage(currentName: name)),
+              ),
+              Divider(),
+              ListTile(
+                leading: Icon(Icons.library_add_check),
+                title: Text('Notificaciones'),
+                onTap: () => Get.to(() => NotificationsPage()),
               ),
               Divider(),
               FloatingActionButton.extended(

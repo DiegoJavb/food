@@ -9,12 +9,14 @@ class AddFoodsReview extends StatefulWidget {
   final FocusNode lunchFocusNode;
   final FocusNode dinnerFocusNode;
   final FocusNode snackFocusNode;
+  final String currentName;
 
   const AddFoodsReview({
     required this.breakfastFocusNode,
     required this.lunchFocusNode,
     required this.dinnerFocusNode,
     required this.snackFocusNode,
+    required this.currentName,
   });
 
   @override
@@ -69,6 +71,7 @@ class _AddFoodsReviewState extends State<AddFoodsReview> {
                             lunch: _lunchController.text,
                             dinner: _dinnerController.text,
                             snack: _snackController.text,
+                            currentName: widget.currentName,
                           ),
                         );
                       }

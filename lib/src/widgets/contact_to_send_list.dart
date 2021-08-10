@@ -12,12 +12,14 @@ class ContactToSendList extends StatefulWidget {
   final String lunch;
   final String dinner;
   final String snack;
+  final String currentName;
   ContactToSendList({
     required this.breakfast,
     required this.daysToReview,
     required this.lunch,
     required this.dinner,
     required this.snack,
+    required this.currentName,
   }) : super();
   @override
   _ContactToSendListState createState() => _ContactToSendListState();
@@ -77,6 +79,7 @@ class _ContactToSendListState extends State<ContactToSendList> {
         widget.lunch,
         widget.dinner,
         widget.snack,
+        widget.currentName,
       ),
       leading: Icon(Icons.person),
       title: Text(
@@ -101,6 +104,7 @@ void _createDialog(
   String lunch,
   String dinner,
   String snack,
+  String currentName,
 ) {
   showDialog(
     context: context,
@@ -133,6 +137,11 @@ void _createDialog(
                 lunch: lunch,
                 dinner: dinner,
                 snack: snack,
+                toUser: email,
+              );
+              DatabaseEvaluations.addPatient(
+                fromUser: currentName,
+                emailFromUser: Database.userUid!,
                 toUser: email,
               );
               Get.snackbar(

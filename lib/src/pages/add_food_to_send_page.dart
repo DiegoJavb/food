@@ -6,6 +6,9 @@ class AddFoodToSendPage extends StatelessWidget {
   final FocusNode _lunchFocusNode = FocusNode();
   final FocusNode _dinnerFocusNode = FocusNode();
   final FocusNode _snackFocusNode = FocusNode();
+  final String currentName;
+
+  AddFoodToSendPage({required this.currentName});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -21,6 +24,7 @@ class AddFoodToSendPage extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.all(16.0),
             child: AddFoodsReview(
+              currentName: this.currentName,
               breakfastFocusNode: _breakfastFocusNode,
               lunchFocusNode: _lunchFocusNode,
               dinnerFocusNode: _dinnerFocusNode,

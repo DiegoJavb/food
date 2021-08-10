@@ -1,7 +1,7 @@
 class Validator {
   static String? validateField({required String value}) {
     if (value.isEmpty) {
-      return 'Field can\'t be empty';
+      return 'El área de texto no puede estar vacía';
     }
 
     return null;
@@ -9,9 +9,9 @@ class Validator {
 
   static String? validateUserID({required String uid}) {
     if (uid.isEmpty) {
-      return 'User ID can\'t be empty';
+      return 'El usuario no puede quedar vacío';
     } else if (uid.length <= 3) {
-      return 'User ID should be greater than 3 characters';
+      return 'El nombre de usuario debe ser mayor a 3 caracteres';
     }
 
     return null;

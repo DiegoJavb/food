@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food/src/widgets/search_users.dart';
+// import 'package:food/src/widgets/search_users.dart';
 import 'package:food/src/widgets/users_list.dart';
 
 class ContactPage extends StatefulWidget {
@@ -19,20 +19,16 @@ class _ContactPageState extends State<ContactPage> {
       appBar: AppBar(
         title: Text('Usuarios'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            UsersList(),
-          ],
+      body: Container(
+        padding: EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              UsersList(),
+            ],
+          ),
         ),
       ),
-    );
-  }
-
-  Widget buildSearch() {
-    return SearchUser(
-      name: 'name',
-      onChanged: (value) {},
     );
   }
 }

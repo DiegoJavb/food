@@ -19,6 +19,7 @@ class DatabaseUser {
     Map<String, dynamic> data = <String, dynamic>{
       'email': email,
       'role': role,
+      'name': '',
     };
     await documentReference
         .set(data)
@@ -27,7 +28,7 @@ class DatabaseUser {
   }
 
   static Stream<QuerySnapshot> readUser() {
-    print(userUid);
+    print('uid del usuarii}o actual: $userUid');
     CollectionReference userCollection =
         _mainCollection.doc(userUid).collection('information');
     return userCollection.snapshots();
@@ -62,12 +63,8 @@ class DatabaseUser {
     required String email,
     required String docId,
   }) async {
-    DocumentReference documentReference = _mainCollection
-        .doc(userUid)
-        .collection('information')
-        .doc(userUid)
-        .collection('contacts')
-        .doc(docId);
+    DocumentReference documentReference =
+        _mainCollection.doc(userUid).collection('contacts').doc(docId);
 
     Map<String, dynamic> data = <String, dynamic>{
       'name': name,
@@ -82,11 +79,8 @@ class DatabaseUser {
 
   //Leer mis usuarios
   static Stream<QuerySnapshot> readMyContacts() {
-    CollectionReference userCollection = _mainCollection
-        .doc(userUid)
-        .collection('information')
-        .doc(userUid)
-        .collection('contacts');
+    CollectionReference userCollection =
+        _mainCollection.doc(userUid).collection('contacts');
     return userCollection.snapshots();
   }
 

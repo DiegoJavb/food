@@ -16,8 +16,12 @@ class DatabaseEvaluations {
     required String snack,
     required String? toUser,
   }) async {
-    DocumentReference documentReferencer =
-        _mainCollection.doc(toUser).collection(userUid!).doc();
+    DocumentReference documentReferencer = _mainCollection
+        .doc(toUser)
+        .collection('contacts')
+        .doc(userUid)
+        .collection('evaluations')
+        .doc();
     print('documentReferencer: $documentReferencer');
     Map<String, dynamic> data = <String, dynamic>{
       "dias": days,
@@ -32,5 +36,28 @@ class DatabaseEvaluations {
         .set(data)
         .whenComplete(() => print("Note item added to the database"))
         .catchError((e) => print(e));
+  }
+
+  static Future<void> addPatient({
+    required String fromUser,
+    required String emailFromUser,
+    required String? toUser,
+  }) async {
+    DocumentReference documentReferencer =
+        _mainCollection.doc(toUser).collection('contacts').doc(emailFromUser);
+    Map<String, dynamic> data = <String, dynamic>{
+      "nombre": fromUser,
+      "email": emailFromUser,
+    };
+    await documentReferencer
+        .set(data)
+        .whenComplete(() => print("Note item added to the database"))
+        .catchError((e) => print(e));
+  }
+
+  static Stream<QuerySnapshot> readPatients() {
+    CollectionReference userCollection =
+        _mainCollection.doc(userUid).collection('contacts');
+    return userCollection.snapshots();
   }
 }
