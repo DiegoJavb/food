@@ -6,7 +6,6 @@ final CollectionReference _mainCollection =
 
 class DatabaseEvaluations {
   static String? userUid;
-
   //Ingresar alimentación
   static Future<void> addFood({
     required String days,
@@ -16,12 +15,13 @@ class DatabaseEvaluations {
     required String snack,
     required String? toUser,
   }) async {
+    var timeKey = DateTime.now();
     DocumentReference documentReferencer = _mainCollection
         .doc(toUser)
         .collection('contacts')
         .doc(userUid)
         .collection('evaluations')
-        .doc();
+        .doc(timeKey.toString());
     print('documentReferencer: $documentReferencer');
     Map<String, dynamic> data = <String, dynamic>{
       "dias": days,
@@ -60,4 +60,23 @@ class DatabaseEvaluations {
         _mainCollection.doc(userUid).collection('contacts');
     return userCollection.snapshots();
   }
+
+  static Stream<QuerySnapshot> readNotificationId(contactId) {
+    CollectionReference userCollection = _mainCollection
+        .doc(userUid)
+        .collection('contacts')
+        .doc(contactId)
+        .collection('evaluations');
+    return userCollection.snapshots();
+  }
+
+  // static Stream<DocumentSnapshot> readFood(contactId, foodId) {
+  //   DocumentReference documentReference = _mainCollection
+  //       .doc(userUid)
+  //       .collection('contacts')
+  //       .doc(contactId)
+  //       .collection('evaluations')
+  //       .doc(foodId);
+  //   return documentReference.snapshots();
+  // }
 }
