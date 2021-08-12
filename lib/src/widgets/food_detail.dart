@@ -5,7 +5,7 @@ import 'package:food/src/res/custom_colors.dart';
 import 'package:food/src/utils/validator.dart';
 
 import 'custom_form_field.dart';
-import 'package:food/src/providers/currentUser.dart' as userInfo;
+import 'package:food/src/providers/currentUser.dart' as userInformation;
 
 class FoodDetail extends StatefulWidget {
   final String desayuno;
@@ -101,17 +101,23 @@ class _FoodDetailState extends State<FoodDetail> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                CustomFormField(
-                  isLabelEnabled: false,
-                  controller: _evaluationController,
-                  focusNode: widget.evaluationFocusNode,
-                  keyboardType: TextInputType.text,
-                  inputAction: TextInputAction.next,
-                  validator: (value) => Validator.validateField(
-                    value: value,
-                  ),
-                  label: 'Evaluación',
-                  hint: 'Ingrese la evaluación alimenticia',
+                userInformation.roleUser == 'Nutricionista'
+                    ? CustomFormField(
+                        isLabelEnabled: false,
+                        controller: _evaluationController,
+                        focusNode: widget.evaluationFocusNode,
+                        keyboardType: TextInputType.text,
+                        inputAction: TextInputAction.next,
+                        validator: (value) => Validator.validateField(
+                          value: value,
+                        ),
+                        label: 'Evaluación',
+                        hint: 'Ingrese la evaluación alimenticia',
+                      )
+                    : SizedBox(height: 15.0),
+                Text(
+                  widget.currentEvaluation,
+                  style: TextStyle(fontSize: 18.0),
                 ),
               ],
             ),
@@ -126,31 +132,33 @@ class _FoodDetailState extends State<FoodDetail> {
                   ),
                 )
               : Container(
-                  child: FloatingActionButton.extended(
-                    label: Text('Enviar'),
-                    onPressed: () async {
-                      if (_editItemFormKey.currentState!.validate()) {
-                        setState(() => _isProcessing = true);
-                        DatabaseEvaluations.addFoodEvaluated(
-                          days: widget.dias,
-                          breakfast: widget.desayuno,
-                          lunch: widget.almuerzo,
-                          dinner: widget.cena,
-                          snack: widget.aperitivos,
-                          toUser: widget.enviado,
-                          carriedEvaluationId: widget.notificacionID,
-                          evaluation: _evaluationController.text,
-                        );
-                        DatabaseEvaluations.addContact(
-                          fromUser: userInfo.nameUser!,
-                          emailFromUser: Database.userUid!,
-                          toUser: widget.enviado,
-                        );
-                        setState(() => _isProcessing = false);
-                        Navigator.of(context).pop();
-                      }
-                    },
-                  ),
+                  child: userInformation.roleUser == 'Nutricionista'
+                      ? FloatingActionButton.extended(
+                          label: Text('Enviar'),
+                          onPressed: () async {
+                            if (_editItemFormKey.currentState!.validate()) {
+                              setState(() => _isProcessing = true);
+                              DatabaseEvaluations.addFoodEvaluated(
+                                days: widget.dias,
+                                breakfast: widget.desayuno,
+                                lunch: widget.almuerzo,
+                                dinner: widget.cena,
+                                snack: widget.aperitivos,
+                                toUser: widget.enviado,
+                                carriedEvaluationId: widget.notificacionID,
+                                evaluation: _evaluationController.text,
+                              );
+                              DatabaseEvaluations.addContact(
+                                fromUser: userInformation.nameUser!,
+                                emailFromUser: Database.userUid!,
+                                toUser: widget.enviado,
+                              );
+                              setState(() => _isProcessing = false);
+                              Navigator.of(context).pop();
+                            }
+                          },
+                        )
+                      : SizedBox(),
                 ),
         ],
       ),
