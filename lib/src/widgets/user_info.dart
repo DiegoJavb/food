@@ -34,7 +34,7 @@ class _UserInfoState extends State<UserInfo> {
         init: LoginController(),
         builder: (_) {
           return ListView(
-            key: _controller.formKey,
+            key: _controller.loginFormKey,
             children: [
               StreamBuilder<QuerySnapshot>(
                 stream: DatabaseUser.readUser(),
@@ -58,15 +58,38 @@ class _UserInfoState extends State<UserInfo> {
                     userInformation.emailUser = email;
                     userInformation.roleUser = role;
 
-                    return UserAccountsDrawerHeader(
-                      decoration: BoxDecoration(color: CustomColors.foodNavy),
-                      accountEmail: Text(email),
-                      accountName: Text(name),
-                      currentAccountPicture: CircleAvatar(
-                        backgroundColor: Colors.blueGrey[100],
-                        child: Text(
-                          email[0].toUpperCase(),
-                          style: TextStyle(fontSize: 40),
+                    return DrawerHeader(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: <Color>[
+                            Colors.deepOrange,
+                            Colors.orangeAccent
+                          ],
+                        ),
+                      ),
+                      child: Container(
+                        child: Column(
+                          children: <Widget>[
+                            CircleAvatar(
+                              radius: 40.0,
+                              backgroundColor: Colors.blueGrey[100],
+                              child: Text(
+                                email[0].toUpperCase(),
+                                style: TextStyle(fontSize: 40),
+                              ),
+                            ),
+                            SizedBox(height: 15.0),
+                            Text(
+                              name,
+                              style: Theme.of(context).textTheme.subtitle1,
+                              textAlign: TextAlign.center,
+                            ),
+                            Text(
+                              '$email    $role',
+                              style: Theme.of(context).textTheme.subtitle2,
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         ),
                       ),
                     );

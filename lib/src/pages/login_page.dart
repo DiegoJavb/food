@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
         builder: (_) {
           return SingleChildScrollView(
             child: Form(
-              key: _controller.formKey,
+              key: _controller.loginFormKey,
               child: Column(
                 children: <Widget>[
                   // _faceBookLogin(),

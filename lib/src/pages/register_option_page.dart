@@ -28,7 +28,7 @@ class _RegisterOpccionPageState extends State<RegisterOpccionPage> {
         builder: (_) {
           return SingleChildScrollView(
             child: Form(
-              key: _controller.formKey,
+              key: _controller.loginFormKey,
               child: Column(
                 children: <Widget>[
                   SizedBox(height: 20.0),
