@@ -54,6 +54,9 @@ class _UserInfoState extends State<UserInfo> {
                     userInformation.nameUser = name;
                     userInformation.heightUser = height;
                     userInformation.weigthtUser = weight;
+                    userInformation.ageUser = age;
+                    userInformation.emailUser = email;
+                    userInformation.roleUser = role;
 
                     return UserAccountsDrawerHeader(
                       decoration: BoxDecoration(color: CustomColors.foodNavy),
