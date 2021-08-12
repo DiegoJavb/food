@@ -135,16 +135,20 @@ class _UserInfoState extends State<UserInfo> {
               ),
               Divider(),
               ListTile(
-                leading: Icon(Icons.send),
-                title: Text('Realizar consulta'),
-                onTap: () => Get.to(() => AddFoodToSendPage(currentName: name)),
-              ),
-              Divider(),
-              ListTile(
                 leading: Icon(Icons.library_add_check),
                 title: Text('Notificaciones'),
                 onTap: () => Get.to(() => NotificationsPage()),
               ),
+              userInformation.roleUser == 'Nutricionista'
+                  ? SizedBox()
+                  : ListTile(
+                      leading: Icon(Icons.send),
+                      title: Text('Realizar consulta'),
+                      onTap: () => Get.to(
+                        () => AddFoodToSendPage(currentName: name),
+                      ),
+                    ),
+              Divider(),
               Divider(),
               FloatingActionButton.extended(
                 heroTag: 'boton salir',

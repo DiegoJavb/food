@@ -101,8 +101,10 @@ class _FoodDetailState extends State<FoodDetail> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                SizedBox(height: 20.0),
                 userInformation.roleUser == 'Nutricionista'
                     ? CustomFormField(
+                        maxLines: 5,
                         isLabelEnabled: false,
                         controller: _evaluationController,
                         focusNode: widget.evaluationFocusNode,
@@ -114,11 +116,10 @@ class _FoodDetailState extends State<FoodDetail> {
                         label: 'Evaluación',
                         hint: 'Ingrese la evaluación alimenticia',
                       )
-                    : SizedBox(height: 15.0),
-                Text(
-                  widget.currentEvaluation,
-                  style: TextStyle(fontSize: 18.0),
-                ),
+                    : Text(
+                        widget.currentEvaluation,
+                        style: TextStyle(fontSize: 18.0),
+                      ),
               ],
             ),
           ),
@@ -148,6 +149,16 @@ class _FoodDetailState extends State<FoodDetail> {
                                 carriedEvaluationId: widget.notificacionID,
                                 evaluation: _evaluationController.text,
                               );
+                              // DatabaseEvaluations.updateFoodEvaluated(
+                              //   days: widget.dias,
+                              //   breakfast: widget.desayuno,
+                              //   lunch: widget.almuerzo,
+                              //   dinner: widget.cena,
+                              //   snack: widget.aperitivos,
+                              //   toUser: widget.enviado,
+                              //   carriedEvaluationId: widget.notificacionID,
+                              //   evaluation: _evaluationController.text,
+                              // );
                               DatabaseEvaluations.addContact(
                                 fromUser: userInformation.nameUser!,
                                 emailFromUser: Database.userUid!,
