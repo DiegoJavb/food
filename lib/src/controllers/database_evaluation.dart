@@ -30,6 +30,7 @@ class DatabaseEvaluations {
       "cena": dinner,
       "aperitivos": snack,
       "enviado": userUid,
+      "evaluation": "",
     };
 
     await documentReferencer

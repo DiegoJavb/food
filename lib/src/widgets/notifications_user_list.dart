@@ -33,20 +33,14 @@ class NotificationUserList extends StatelessWidget {
               String aperitivos = notificationInfo['aperitivos'];
               String dias = notificationInfo['dias'];
               String enviado = notificationInfo['enviado'];
+              String evaluacion = notificationInfo['evaluation'];
               return Ink(
                 decoration: BoxDecoration(
                   color: CustomColors.firebaseGrey.withOpacity(1.0),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
-                child: _createNotification(
-                  desayuno,
-                  almuerzo,
-                  cena,
-                  aperitivos,
-                  dias,
-                  enviado,
-                  notificationID,
-                ),
+                child: _createNotification(desayuno, almuerzo, cena, aperitivos,
+                    dias, enviado, notificationID, evaluacion),
               );
             },
           );
@@ -60,14 +54,14 @@ class NotificationUserList extends StatelessWidget {
   }
 
   Widget _createNotification(
-    String desayuno,
-    String almuerzo,
-    String cena,
-    String aperitivos,
-    String dias,
-    String enviado,
-    String notificationID,
-  ) {
+      String desayuno,
+      String almuerzo,
+      String cena,
+      String aperitivos,
+      String dias,
+      String enviado,
+      String notificationID,
+      String evaluacion) {
     return ListTile(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
@@ -75,14 +69,14 @@ class NotificationUserList extends StatelessWidget {
       onTap: () {
         Get.to(
           () => FoodDetailPage(
-            desayuno: desayuno,
-            almuerzo: almuerzo,
-            cena: cena,
-            aperitivos: aperitivos,
-            dias: dias,
-            enviado: enviado,
-            notificationID: notificationID,
-          ),
+              desayuno: desayuno,
+              almuerzo: almuerzo,
+              cena: cena,
+              aperitivos: aperitivos,
+              dias: dias,
+              enviado: enviado,
+              notificationID: notificationID,
+              currentEvaluation: evaluacion),
         );
       },
       leading: Icon(Icons.notification_important),

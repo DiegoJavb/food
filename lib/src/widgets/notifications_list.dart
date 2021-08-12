@@ -25,6 +25,7 @@ class NotificationsList extends StatelessWidget {
               String userId = snapshot.data!.docs[index].id;
               String name = noteInfo['nombre'];
               String email = noteInfo['email'];
+              //El userId y el email son los mismos para todos los usuarios
               return Ink(
                 decoration: BoxDecoration(
                   color: CustomColors.firebaseGrey.withOpacity(1.0),
@@ -53,6 +54,7 @@ class NotificationsList extends StatelessWidget {
         Get.to(
           () => NotificationDetailsPage(
             userId: userId,
+            userName: name,
           ),
         );
       },

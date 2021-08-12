@@ -9,6 +9,7 @@ class FoodDetailPage extends StatelessWidget {
   final String dias;
   final String enviado;
   final String notificationID;
+  final String currentEvaluation;
 
   FoodDetailPage({
     required this.desayuno,
@@ -18,10 +19,13 @@ class FoodDetailPage extends StatelessWidget {
     required this.dias,
     required this.enviado,
     required this.notificationID,
+    //currentEvaluation
+    required this.currentEvaluation,
   });
 
   @override
   Widget build(BuildContext context) {
+    final FocusNode _evaluationFocusNode = FocusNode();
     return Scaffold(
       appBar: AppBar(
         title: Text('detalle de comida'),
@@ -37,6 +41,9 @@ class FoodDetailPage extends StatelessWidget {
             dias: this.dias,
             enviado: this.enviado,
             notificacionID: this.notificationID,
+            //evaluacion
+            currentEvaluation: this.currentEvaluation,
+            evaluationFocusNode: _evaluationFocusNode,
           ),
         ),
       ),

@@ -3,14 +3,16 @@ import 'package:food/src/widgets/notifications_user_list.dart';
 
 class NotificationDetailsPage extends StatelessWidget {
   final String userId;
+  final String userName;
   NotificationDetailsPage({
     required this.userId,
+    required this.userName,
   });
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Notification Details'),
+        title: Text(userName),
       ),
       body: SafeArea(
         child: Container(
