@@ -9,6 +9,8 @@ import 'package:food/src/pages/notifications_page.dart';
 import 'package:food/src/res/custom_colors.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+//Seteo de variables globales
+import 'package:food/src/providers/currentUser.dart' as userInformation;
 
 class UserInfo extends StatefulWidget {
   @override
@@ -32,7 +34,7 @@ class _UserInfoState extends State<UserInfo> {
         init: LoginController(),
         builder: (_) {
           return ListView(
-            key: _controller.formKey,
+            key: _controller.loginFormKey,
             children: [
               StreamBuilder<QuerySnapshot>(
                 stream: DatabaseUser.readUser(),
@@ -48,15 +50,46 @@ class _UserInfoState extends State<UserInfo> {
                     age = (userInfo as dynamic)['age'];
                     email = (userInfo as dynamic)['email'];
                     role = (userInfo as dynamic)['role'];
-                    return UserAccountsDrawerHeader(
-                      decoration: BoxDecoration(color: CustomColors.foodNavy),
-                      accountEmail: Text(email),
-                      accountName: Text(name),
-                      currentAccountPicture: CircleAvatar(
-                        backgroundColor: Colors.blueGrey[100],
-                        child: Text(
-                          email[0].toUpperCase(),
-                          style: TextStyle(fontSize: 40),
+                    //seteo de variables globales
+                    userInformation.nameUser = name;
+                    userInformation.heightUser = height;
+                    userInformation.weigthtUser = weight;
+                    userInformation.ageUser = age;
+                    userInformation.emailUser = email;
+                    userInformation.roleUser = role;
+
+                    return DrawerHeader(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: <Color>[
+                            Colors.deepOrange,
+                            Colors.orangeAccent
+                          ],
+                        ),
+                      ),
+                      child: Container(
+                        child: Column(
+                          children: <Widget>[
+                            CircleAvatar(
+                              radius: 40.0,
+                              backgroundColor: Colors.blueGrey[100],
+                              child: Text(
+                                email[0].toUpperCase(),
+                                style: TextStyle(fontSize: 40),
+                              ),
+                            ),
+                            SizedBox(height: 15.0),
+                            Text(
+                              name,
+                              style: Theme.of(context).textTheme.subtitle1,
+                              textAlign: TextAlign.center,
+                            ),
+                            Text(
+                              '$email    $role',
+                              style: Theme.of(context).textTheme.subtitle2,
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         ),
                       ),
                     );
@@ -102,16 +135,20 @@ class _UserInfoState extends State<UserInfo> {
               ),
               Divider(),
               ListTile(
-                leading: Icon(Icons.send),
-                title: Text('Realizar consulta'),
-                onTap: () => Get.to(() => AddFoodToSendPage(currentName: name)),
-              ),
-              Divider(),
-              ListTile(
                 leading: Icon(Icons.library_add_check),
                 title: Text('Notificaciones'),
                 onTap: () => Get.to(() => NotificationsPage()),
               ),
+              userInformation.roleUser == 'Nutricionista'
+                  ? SizedBox()
+                  : ListTile(
+                      leading: Icon(Icons.send),
+                      title: Text('Realizar consulta'),
+                      onTap: () => Get.to(
+                        () => AddFoodToSendPage(currentName: name),
+                      ),
+                    ),
+              Divider(),
               Divider(),
               FloatingActionButton.extended(
                 heroTag: 'boton salir',
