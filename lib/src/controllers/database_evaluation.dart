@@ -39,7 +39,40 @@ class DatabaseEvaluations {
         .catchError((e) => print(e));
   }
 
-  static Future<void> addPatient({
+  static Future<void> addFoodEvaluated({
+    required String days,
+    required String breakfast,
+    required String lunch,
+    required String dinner,
+    required String snack,
+    required String? toUser,
+    required String carriedEvaluationId,
+    required String evaluation,
+  }) async {
+    DocumentReference documentReferencer = _mainCollection
+        .doc(toUser)
+        .collection('contacts')
+        .doc(userUid)
+        .collection('evaluations')
+        .doc(carriedEvaluationId);
+    print('documentReferencer: $documentReferencer');
+    Map<String, dynamic> data = <String, dynamic>{
+      "dias": days,
+      "desayuno": breakfast,
+      "almuerzo": lunch,
+      "cena": dinner,
+      "aperitivos": snack,
+      "enviado": userUid,
+      "evaluation": evaluation,
+    };
+
+    await documentReferencer
+        .set(data)
+        .whenComplete(() => print("Note item added to the database"))
+        .catchError((e) => print(e));
+  }
+
+  static Future<void> addContact({
     required String fromUser,
     required String emailFromUser,
     required String? toUser,
@@ -56,7 +89,7 @@ class DatabaseEvaluations {
         .catchError((e) => print(e));
   }
 
-  static Stream<QuerySnapshot> readPatients() {
+  static Stream<QuerySnapshot> readContacts() {
     CollectionReference userCollection =
         _mainCollection.doc(userUid).collection('contacts');
     return userCollection.snapshots();

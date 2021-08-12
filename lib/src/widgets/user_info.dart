@@ -9,6 +9,8 @@ import 'package:food/src/pages/notifications_page.dart';
 import 'package:food/src/res/custom_colors.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+//Seteo de variables globales
+import 'package:food/src/providers/currentUser.dart' as userInformation;
 
 class UserInfo extends StatefulWidget {
   @override
@@ -48,6 +50,11 @@ class _UserInfoState extends State<UserInfo> {
                     age = (userInfo as dynamic)['age'];
                     email = (userInfo as dynamic)['email'];
                     role = (userInfo as dynamic)['role'];
+                    //seteo de variables globales
+                    userInformation.nameUser = name;
+                    userInformation.heightUser = height;
+                    userInformation.weigthtUser = weight;
+
                     return UserAccountsDrawerHeader(
                       decoration: BoxDecoration(color: CustomColors.foodNavy),
                       accountEmail: Text(email),

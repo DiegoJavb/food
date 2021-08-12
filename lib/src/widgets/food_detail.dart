@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:food/src/controllers/database_controller.dart';
+import 'package:food/src/controllers/database_evaluation.dart';
 import 'package:food/src/res/custom_colors.dart';
 import 'package:food/src/utils/validator.dart';
 
 import 'custom_form_field.dart';
+import 'package:food/src/providers/currentUser.dart' as userInfo;
 
 class FoodDetail extends StatefulWidget {
   final String desayuno;
@@ -37,12 +40,12 @@ class _FoodDetailState extends State<FoodDetail> {
   final _editItemFormKey = GlobalKey<FormState>();
   bool _isProcessing = false;
   late TextEditingController _evaluationController;
-
   @override
   void initState() {
     _evaluationController = new TextEditingController(
       text: widget.currentEvaluation,
     );
+
     super.initState();
   }
 
@@ -128,6 +131,21 @@ class _FoodDetailState extends State<FoodDetail> {
                     onPressed: () async {
                       if (_editItemFormKey.currentState!.validate()) {
                         setState(() => _isProcessing = true);
+                        DatabaseEvaluations.addFoodEvaluated(
+                          days: widget.dias,
+                          breakfast: widget.desayuno,
+                          lunch: widget.almuerzo,
+                          dinner: widget.cena,
+                          snack: widget.aperitivos,
+                          toUser: widget.enviado,
+                          carriedEvaluationId: widget.notificacionID,
+                          evaluation: _evaluationController.text,
+                        );
+                        DatabaseEvaluations.addContact(
+                          fromUser: userInfo.nameUser!,
+                          emailFromUser: Database.userUid!,
+                          toUser: widget.enviado,
+                        );
                         setState(() => _isProcessing = false);
                         Navigator.of(context).pop();
                       }

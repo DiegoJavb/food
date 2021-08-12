@@ -139,7 +139,7 @@ void _createDialog(
                 snack: snack,
                 toUser: email,
               );
-              DatabaseEvaluations.addPatient(
+              DatabaseEvaluations.addContact(
                 fromUser: currentName,
                 emailFromUser: Database.userUid!,
                 toUser: email,

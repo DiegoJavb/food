@@ -11,7 +11,7 @@ class NotificationsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: DatabaseEvaluations.readPatients(),
+      stream: DatabaseEvaluations.readContacts(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return Text('Something went wrong');
