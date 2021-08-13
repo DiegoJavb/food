@@ -103,7 +103,7 @@ class Contentlist extends StatelessWidget {
           ),
         ),
         onTap: () {
-          Get.toNamed('recomendation');
+          Get.toNamed('news');
         },
       ),
     );
