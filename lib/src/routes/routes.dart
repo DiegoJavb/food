@@ -1,11 +1,12 @@
+import 'package:get/route_manager.dart';
 import 'package:food/src/pages/add_appointment_page.dart';
 import 'package:food/src/pages/recomendations_page.dart';
 import 'package:food/src/pages/information_page.dart';
 import 'package:food/src/pages/record_page.dart';
 import 'package:food/src/pages/welcome_page.dart';
-import 'package:get/route_manager.dart';
 import 'package:food/src/pages/login_page.dart';
 import 'package:food/src/pages/home_page.dart';
+import 'package:food/src/pages/news_page.dart';
 
 //para estasrutas haremos uso del packete get
 getAplicationRoutes() => [
@@ -37,5 +38,9 @@ getAplicationRoutes() => [
       GetPage(
         name: 'addAppointment',
         page: () => AddAppointmentPage(),
+      ),
+      GetPage(
+        name: 'news',
+        page: () => NewsPage(),
       ),
     ];
