@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:food/src/controllers/login_controller.dart';
-import 'package:food/src/res/custom_colors.dart';
 import 'package:get/get.dart';
 
 class LoginPage extends StatefulWidget {
@@ -19,7 +18,16 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: CustomColors.foodNavy),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        title: Text("Inicio de sesión", style: TextStyle(color: Colors.black)),
+        centerTitle: true,
+      ),
+      drawer: Drawer(),
       body: GetBuilder<LoginController>(
         init: LoginController(),
         //este guion bajo hara referancia a los controladores de login
@@ -29,7 +37,16 @@ class _LoginPageState extends State<LoginPage> {
               key: _controller.loginFormKey,
               child: Column(
                 children: <Widget>[
-                  // _faceBookLogin(),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 40.0,
+                      vertical: 10.0,
+                    ),
+                    child: Image(
+                      image: AssetImage('images/Healthy.png'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                   _googleLogin(_),
                   Center(
                       child: Container(
@@ -38,6 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                   _insertUser(),
                   _insertPassword(),
                   _loginButton(_),
+                  _notAccount(),
                 ],
               ),
             ),
@@ -103,13 +121,34 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _loginButton(_) {
     return Container(
+      width: 200.0,
       padding: const EdgeInsets.all(10.0),
       child: FloatingActionButton.extended(
-        label: const Text('Iniciar'),
-        backgroundColor: Colors.pink[100],
+        label: const Text(
+          'Iniciar',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 15.0,
+          ),
+        ),
+        backgroundColor: Colors.white,
         onPressed: () async {
           _.signInWithEmailAndPassword();
         },
+      ),
+    );
+  }
+
+  Widget _notAccount() {
+    return Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          TextButton(
+            onPressed: () => Get.toNamed('welcome'),
+            child: Text('No tienes una cuenta?'),
+          ),
+        ],
       ),
     );
   }

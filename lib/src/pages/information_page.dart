@@ -47,7 +47,10 @@ class _InformationPageState extends State<InformationPage> {
         ),
         FloatingActionButton.extended(
           heroTag: 'login button',
-          label: const Text('Iniciar sesión'),
+          label: const Text(
+            'Iniciar sesión',
+            style: TextStyle(fontSize: 15.0),
+          ),
           foregroundColor: Colors.black,
           backgroundColor: Colors.white,
           onPressed: () {
@@ -59,7 +62,10 @@ class _InformationPageState extends State<InformationPage> {
         ),
         FloatingActionButton.extended(
           heroTag: 'register button',
-          label: const Text('Registrarse'),
+          label: const Text(
+            'Registrarse',
+            style: TextStyle(fontSize: 15.0),
+          ),
           foregroundColor: Colors.black,
           backgroundColor: Colors.white,
           onPressed: () {
