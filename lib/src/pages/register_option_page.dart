@@ -33,13 +33,23 @@ class _RegisterOpccionPageState extends State<RegisterOpccionPage> {
                 children: <Widget>[
                   SizedBox(height: 20.0),
                   Container(
-                    width: 250,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 40.0,
+                      vertical: 10.0,
+                    ),
                     child: Image(
                       image: AssetImage('images/Healthy.png'),
+                      fit: BoxFit.cover,
                     ),
                   ),
+                  SizedBox(height: 20.0),
                   _googleRegister(_),
-                  Center(child: Text('Ó')),
+                  Center(
+                    child: Text(
+                      'Ó',
+                      style: TextStyle(fontSize: 20.0),
+                    ),
+                  ),
                   _crearCuenta(),
                 ],
               ),

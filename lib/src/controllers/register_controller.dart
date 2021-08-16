@@ -23,7 +23,6 @@ class RegisterController extends GetxController {
   }
 
   void registerUserWithEmailAndPassword() async {
-    String name = '';
     final User? user = (await _auth.createUserWithEmailAndPassword(
       email: emailController.text,
       password: passwordController.text,
@@ -37,11 +36,6 @@ class RegisterController extends GetxController {
       await DatabaseUser.addUser(
         email: user.email!,
         role: role.rolUser,
-        docId: user.uid,
-      );
-      await DatabaseUser.addUserOnListUsers(
-        email: user.email!,
-        name: name,
         docId: user.uid,
       );
       Get.snackbar(

@@ -68,11 +68,6 @@ class LoginController extends GetxController {
         role: role.rolUser,
         docId: user.uid,
       );
-      await DatabaseUser.addUserOnListUsers(
-        email: user.email!,
-        name: user.displayName!,
-        docId: user.uid,
-      );
       Get.snackbar(
         'Hola',
         '${user.displayName} iniciaste sesión con Google',

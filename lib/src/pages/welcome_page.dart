@@ -24,15 +24,26 @@ class _WelcomePageState extends State<WelcomePage> {
       body: Center(
         child: Column(
           children: <Widget>[
+            SizedBox(height: 10.0),
+            Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 40.0,
+                vertical: 10.0,
+              ),
+              child: Image(
+                image: AssetImage('images/Healthy.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
             SizedBox(height: 20.0),
             Text(
               'Bienvenido',
               style: TextStyle(
-                fontSize: 40.0,
+                fontSize: 30.0,
                 fontWeight: FontWeight.w300,
               ),
             ),
-            SizedBox(height: 80.0),
+            SizedBox(height: 60.0),
             Container(
               width: 300.0,
               child: Text(
@@ -49,7 +60,7 @@ class _WelcomePageState extends State<WelcomePage> {
         heroTag: 'siguiente button',
         label: const Text(
           'Siguiente',
-          style: TextStyle(fontSize: 20.0),
+          style: TextStyle(fontSize: 15.0),
         ),
         foregroundColor: Colors.black,
         backgroundColor: Colors.white,
