@@ -1,9 +1,13 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:food/src/controllers/database_user_controller.dart';
 import 'package:food/src/res/custom_colors.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class EditUserPage extends StatefulWidget {
   final String currentName;
+  final String currentPhoto;
   final String currentweight;
   final String currentheight;
   final String currentage;
@@ -12,6 +16,7 @@ class EditUserPage extends StatefulWidget {
   const EditUserPage({
     required this.currentEmail,
     required this.currentName,
+    required this.currentPhoto,
     required this.currentweight,
     required this.currentheight,
     required this.currentage,
@@ -24,12 +29,17 @@ class EditUserPage extends StatefulWidget {
 
 class _EditUserPageState extends State<EditUserPage> {
   final _editUserInfoFormKey = GlobalKey<FormState>();
+  File? sampleImage;
+  late String photo;
   late String name;
+  late String email;
   late String weight;
   late String height;
   late String age;
+  late String docId;
 
   bool _isProcessing = false;
+  late TextEditingController _photoController;
   late TextEditingController _nameController;
   late TextEditingController _weightController;
   late TextEditingController _heightController;
@@ -37,6 +47,9 @@ class _EditUserPageState extends State<EditUserPage> {
 
   @override
   void initState() {
+    _photoController = TextEditingController(
+      text: widget.currentPhoto,
+    );
     _nameController = TextEditingController(
       text: widget.currentName,
     );
@@ -63,35 +76,67 @@ class _EditUserPageState extends State<EditUserPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
+                SizedBox(height: 25.0),
                 Container(
-                  height: 150,
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
-                  child: Container(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text(
-                      widget.currentEmail[0].toUpperCase(),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 60.0),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: CustomColors.foodNavy,
+                      width: 2,
                     ),
-                    decoration: BoxDecoration(
-                      // image: DecorationImage(
-                      //   image: AssetImage('images/userPhoto.jpg'),
-                      //   fit: BoxFit.cover,
-                      // ),
-                      shape: BoxShape.circle,
-                      border:
-                          Border.all(color: CustomColors.foodNavy, width: 4),
-                    ),
-                    width: 90.0,
-                    height: 90.0,
-                    margin: EdgeInsets.only(bottom: 5.0),
+                  ),
+                  // child: _photoController.text == ''
+                  child: sampleImage == null
+                      ? Container(
+                          width: 200,
+                          height: 200,
+                          child: _photoController.text == ''
+                              // child: sampleImage == null
+                              ? Center(
+                                  child: Text(
+                                    widget.currentEmail[0].toUpperCase(),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(fontSize: 60.0),
+                                  ),
+                                )
+                              : Container(
+                                  width: 200,
+                                  height: 200,
+                                  child: Center(
+                                    child: CircleAvatar(
+                                      radius: 100.0,
+                                      backgroundImage:
+                                          NetworkImage(_photoController.text),
+                                      backgroundColor: Colors.transparent,
+                                    ),
+                                  ),
+                                ),
+                        )
+                      : Center(
+                          child: CircleAvatar(
+                            radius: 100.0,
+                            backgroundImage: FileImage(
+                              sampleImage!,
+                            ),
+                            backgroundColor: Colors.transparent,
+                          ),
+                        ),
+                ),
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.camera_alt),
+                        onPressed: getPhoto,
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.upload_sharp),
+                        onPressed: getImage,
+                      ),
+                    ],
                   ),
                 ),
-                // Header(
-                //   height: 150.0,
-                //   userName: _nameController.text,
-                // ),
                 Container(
                   padding:
                       EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
@@ -122,18 +167,16 @@ class _EditUserPageState extends State<EditUserPage> {
                           onPressed: () async {
                             if (_editUserInfoFormKey.currentState!.validate()) {
                               setState(() => _isProcessing = true);
-                              await DatabaseUser.updateUser(
-                                age: _ageController.text,
-                                docId: widget.documentId,
-                                height: _heightController.text,
-                                name: _nameController.text,
-                                weight: _weightController.text,
+                              uploadStatusImage(
+                                sampleImage!,
+                                docId = widget.documentId,
+                                age = _ageController.text,
+                                name = _nameController.text,
+                                email = widget.currentEmail,
+                                weight = _weightController.text,
+                                height = _heightController.text,
                               );
-                              await DatabaseUser.addUserOnListUsers(
-                                name: _nameController.text,
-                                email: widget.currentEmail,
-                                docId: widget.documentId,
-                              );
+
                               setState(() => _isProcessing = false);
                               Navigator.of(context).pop();
                             }
@@ -146,6 +189,21 @@ class _EditUserPageState extends State<EditUserPage> {
         ],
       ),
     );
+  }
+
+  Future getImage() async {
+    var tempImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+    setState(() {
+      sampleImage = File(tempImage!.path);
+      print('file del sample image: $sampleImage');
+    });
+  }
+
+  Future getPhoto() async {
+    var tempImage = await ImagePicker().pickImage(source: ImageSource.camera);
+    setState(() {
+      sampleImage = File(tempImage!.path);
+    });
   }
 
   TextField _createName() {
@@ -230,87 +288,39 @@ class _EditUserPageState extends State<EditUserPage> {
   }
 }
 
-class Header extends StatelessWidget {
-  final double height;
-  final String userName;
-  // final String backgroundImage;
-  const Header({
-    required this.height,
-    required this.userName,
-    // required this.userImage,
-    // required this.backgroundImage,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      // decoration: BoxDecoration(
-      //   image: DecorationImage(
-      //     image: AssetImage(this.backgroundImage),
-      //     fit: BoxFit.cover,
-      //   ),
-      // ),
-      height: this.height,
-      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
-      child: Container(
-        child: UserPhoto(
-          size: 90.0,
-          userName: this.userName,
-          // userImage: this.userImage,
-        ),
-        // SizedBox(height: 5.0),
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        //   children: <Widget>[
-        //     FloatingActionButton(
-        //       backgroundColor: Color(0XFFFFF),
-        //       child: Icon(
-        //         Icons.camera_alt,
-        //       ),
-        //       onPressed: () {},
-        //     ),
-        //     FloatingActionButton(
-        //       backgroundColor: Color(0XFFFFF),
-        //       child: Icon(Icons.upload_sharp),
-        //       onPressed: () {},
-        //     ),
-        //   ],
-        // )
-      ),
-    );
-  }
-}
-
-class UserPhoto extends StatelessWidget {
-  final String userName;
-  final double size;
-  const UserPhoto({
-    // required this.userImage,
-    required this.size,
-    required this.userName,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Text(
-        this.userName[0],
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 60.0),
-      ),
-      decoration: BoxDecoration(
-        // image: DecorationImage(
-        //   image: AssetImage('images/userPhoto.jpg'),
-        //   fit: BoxFit.cover,
-        // ),
-        shape: BoxShape.circle,
-        border: Border.all(color: CustomColors.foodNavy, width: 4),
-      ),
-      width: 90.0,
-      height: 90.0,
-      margin: EdgeInsets.only(bottom: 5.0),
-    );
-  }
+Future<void> uploadStatusImage(
+  File sampleImage,
+  String docId,
+  String age,
+  String name,
+  String email,
+  String weight,
+  String height,
+) async {
+  String url;
+  firebase_storage.Reference postImageRef =
+      firebase_storage.FirebaseStorage.instance.ref().child(docId);
+  print('Image URl' + postImageRef.toString());
+  var timeKey = DateTime.now();
+  firebase_storage.UploadTask uploadTask =
+      postImageRef.child(timeKey.toString() + ".jpg").putFile(sampleImage);
+  print('imagen que se subira: ${uploadTask.toString()}');
+  var imageUrl = await (await uploadTask).ref.getDownloadURL();
+  print('url de la imagen:  $imageUrl');
+  url = imageUrl.toString();
+  // Guardar el post a firebase database: database realtime database
+  await DatabaseUser.updateUser(
+    photo: url,
+    age: age,
+    docId: docId,
+    height: height,
+    name: name,
+    weight: weight,
+  );
+  await DatabaseUser.addUserOnListUsers(
+    photo: url,
+    name: name,
+    email: email,
+    docId: docId,
+  );
 }

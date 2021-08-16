@@ -35,6 +35,7 @@ class DatabaseUser {
   }
 
   static Future<void> updateUser({
+    required String photo,
     required String name,
     required String weight,
     required String height,
@@ -45,6 +46,7 @@ class DatabaseUser {
         _mainCollection.doc(userUid).collection('information').doc(docId);
 
     Map<String, dynamic> data = <String, dynamic>{
+      "photo": photo,
       "name": name,
       "weight": weight,
       "height": height,
@@ -86,6 +88,7 @@ class DatabaseUser {
 
   //BASE DE DATOS UUARIOS TOTALES
   static Future<void> addUserOnListUsers({
+    required String photo,
     required String name,
     required String email,
     required String docId,
@@ -93,6 +96,7 @@ class DatabaseUser {
     DocumentReference documentReference = _allUserCollection.doc(docId);
 
     Map<String, dynamic> data = <String, dynamic>{
+      'photo': photo,
       'name': name,
       'email': email,
       'userUid': docId,

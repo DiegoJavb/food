@@ -19,11 +19,13 @@ class UserInfo extends StatefulWidget {
 
 class _UserInfoState extends State<UserInfo> {
   late String docId;
+  late String photo;
   late String name;
   late String weight;
   late String height;
   late String age;
   late String email;
+
   late String role = '';
   final _controller = Get.put(LoginController());
 
@@ -44,6 +46,7 @@ class _UserInfoState extends State<UserInfo> {
                   } else if (snapshot.hasData || snapshot.data != null) {
                     var userInfo = snapshot.data!.docs[0].data();
                     docId = snapshot.data!.docs[0].id;
+                    photo = (userInfo as dynamic)['photo'];
                     name = (userInfo as dynamic)['name'];
                     weight = (userInfo as dynamic)['weight'];
                     height = (userInfo as dynamic)['height'];
@@ -52,6 +55,7 @@ class _UserInfoState extends State<UserInfo> {
                     role = (userInfo as dynamic)['role'];
                     //seteo de variables globales
                     userInformation.nameUser = name;
+                    userInformation.photoUser = photo;
                     userInformation.heightUser = height;
                     userInformation.weigthtUser = weight;
                     userInformation.ageUser = age;
@@ -70,14 +74,20 @@ class _UserInfoState extends State<UserInfo> {
                       child: Container(
                         child: Column(
                           children: <Widget>[
-                            CircleAvatar(
-                              radius: 40.0,
-                              backgroundColor: Colors.blueGrey[100],
-                              child: Text(
-                                email[0].toUpperCase(),
-                                style: TextStyle(fontSize: 40),
-                              ),
-                            ),
+                            photo == ''
+                                ? CircleAvatar(
+                                    radius: 40.0,
+                                    backgroundColor: Colors.blueGrey[100],
+                                    child: Text(
+                                      email[0].toUpperCase(),
+                                      style: TextStyle(fontSize: 40),
+                                    ),
+                                  )
+                                : CircleAvatar(
+                                    radius: 40.0,
+                                    backgroundImage: NetworkImage(photo),
+                                    backgroundColor: Colors.transparent,
+                                  ),
                             SizedBox(height: 15.0),
                             Text(
                               name,
@@ -107,14 +117,17 @@ class _UserInfoState extends State<UserInfo> {
                 leading: Icon(Icons.person),
                 title: Text('Actualizar información'),
                 onTap: () {
-                  Get.to(EditUserPage(
-                    currentage: age,
-                    currentheight: height,
-                    currentweight: weight,
-                    currentName: name,
-                    currentEmail: email,
-                    documentId: docId,
-                  ));
+                  Get.to(
+                    () => EditUserPage(
+                      currentage: age,
+                      currentheight: height,
+                      currentweight: weight,
+                      currentName: name,
+                      currentPhoto: photo,
+                      currentEmail: email,
+                      documentId: docId,
+                    ),
+                  );
                 },
               ),
               Divider(),
