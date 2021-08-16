@@ -207,11 +207,31 @@ class RecomemendationsList extends StatelessWidget {
   List<DataRow> _createRows(QuerySnapshot snapshot) {
     List<DataRow> newList =
         snapshot.docs.map((DocumentSnapshot documentSnapshot) {
+      String color = documentSnapshot['level'].replaceAll('#', '0xff');
+
+      print('color que viene: $color');
       return new DataRow(cells: [
         DataCell(Text(documentSnapshot['food'])),
-        DataCell(Text(documentSnapshot['level'])),
+        DataCell(
+          Text(
+            "Nivel",
+            style: TextStyle(
+              color: new Color(int.parse(color)),
+            ),
+          ),
+        ),
       ]);
     }).toList();
     return newList;
   }
 }
+// COLORES HEXADECIMALES
+// #FF0000 = red
+// #00FF00 = green
+// #0000FF = blue
+// #FFFF00 = yellow 
+// #FF00FF = magenta
+// #00FFFF = cyan
+// #000000 = black
+// #FFFFFF = white
+// #FF9900 = orange
