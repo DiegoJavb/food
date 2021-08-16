@@ -144,9 +144,31 @@ class _EditUserPageState extends State<EditUserPage> {
                     children: <Widget>[
                       _createName(),
                       SizedBox(height: 20.0),
-                      _createWeight(),
+                      Container(
+                        child: Row(children: <Widget>[
+                          Container(
+                            width: 150.0,
+                            child: _createWeight(),
+                          ),
+                          SizedBox(
+                            width: 50.0,
+                          ),
+                          Text('kilogramos', style: TextStyle(fontSize: 20.0)),
+                        ]),
+                      ),
                       SizedBox(height: 20.0),
-                      _createHeight(),
+                      Container(
+                        child: Row(children: <Widget>[
+                          Container(
+                            width: 150.0,
+                            child: _createHeight(),
+                          ),
+                          SizedBox(
+                            width: 50.0,
+                          ),
+                          Text('centímetros', style: TextStyle(fontSize: 20.0)),
+                        ]),
+                      ),
                       SizedBox(height: 20.0),
                       _createDate(context),
                     ],
@@ -228,7 +250,7 @@ class _EditUserPageState extends State<EditUserPage> {
       autofocus: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-        labelText: 'Altura',
+        labelText: 'Altura en Metros',
         icon: Icon(Icons.height),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
       ),
