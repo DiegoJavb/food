@@ -9,13 +9,12 @@ class RecomendationsPage extends StatefulWidget {
 }
 
 class _RecomendationsPageState extends State<RecomendationsPage> {
-  late int units;
+  late String level;
   late String food;
-  late double quantity;
 
-  late TextEditingController _unitsController = TextEditingController();
+  late TextEditingController _levelController = TextEditingController();
   late TextEditingController _foodController = TextEditingController();
-  late TextEditingController _quantityController = TextEditingController();
+
   final _addFoodFormKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -60,13 +59,7 @@ class _RecomendationsPageState extends State<RecomendationsPage> {
             title: Text('Alimento'),
             content: Container(
               child: ListView(
-                children: <Widget>[
-                  _createUnits(),
-                  Divider(),
-                  _createFood(),
-                  Divider(),
-                  _createQuantity(),
-                ],
+                children: <Widget>[_createFood(), Divider(), _createLevel()],
               ),
             ),
             actions: <Widget>[
@@ -81,9 +74,8 @@ class _RecomendationsPageState extends State<RecomendationsPage> {
                 onPressed: () async {
                   if (_addFoodFormKey.currentState!.validate()) {
                     await DatabaseUser.addRecomendation(
-                      units: _unitsController.text,
+                      level: _levelController.text,
                       food: _foodController.text,
-                      quantity: _quantityController.text,
                     );
                     Navigator.of(context).pop();
                   }
@@ -92,25 +84,6 @@ class _RecomendationsPageState extends State<RecomendationsPage> {
             ],
           ),
         );
-      },
-    );
-  }
-
-  TextField _createUnits() {
-    return TextField(
-      controller: _unitsController,
-      autofocus: false,
-      textCapitalization: TextCapitalization.sentences,
-      decoration: InputDecoration(
-        labelText: 'Unidades',
-        suffixIcon: Icon(Icons.ac_unit_sharp),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-      ),
-      onChanged: (valor) {
-        setState(() {
-          units = valor as int;
-          print('cantidad de l procudto: $units');
-        });
       },
     );
   }
@@ -133,19 +106,19 @@ class _RecomendationsPageState extends State<RecomendationsPage> {
     );
   }
 
-  TextField _createQuantity() {
+  TextField _createLevel() {
     return TextField(
-      controller: _quantityController,
+      controller: _levelController,
       autofocus: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-        labelText: 'Cantidad',
-        suffixIcon: Icon(Icons.line_weight_outlined),
+        labelText: 'Unidades',
+        suffixIcon: Icon(Icons.ac_unit_sharp),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
       ),
       onChanged: (valor) {
         setState(() {
-          quantity = valor as double;
+          level = valor;
         });
       },
     );
@@ -169,7 +142,7 @@ class Header extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Text(
-            'Alimentos recomendados en el transcurso del día',
+            'Nivel aceptado de consumo',
             style: TextStyle(
               fontSize: 20.0,
             ),
@@ -218,9 +191,8 @@ class RecomemendationsList extends StatelessWidget {
         } else if (snapshot.hasData || snapshot.data != null) {
           return DataTable(
             columns: [
-              DataColumn(label: Text('U')),
               DataColumn(label: Text('Alimento')),
-              DataColumn(label: Text('Cantidad "(Kg)"')),
+              DataColumn(label: Text('Nivel aceptado')),
             ],
             rows: _createRows(snapshot.data!),
           );
@@ -235,11 +207,9 @@ class RecomemendationsList extends StatelessWidget {
   List<DataRow> _createRows(QuerySnapshot snapshot) {
     List<DataRow> newList =
         snapshot.docs.map((DocumentSnapshot documentSnapshot) {
-      print('este es el document snapshot: ${documentSnapshot['unidades']}');
       return new DataRow(cells: [
-        DataCell(Text(documentSnapshot['unidades'])),
         DataCell(Text(documentSnapshot['food'])),
-        DataCell(Text(documentSnapshot['Cantidad'])),
+        DataCell(Text(documentSnapshot['level'])),
       ]);
     }).toList();
     return newList;

@@ -114,17 +114,15 @@ class DatabaseUser {
 
   //BASE DE DATOS PARA EL CONSUMO ALIMENTICIO
   static Future<void> addRecomendation({
-    required String units,
+    required String level,
     required String food,
-    required String quantity,
   }) async {
     DocumentReference documentReference =
         _mainCollection.doc(userUid).collection('recomendations').doc();
 
     Map<String, dynamic> data = <String, dynamic>{
-      'unidades': units,
+      'level': level,
       'food': food,
-      'Cantidad': quantity,
     };
     await documentReference
         .set(data)
