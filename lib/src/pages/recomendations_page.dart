@@ -214,7 +214,7 @@ class RecomemendationsList extends StatelessWidget {
         DataCell(Text(documentSnapshot['food'])),
         DataCell(
           Text(
-            "Nivel",
+            documentSnapshot['level'],
             style: TextStyle(
               color: new Color(int.parse(color)),
             ),
