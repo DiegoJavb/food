@@ -9,7 +9,8 @@ class RecomendationsPage extends StatefulWidget {
 }
 
 class _RecomendationsPageState extends State<RecomendationsPage> {
-  late String level;
+  late String _level = 'Permitido';
+  late String _colorLevel = '#28A60F';
   late String food;
 
   late TextEditingController _levelController = TextEditingController();
@@ -46,43 +47,117 @@ class _RecomendationsPageState extends State<RecomendationsPage> {
   }
 
   void _llenarAlimento(BuildContext context) {
-    showDialog(
+    showDialog<void>(
       context: context,
-      barrierDismissible: true,
-      builder: (context) {
-        return Form(
-          key: _addFoodFormKey,
-          child: AlertDialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0),
-            ),
-            title: Text('Alimento'),
-            content: Container(
-              child: ListView(
-                children: <Widget>[_createFood(), Divider(), _createLevel()],
-              ),
-            ),
-            actions: <Widget>[
-              TextButton(
-                child: Text('Cancelar'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              TextButton(
-                child: Text('Agregar'),
-                onPressed: () async {
-                  if (_addFoodFormKey.currentState!.validate()) {
-                    await DatabaseUser.addRecomendation(
-                      level: _levelController.text,
-                      food: _foodController.text,
-                    );
-                    Navigator.of(context).pop();
-                  }
-                },
-              ),
-            ],
+      builder: (BuildContext context) {
+        int selectedRadio = 0;
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
           ),
+          content: SingleChildScrollView(
+            child: StatefulBuilder(
+              builder: (BuildContext context, StateSetter setState) {
+                return Container(
+                  child: Column(
+                    children: [
+                      Text('Alimento'),
+                      Form(
+                        key: _addFoodFormKey,
+                        child: Column(
+                          children: <Widget>[
+                            _createFood(),
+                            Divider(),
+                            // _createLevel(),
+                          ],
+                        ),
+                      ),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          RadioListTile<int>(
+                            title: Text(
+                              'Permitido',
+                              style: TextStyle(
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.bold,
+                                  wordSpacing: 0.1),
+                            ),
+                            value: 0,
+                            groupValue: selectedRadio,
+                            onChanged: (value) {
+                              setState(() {
+                                selectedRadio = value!;
+                                _level = 'Permitido';
+                                _colorLevel = '#28A60F';
+                              });
+                            },
+                          ),
+                          RadioListTile<int>(
+                            title: Text(
+                              'Moderado',
+                              style: TextStyle(
+                                  color: Colors.yellow,
+                                  fontWeight: FontWeight.bold,
+                                  wordSpacing: 0.1),
+                            ),
+                            value: 1,
+                            groupValue: selectedRadio,
+                            onChanged: (value) {
+                              setState(() {
+                                selectedRadio = value!;
+                                _level = 'Moderado';
+                                _colorLevel = '#E6E61A';
+                              });
+                            },
+                          ),
+                          RadioListTile<int>(
+                            title: Text(
+                              'Evitar',
+                              style: TextStyle(
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold,
+                                  wordSpacing: 0.1),
+                            ),
+                            value: 2,
+                            groupValue: selectedRadio,
+                            onChanged: (value) {
+                              setState(() {
+                                selectedRadio = value!;
+                                _level = 'Evitar';
+                                _colorLevel = '#CD0722';
+                              });
+                            },
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancelar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Agregar'),
+              onPressed: () async {
+                if (_addFoodFormKey.currentState!.validate()) {
+                  await DatabaseUser.addRecomendation(
+                    food: _foodController.text,
+                    level: _level,
+                    colorLevel: _colorLevel,
+                  );
+                  Navigator.of(context).pop();
+                }
+              },
+            ),
+          ],
         );
       },
     );
@@ -101,24 +176,6 @@ class _RecomendationsPageState extends State<RecomendationsPage> {
       onChanged: (valor) {
         setState(() {
           food = valor;
-        });
-      },
-    );
-  }
-
-  TextField _createLevel() {
-    return TextField(
-      controller: _levelController,
-      autofocus: false,
-      textCapitalization: TextCapitalization.sentences,
-      decoration: InputDecoration(
-        labelText: 'Unidades',
-        suffixIcon: Icon(Icons.ac_unit_sharp),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-      ),
-      onChanged: (valor) {
-        setState(() {
-          level = valor;
         });
       },
     );
@@ -207,7 +264,7 @@ class RecomemendationsList extends StatelessWidget {
   List<DataRow> _createRows(QuerySnapshot snapshot) {
     List<DataRow> newList =
         snapshot.docs.map((DocumentSnapshot documentSnapshot) {
-      String color = documentSnapshot['level'].replaceAll('#', '0xff');
+      String color = documentSnapshot['colorLevel'].replaceAll('#', '0xff');
 
       print('color que viene: $color');
       return new DataRow(cells: [
@@ -226,10 +283,10 @@ class RecomemendationsList extends StatelessWidget {
   }
 }
 // COLORES HEXADECIMALES
-// #FF0000 = red
-// #00FF00 = green
+// #CD0722 = red
+// #28A60F = green
 // #0000FF = blue
-// #FFFF00 = yellow 
+// #E6E61A = yellow
 // #FF00FF = magenta
 // #00FFFF = cyan
 // #000000 = black
