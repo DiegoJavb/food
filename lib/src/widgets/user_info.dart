@@ -74,7 +74,7 @@ class _UserInfoState extends State<UserInfo> {
                       child: Container(
                         child: Column(
                           children: <Widget>[
-                            photo == ''
+                            photo == null
                                 ? CircleAvatar(
                                     radius: 40.0,
                                     backgroundColor: Colors.blueGrey[100],
