@@ -94,7 +94,7 @@ class _UserInfoState extends State<UserInfo> {
                         backgroundImage: NetworkImage(photo),
                         backgroundColor: Colors.transparent,
                       ),
-                SizedBox(height: 15.0),
+                SizedBox(height: 10.0),
                 Text(
                   widget.email,
                   style: Theme.of(context).textTheme.subtitle1,

@@ -129,10 +129,12 @@ class _EditUserPageState extends State<EditUserPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       IconButton(
+                        iconSize: 40.0,
                         icon: Icon(Icons.camera_alt),
                         onPressed: getPhoto,
                       ),
                       IconButton(
+                        iconSize: 40.0,
                         icon: Icon(Icons.upload_sharp),
                         onPressed: getImage,
                       ),
@@ -186,29 +188,44 @@ class _EditUserPageState extends State<EditUserPage> {
                         ),
                       )
                     : Container(
-                        child: FloatingActionButton.extended(
-                          label: Text('Guardar'),
-                          onPressed: () async {
-                            if (_editUserInfoFormKey.currentState!.validate()) {
-                              setState(() => _isProcessing = true);
-                              uploadStatusImage(
-                                sampleImage!,
-                                nameChecker = widget.currentName,
-                                docId = widget.currentEmail,
-                                age = _ageController.text,
-                                name = _nameController.text,
-                                email = widget.currentEmail,
-                                role = widget.currentRole,
-                                weight = _weightController.text,
-                                height = _heightController.text,
-                              );
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              width: 200.0,
+                              child: FloatingActionButton.extended(
+                                foregroundColor: Colors.black,
+                                backgroundColor: Colors.white,
+                                label: Text(
+                                  'Guardar',
+                                  style: TextStyle(fontSize: 15.0),
+                                ),
+                                onPressed: () async {
+                                  if (_editUserInfoFormKey.currentState!
+                                      .validate()) {
+                                    setState(() => _isProcessing = true);
+                                    uploadStatusImage(
+                                      sampleImage!,
+                                      nameChecker = widget.currentName,
+                                      docId = widget.currentEmail,
+                                      age = _ageController.text,
+                                      name = _nameController.text,
+                                      email = widget.currentEmail,
+                                      role = widget.currentRole,
+                                      weight = _weightController.text,
+                                      height = _heightController.text,
+                                    );
 
-                              setState(() => _isProcessing = false);
-                              Navigator.of(context).pop();
-                            }
-                          },
+                                    setState(() => _isProcessing = false);
+                                    Navigator.of(context).pop();
+                                  }
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                       ),
+                SizedBox(height: 30.0),
               ],
             ),
           ),
@@ -237,8 +254,18 @@ class _EditUserPageState extends State<EditUserPage> {
       autofocus: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.0),
+          borderSide: BorderSide(
+            color: CustomColors.foodNavy,
+            width: 2,
+          ),
+        ),
+        labelStyle: TextStyle(
+          color: CustomColors.foodNavy,
+          fontSize: 20.0,
+        ),
         labelText: 'Nombre',
-        icon: Icon(Icons.account_circle),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
       ),
       onChanged: (valor) {
@@ -253,8 +280,18 @@ class _EditUserPageState extends State<EditUserPage> {
       autofocus: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.0),
+          borderSide: BorderSide(
+            color: CustomColors.foodNavy,
+            width: 2,
+          ),
+        ),
+        labelStyle: TextStyle(
+          color: CustomColors.foodNavy,
+          fontSize: 20.0,
+        ),
         labelText: 'Altura en Metros',
-        icon: Icon(Icons.height),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
       ),
       onChanged: (valor) {
@@ -271,9 +308,18 @@ class _EditUserPageState extends State<EditUserPage> {
       autofocus: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-        // counter: Text('${_nombre.length}'),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.0),
+          borderSide: BorderSide(
+            color: CustomColors.foodNavy,
+            width: 2,
+          ),
+        ),
+        labelStyle: TextStyle(
+          color: CustomColors.foodNavy,
+          fontSize: 20.0,
+        ),
         labelText: 'Peso',
-        icon: Icon(Icons.accessibility),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
       ),
       onChanged: (valor) {
@@ -289,8 +335,18 @@ class _EditUserPageState extends State<EditUserPage> {
       controller: _ageController,
       enableInteractiveSelection: false,
       decoration: InputDecoration(
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.0),
+          borderSide: BorderSide(
+            color: CustomColors.foodNavy,
+            width: 2,
+          ),
+        ),
+        labelStyle: TextStyle(
+          color: CustomColors.foodNavy,
+          fontSize: 20.0,
+        ),
         labelText: 'Fecha de nacimiento',
-        icon: Icon(Icons.calendar_today),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
       ),
       onTap: () {

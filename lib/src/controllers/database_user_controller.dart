@@ -90,6 +90,8 @@ class DatabaseUser {
   //Añadir contacto a la base de datos
   static Future<void> addContact({
     required String name,
+    required String photoUrl,
+    required String role,
     required String email,
     required String docId,
   }) async {
@@ -99,6 +101,8 @@ class DatabaseUser {
     Map<String, dynamic> data = <String, dynamic>{
       'name': name,
       'email': email,
+      'photoUrl': photoUrl,
+      'role': role,
       'docId': docId,
     };
     await documentReference

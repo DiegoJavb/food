@@ -31,6 +31,9 @@ class MyApp extends StatelessWidget {
         const Locale('en', 'US'),
         const Locale('es', 'ES'),
       ],
+      theme: ThemeData(
+        primaryColor: Colors.white,
+      ),
     );
   }
 }

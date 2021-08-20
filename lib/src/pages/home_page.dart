@@ -47,14 +47,19 @@ class _HomePageState extends State<HomePage> {
           slivers: <Widget>[
             SliverAppBar(
               automaticallyImplyLeading: true,
+              iconTheme: IconThemeData(
+                color: Colors.white,
+              ),
               floating: true,
               pinned: true,
               centerTitle: true,
               title: Text(
                 'Contenido',
                 style: TextStyle(
+                  color: Colors.white,
                   fontSize: 30.0,
                   fontWeight: FontWeight.bold,
+                  letterSpacing: 1.0,
                 ),
               ),
               expandedHeight: 100.0,
