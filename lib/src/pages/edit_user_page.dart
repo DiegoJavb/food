@@ -7,20 +7,20 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class EditUserPage extends StatefulWidget {
   final String currentName;
+  final String currentRole;
   final String currentPhoto;
   final String currentweight;
   final String currentheight;
   final String currentage;
   final String currentEmail;
-  final String documentId;
   const EditUserPage({
     required this.currentEmail,
     required this.currentName,
+    required this.currentRole,
     required this.currentPhoto,
     required this.currentweight,
     required this.currentheight,
     required this.currentage,
-    required this.documentId,
   });
 
   @override
@@ -31,8 +31,10 @@ class _EditUserPageState extends State<EditUserPage> {
   final _editUserInfoFormKey = GlobalKey<FormState>();
   File? sampleImage;
   late String photo;
+  late String nameChecker;
   late String name;
   late String email;
+  late String role;
   late String weight;
   late String height;
   late String age;
@@ -191,10 +193,12 @@ class _EditUserPageState extends State<EditUserPage> {
                               setState(() => _isProcessing = true);
                               uploadStatusImage(
                                 sampleImage!,
-                                docId = widget.documentId,
+                                nameChecker = widget.currentName,
+                                docId = widget.currentEmail,
                                 age = _ageController.text,
                                 name = _nameController.text,
                                 email = widget.currentEmail,
+                                role = widget.currentRole,
                                 weight = _weightController.text,
                                 height = _heightController.text,
                               );
@@ -217,7 +221,6 @@ class _EditUserPageState extends State<EditUserPage> {
     var tempImage = await ImagePicker().pickImage(source: ImageSource.gallery);
     setState(() {
       sampleImage = File(tempImage!.path);
-      print('file del sample image: $sampleImage');
     });
   }
 
@@ -256,7 +259,7 @@ class _EditUserPageState extends State<EditUserPage> {
       ),
       onChanged: (valor) {
         setState(() {
-          name = valor;
+          height = valor;
         });
       },
     );
@@ -275,7 +278,7 @@ class _EditUserPageState extends State<EditUserPage> {
       ),
       onChanged: (valor) {
         setState(() {
-          name = valor;
+          weight = valor;
         });
       },
     );
@@ -312,37 +315,67 @@ class _EditUserPageState extends State<EditUserPage> {
 
 Future<void> uploadStatusImage(
   File sampleImage,
+  String nameChecker,
   String docId,
   String age,
   String name,
   String email,
+  String role,
   String weight,
   String height,
 ) async {
   String url;
-  firebase_storage.Reference postImageRef =
-      firebase_storage.FirebaseStorage.instance.ref().child(docId);
-  print('Image URl' + postImageRef.toString());
-  var timeKey = DateTime.now();
-  firebase_storage.UploadTask uploadTask =
-      postImageRef.child(timeKey.toString() + ".jpg").putFile(sampleImage);
-  print('imagen que se subira: ${uploadTask.toString()}');
-  var imageUrl = await (await uploadTask).ref.getDownloadURL();
-  print('url de la imagen:  $imageUrl');
-  url = imageUrl.toString();
+
   // Guardar el post a firebase database: database realtime database
-  await DatabaseUser.updateUser(
-    photo: url,
-    age: age,
-    docId: docId,
-    height: height,
-    name: name,
-    weight: weight,
-  );
-  await DatabaseUser.addUserOnListUsers(
-    photo: url,
-    name: name,
-    email: email,
-    docId: docId,
-  );
+  if (nameChecker == '') {
+    firebase_storage.Reference postImageRef =
+        firebase_storage.FirebaseStorage.instance.ref().child(docId);
+    print('nombre si es que hay alguien: $name');
+    firebase_storage.UploadTask uploadTask =
+        postImageRef.child(email + ".jpg").putFile(sampleImage);
+    var imageUrl = await (await uploadTask).ref.getDownloadURL();
+    url = imageUrl.toString();
+    await DatabaseUser.addUserInfo(
+      photo: url,
+      age: age,
+      docId: docId,
+      height: height,
+      name: name,
+      email: email,
+      weight: weight,
+      role: role,
+    );
+    await DatabaseUser.addUserOnListUsers(
+      photo: url,
+      name: name,
+      email: email,
+      role: role,
+      docId: docId,
+    );
+  } else {
+    firebase_storage.Reference postImageRef =
+        firebase_storage.FirebaseStorage.instance.ref().child(docId);
+    print('nombre si es que hay alguien: $name');
+    firebase_storage.UploadTask uploadTask =
+        postImageRef.child(email + ".jpg").putFile(sampleImage);
+    var imageUrl = await (await uploadTask).ref.getDownloadURL();
+    url = imageUrl.toString();
+    await DatabaseUser.updateUserInfo(
+      photo: url,
+      age: age,
+      docId: docId,
+      height: height,
+      name: name,
+      email: email,
+      weight: weight,
+      role: role,
+    );
+    await DatabaseUser.updateUserOnListUsers(
+      photo: url,
+      name: name,
+      email: email,
+      role: role,
+      docId: docId,
+    );
+  }
 }

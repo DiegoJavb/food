@@ -13,7 +13,6 @@ class _RecomendationsPageState extends State<RecomendationsPage> {
   late String _colorLevel = '#28A60F';
   late String food;
 
-  late TextEditingController _levelController = TextEditingController();
   late TextEditingController _foodController = TextEditingController();
 
   final _addFoodFormKey = GlobalKey<FormState>();

@@ -8,18 +8,17 @@ final CollectionReference _allUserCollection =
 class DatabaseUser {
   static String? userUid;
   //BASE DE DATOS DE USUARIOS
+  //Añadir usuario a la base de datos sin toda su información
   static Future<void> addUser({
     required String email,
     required String role,
     required String docId,
   }) async {
-    DocumentReference documentReference =
-        _mainCollection.doc(userUid).collection('information').doc(docId);
+    DocumentReference documentReference = _mainCollection.doc(email);
 
     Map<String, dynamic> data = <String, dynamic>{
       'email': email,
       'role': role,
-      'name': '',
     };
     await documentReference
         .set(data)
@@ -27,23 +26,51 @@ class DatabaseUser {
         .catchError((e) => print(e));
   }
 
-  static Stream<QuerySnapshot> readUser() {
-    print('uid del usuarii}o actual: $userUid');
-    CollectionReference userCollection =
-        _mainCollection.doc(userUid).collection('information');
-    return userCollection.snapshots();
-  }
-
-  static Future<void> updateUser({
+  //Añadir toda la información del usuario a la base de datos
+  //solo datos provistos por el usuario
+  //utilizamos el (SET) en el await de la función
+  static Future<void> addUserInfo({
     required String photo,
     required String name,
+    required String email,
+    required String role,
     required String weight,
     required String height,
     required String age,
     required String docId,
   }) async {
     DocumentReference documentReferencer =
-        _mainCollection.doc(userUid).collection('information').doc(docId);
+        _mainCollection.doc(email).collection('information').doc(email);
+
+    Map<String, dynamic> data = <String, dynamic>{
+      "photo": photo,
+      "name": name,
+      "weight": weight,
+      "height": height,
+      "age": age,
+    };
+
+    await documentReferencer
+        .set(data)
+        .whenComplete(() => print("usuario actualizado en la BDD"))
+        .catchError((e) => print(e));
+  }
+
+  //Actualizamos toda la información del usuario a la base de datos
+  //solo datos provistos por el usuario
+  //utilizamos el (UPDATE) en el await de la función
+  static Future<void> updateUserInfo({
+    required String photo,
+    required String name,
+    required String email,
+    required String role,
+    required String weight,
+    required String height,
+    required String age,
+    required String docId,
+  }) async {
+    DocumentReference documentReferencer =
+        _mainCollection.doc(email).collection('information').doc(email);
 
     Map<String, dynamic> data = <String, dynamic>{
       "photo": photo,
@@ -60,6 +87,7 @@ class DatabaseUser {
   }
 
   //BASE DE DATOS PARA CONTACTOS
+  //Añadir contacto a la base de datos
   static Future<void> addContact({
     required String name,
     required String email,
@@ -86,23 +114,51 @@ class DatabaseUser {
     return userCollection.snapshots();
   }
 
-  //BASE DE DATOS UUARIOS TOTALES
+  //BASE DE DATOS USUARIOS TOTALES
+  //Cuando un usuario actualiza su información,
+  //esta se hace visible para el resto de
+  //usuarios de la app
+  //Añadir usuario a la base de datos de usuarios totales
   static Future<void> addUserOnListUsers({
     required String photo,
     required String name,
     required String email,
+    required String role,
     required String docId,
   }) async {
-    DocumentReference documentReference = _allUserCollection.doc(docId);
+    DocumentReference documentReference = _allUserCollection.doc(email);
 
     Map<String, dynamic> data = <String, dynamic>{
       'photo': photo,
       'name': name,
       'email': email,
       'userUid': docId,
+      'role': role,
     };
     await documentReference
         .set(data)
+        .whenComplete(() => print("User added to the database"))
+        .catchError((e) => print(e));
+  }
+
+  static Future<void> updateUserOnListUsers({
+    required String photo,
+    required String name,
+    required String email,
+    required String role,
+    required String docId,
+  }) async {
+    DocumentReference documentReference = _allUserCollection.doc(email);
+
+    Map<String, dynamic> data = <String, dynamic>{
+      'photo': photo,
+      'name': name,
+      'email': email,
+      'userUid': docId,
+      'role': role,
+    };
+    await documentReference
+        .update(data)
         .whenComplete(() => print("User added to the database"))
         .catchError((e) => print(e));
   }
@@ -113,6 +169,7 @@ class DatabaseUser {
   }
 
   //BASE DE DATOS PARA EL CONSUMO ALIMENTICIO
+  //Añadir un alimeto a la base de datos
   static Future<void> addRecomendation({
     required String food,
     required String level,
