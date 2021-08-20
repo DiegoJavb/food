@@ -63,7 +63,7 @@ class _MyContactsState extends State<MyContacts> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50.0),
-        color: Colors.white,
+        color: CustomColors.foodBackground,
         boxShadow: [
           BoxShadow(
             color: Colors.black12,
@@ -92,6 +92,16 @@ class _MyContactsState extends State<MyContacts> {
           '$role\n$email',
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
+        ),
+        trailing: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Icon(
+              Icons.arrow_right,
+              color: Colors.blue,
+              size: 30.0,
+            ),
+          ],
         ),
       ),
     );

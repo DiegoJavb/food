@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:food/src/controllers/database_user_controller.dart';
+import 'package:food/src/res/custom_colors.dart';
 
 class UsersList extends StatefulWidget {
   @override
@@ -70,7 +71,7 @@ class _UsersListState extends State<UsersList> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50.0),
-        color: Colors.white,
+        color: CustomColors.foodBackground,
         boxShadow: [
           BoxShadow(
             color: Colors.black12,

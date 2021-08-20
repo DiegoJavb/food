@@ -13,23 +13,19 @@ class _MyContactsPageState extends State<MyContactsPage> {
       appBar: AppBar(
         title: Text('Contactos'),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.only(
-          left: 16.0,
-          right: 16.0,
-          bottom: 20.0,
+      body: Container(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.only(
+            left: 16.0,
+            right: 16.0,
+            bottom: 20.0,
+          ),
+          child: Column(
+            children: <Widget>[
+              MyContacts(),
+            ],
+          ),
         ),
-        child: Column(
-          children: <Widget>[
-            MyContacts(),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-          // Get.toNamed('addAppointment');
-        },
       ),
     );
   }

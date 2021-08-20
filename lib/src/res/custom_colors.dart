@@ -6,7 +6,8 @@ class CustomColors {
   static final Color foodNavy = Color(0xFF7868E6);
   static final Color firebaseYellow = Color(0xFFEDEEF7);
   static final Color firebaseGrey = Color(0xFFECEFF1);
-  static final Color googleBackground = Color(0xFF4285F4);
+  // static final Color foodBackground = Color(0xFFB8B5FF);
+  static final Color foodBackground = Color(0xFFFEFBDE);
 }
 // class CustomColors {
 //   static final Color firebaseNavy = Color(0xFFECEFF1);
