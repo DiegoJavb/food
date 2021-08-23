@@ -19,7 +19,7 @@ class _WelcomePageState extends State<WelcomePage> {
     print(role.rolUser);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: CustomColors.foodNavy,
+        backgroundColor: CustomColors.foodAppbar,
       ),
       body: Center(
         child: Column(
@@ -78,6 +78,7 @@ class _WelcomePageState extends State<WelcomePage> {
       child: Column(
         children: <Widget>[
           RadioListTile(
+            activeColor: CustomColors.foodBackground,
             value: 0,
             groupValue: _value,
             onChanged: (value) {
@@ -90,6 +91,7 @@ class _WelcomePageState extends State<WelcomePage> {
             title: Text('Nutricionista'),
           ),
           RadioListTile(
+            activeColor: CustomColors.foodBackground,
             value: 1,
             groupValue: _value,
             onChanged: (value) {

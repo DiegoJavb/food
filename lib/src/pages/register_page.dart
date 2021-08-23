@@ -25,7 +25,7 @@ class _RegisterPageState extends State<RegisterPage> {
     print(role.rolUser);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: CustomColors.foodNavy,
+        backgroundColor: CustomColors.foodAppbar,
       ),
       body: GetBuilder<RegisterController>(
         builder: (_) {
@@ -34,13 +34,15 @@ class _RegisterPageState extends State<RegisterPage> {
               key: _controller.formKey,
               child: Column(
                 children: <Widget>[
+                  SizedBox(height: 20.0),
                   Container(
                     padding: const EdgeInsets.all(10.0),
                     child: const Text(
-                      'Registrate',
-                      style: TextStyle(fontSize: 30.0),
+                      'Regístrate',
+                      style: TextStyle(fontSize: 35.0),
                     ),
                   ),
+                  SizedBox(height: 20.0),
                   _createUser(),
                   _createPassword(),
                   _createAccountButton(_),

@@ -22,7 +22,7 @@ class _RegisterOpccionPageState extends State<RegisterOpccionPage> {
   Widget build(BuildContext context) {
     print(role.rolUser);
     return Scaffold(
-      appBar: AppBar(backgroundColor: CustomColors.foodNavy),
+      appBar: AppBar(backgroundColor: CustomColors.foodAppbar),
       body: GetBuilder<LoginController>(
         init: LoginController(),
         builder: (_) {
