@@ -21,39 +21,41 @@ class _WelcomePageState extends State<WelcomePage> {
       appBar: AppBar(
         backgroundColor: CustomColors.foodAppbar,
       ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            SizedBox(height: 10.0),
-            Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 40.0,
-                vertical: 10.0,
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              SizedBox(height: 10.0),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 40.0,
+                  vertical: 10.0,
+                ),
+                child: Image(
+                  image: AssetImage('images/Healthy.png'),
+                  fit: BoxFit.cover,
+                ),
               ),
-              child: Image(
-                image: AssetImage('images/Healthy.png'),
-                fit: BoxFit.cover,
+              SizedBox(height: 20.0),
+              Text(
+                'Bienvenido',
+                style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.w300,
+                ),
               ),
-            ),
-            SizedBox(height: 20.0),
-            Text(
-              'Bienvenido',
-              style: TextStyle(
-                fontSize: 30.0,
-                fontWeight: FontWeight.w300,
+              SizedBox(height: 60.0),
+              Container(
+                width: 300.0,
+                child: Text(
+                  'Cuentanos con que rol te identificas',
+                  style: TextStyle(fontSize: 25.0),
+                ),
               ),
-            ),
-            SizedBox(height: 60.0),
-            Container(
-              width: 300.0,
-              child: Text(
-                'Cuentanos con que rol te identificas',
-                style: TextStyle(fontSize: 25.0),
-              ),
-            ),
-            SizedBox(height: 50.0),
-            _crearCheckBoxes(),
-          ],
+              SizedBox(height: 50.0),
+              _crearCheckBoxes(),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(

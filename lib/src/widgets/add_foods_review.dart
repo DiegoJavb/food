@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food/src/pages/select_contact_to_sen_page.dart';
+import 'package:food/src/res/custom_colors.dart';
 import 'package:food/src/utils/validator.dart';
 import 'package:get/get.dart';
 import 'custom_form_field.dart';
@@ -45,7 +46,9 @@ class _AddFoodsReviewState extends State<AddFoodsReview> {
           _isProcessing
               ? Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(
+                    backgroundColor: CustomColors.foodProgress,
+                  ),
                 )
               : Container(
                   width: double.maxFinite,

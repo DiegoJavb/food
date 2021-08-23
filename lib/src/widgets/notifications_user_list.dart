@@ -46,7 +46,11 @@ class NotificationUserList extends StatelessWidget {
           );
         } else {
           return Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                CustomColors.foodProgress,
+              ),
+            ),
           );
         }
       },

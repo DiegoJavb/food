@@ -95,10 +95,11 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget _createAccountButton(_) {
     return Container(
+      width: 200.0,
       padding: const EdgeInsets.all(10.0),
       child: FloatingActionButton.extended(
-        label: const Text('Registrarse'),
-        backgroundColor: Colors.pink[100],
+        label: const Text('Registrarse', style: TextStyle(fontSize: 15.0)),
+        backgroundColor: Colors.white,
         onPressed: () async {
           _.registerUserWithEmailAndPassword();
         },

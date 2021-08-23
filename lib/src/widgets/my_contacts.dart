@@ -47,7 +47,11 @@ class _MyContactsState extends State<MyContacts> {
             );
           }
           return Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                CustomColors.foodProgress,
+              ),
+            ),
           );
         },
       ),

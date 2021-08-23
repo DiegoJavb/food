@@ -70,7 +70,9 @@ class _EditUserPageState extends State<EditUserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: CustomColors.foodAppbar,
+      ),
       body: ListView(
         children: [
           Form(
@@ -83,7 +85,7 @@ class _EditUserPageState extends State<EditUserPage> {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: CustomColors.foodNavy,
+                      color: CustomColors.foodBackground,
                       width: 2,
                     ),
                   ),
@@ -183,7 +185,7 @@ class _EditUserPageState extends State<EditUserPage> {
                         padding: const EdgeInsets.all(16.0),
                         child: CircularProgressIndicator(
                           valueColor: AlwaysStoppedAnimation<Color>(
-                            CustomColors.foodpink,
+                            CustomColors.foodProgress,
                           ),
                         ),
                       )
@@ -257,12 +259,12 @@ class _EditUserPageState extends State<EditUserPage> {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
           borderSide: BorderSide(
-            color: CustomColors.foodNavy,
+            color: CustomColors.foodBackground,
             width: 2,
           ),
         ),
         labelStyle: TextStyle(
-          color: CustomColors.foodNavy,
+          color: CustomColors.foodBackground,
           fontSize: 20.0,
         ),
         labelText: 'Nombre',
@@ -283,12 +285,12 @@ class _EditUserPageState extends State<EditUserPage> {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
           borderSide: BorderSide(
-            color: CustomColors.foodNavy,
+            color: CustomColors.foodBackground,
             width: 2,
           ),
         ),
         labelStyle: TextStyle(
-          color: CustomColors.foodNavy,
+          color: CustomColors.foodBackground,
           fontSize: 20.0,
         ),
         labelText: 'Altura en Metros',
@@ -311,12 +313,12 @@ class _EditUserPageState extends State<EditUserPage> {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
           borderSide: BorderSide(
-            color: CustomColors.foodNavy,
+            color: CustomColors.foodBackground,
             width: 2,
           ),
         ),
         labelStyle: TextStyle(
-          color: CustomColors.foodNavy,
+          color: CustomColors.foodBackground,
           fontSize: 20.0,
         ),
         labelText: 'Peso',
@@ -338,12 +340,12 @@ class _EditUserPageState extends State<EditUserPage> {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
           borderSide: BorderSide(
-            color: CustomColors.foodNavy,
+            color: CustomColors.foodBackground,
             width: 2,
           ),
         ),
         labelStyle: TextStyle(
-          color: CustomColors.foodNavy,
+          color: CustomColors.foodBackground,
           fontSize: 20.0,
         ),
         labelText: 'Fecha de nacimiento',

@@ -39,7 +39,11 @@ class ItemList extends StatelessWidget {
           );
         }
         return Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(
+              CustomColors.foodProgress,
+            ),
+          ),
         );
       },
     );

@@ -54,7 +54,11 @@ class _UsersListState extends State<UsersList> {
             );
           }
           return Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                CustomColors.foodProgress,
+              ),
+            ),
           );
         },
       ),

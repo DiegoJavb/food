@@ -254,7 +254,9 @@ class RecomemendationsList extends StatelessWidget {
           );
         }
         return Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator(
+            backgroundColor: CustomColors.foodProgress,
+          ),
         );
       },
     );
