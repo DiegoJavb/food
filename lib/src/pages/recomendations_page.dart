@@ -197,6 +197,7 @@ class Header extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
+          SizedBox(height: 20.0),
           Text(
             'Nivel aceptado de consumo',
             style: TextStyle(
@@ -248,7 +249,8 @@ class RecomemendationsList extends StatelessWidget {
           return DataTable(
             columns: [
               DataColumn(label: Text('Alimento')),
-              DataColumn(label: Text('Nivel aceptado')),
+              DataColumn(label: Text('Nivel ')),
+              DataColumn(label: Text('')),
             ],
             rows: _createRows(snapshot.data!),
           );
@@ -278,6 +280,15 @@ class RecomemendationsList extends StatelessWidget {
             ),
           ),
         ),
+        DataCell(
+          IconButton(
+            icon: Icon(
+              Icons.delete,
+              color: Colors.red[400],
+            ),
+            onPressed: () {},
+          ),
+        )
       ]);
     }).toList();
     return newList;

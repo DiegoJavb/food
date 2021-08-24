@@ -79,7 +79,7 @@ class _MyContactsState extends State<MyContacts> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
         ),
-        onTap: () {},
+        onTap: null,
         leading: Container(
           child: CircleAvatar(
             radius: 25.0,
@@ -97,16 +97,16 @@ class _MyContactsState extends State<MyContacts> {
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
-        trailing: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Icon(
-              Icons.arrow_right,
-              color: Colors.blue,
-              size: 30.0,
-            ),
-          ],
-        ),
+        // trailing: Column(
+        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //   children: [
+        //     Icon(
+        //       Icons.arrow_right,
+        //       color: Colors.blue,
+        //       size: 30.0,
+        //     ),
+        //   ],
+        // ),
       ),
     );
   }

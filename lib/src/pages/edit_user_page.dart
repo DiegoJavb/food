@@ -133,12 +133,12 @@ class _EditUserPageState extends State<EditUserPage> {
                     children: [
                       IconButton(
                         iconSize: 40.0,
-                        icon: Icon(Icons.camera_alt),
+                        icon: Icon(Icons.camera_alt, color: Colors.pink),
                         onPressed: getPhoto,
                       ),
                       IconButton(
                         iconSize: 40.0,
-                        icon: Icon(Icons.upload_sharp),
+                        icon: Icon(Icons.upload_sharp, color: Colors.blue),
                         onPressed: getImage,
                       ),
                     ],
@@ -173,7 +173,7 @@ class _EditUserPageState extends State<EditUserPage> {
                           SizedBox(
                             width: 50.0,
                           ),
-                          Text('centímetros', style: TextStyle(fontSize: 20.0)),
+                          Text('Centímetros', style: TextStyle(fontSize: 20.0)),
                         ]),
                       ),
                       SizedBox(height: 20.0),
@@ -280,6 +280,7 @@ class _EditUserPageState extends State<EditUserPage> {
   TextField _createHeight() {
     return TextField(
       controller: _heightController,
+      keyboardType: TextInputType.number,
       autofocus: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -308,6 +309,7 @@ class _EditUserPageState extends State<EditUserPage> {
   TextField _createWeight() {
     return TextField(
       controller: _weightController,
+      keyboardType: TextInputType.number,
       autofocus: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(

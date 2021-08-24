@@ -74,7 +74,10 @@ class _UserInfoState extends State<UserInfo> {
         DrawerHeader(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: <Color>[Colors.deepOrange, Colors.orangeAccent],
+              colors: <Color>[
+                Colors.pink[300]!,
+                Colors.blue[300]!,
+              ],
             ),
           ),
           child: Container(

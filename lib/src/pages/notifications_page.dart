@@ -11,7 +11,7 @@ class NotificationsPage extends StatelessWidget {
     print('veamos si se setea de manera global: ${userName.nameUser}');
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Todas las notificaciones',
+        title: 'Notificaciones',
       ),
       body: SafeArea(
         child: Padding(

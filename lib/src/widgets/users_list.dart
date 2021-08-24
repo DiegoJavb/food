@@ -30,7 +30,7 @@ class _UsersListState extends State<UsersList> {
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               padding: EdgeInsets.only(top: 16.0),
-              separatorBuilder: (context, index) => SizedBox(height: 16.0),
+              separatorBuilder: (context, index) => SizedBox(height: 10.0),
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (BuildContext context, int index) {
                 userInfo = snapshot.data!.docs[index];
@@ -116,8 +116,8 @@ class _UsersListState extends State<UsersList> {
           children: [
             Icon(
               Icons.add,
-              color: Colors.blue,
-              size: 30.0,
+              color: Colors.white,
+              size: 40.0,
             ),
           ],
         ),

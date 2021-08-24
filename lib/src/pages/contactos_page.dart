@@ -20,7 +20,7 @@ class _ContactPageState extends State<ContactPage> {
         title: 'Usuarios',
       ),
       body: Container(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(5.0),
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
