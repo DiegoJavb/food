@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food/src/res/custom_colors.dart';
-// import 'package:firebase_core/firebase_core.dart';
-// import 'package:food/src/res/custom_colors.dart';
+import 'package:food/src/components/customAppBar.dart';
 import 'package:food/src/widgets/item_list.dart';
 import 'package:get/get.dart';
 
@@ -14,10 +12,8 @@ class _RecordPageState extends State<RecordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: CustomColors.foodNavy,
-      appBar: AppBar(
-        backgroundColor: CustomColors.foodNavy,
-        title: Text('Historial'),
+      appBar: CustomAppBar(
+        title: 'Historial',
       ),
       body: SafeArea(
         child: Padding(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food/src/components/customAppBar.dart';
 import 'package:food/src/pages/register_option_page.dart';
 import 'package:food/src/res/custom_colors.dart';
 import 'package:get/get.dart';
@@ -18,42 +19,36 @@ class _WelcomePageState extends State<WelcomePage> {
   Widget build(BuildContext context) {
     print(role.rolUser);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: CustomColors.foodNavy,
+      appBar: CustomAppBar(
+        title: 'Bienvenido',
       ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            SizedBox(height: 10.0),
-            Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 40.0,
-                vertical: 10.0,
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              SizedBox(height: 10.0),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 40.0,
+                  vertical: 10.0,
+                ),
+                child: Image(
+                  image: AssetImage('images/Healthy.png'),
+                  fit: BoxFit.cover,
+                ),
               ),
-              child: Image(
-                image: AssetImage('images/Healthy.png'),
-                fit: BoxFit.cover,
+              SizedBox(height: 60.0),
+              Container(
+                width: 300.0,
+                child: Text(
+                  'Cuentanos con que rol te identificas',
+                  style: TextStyle(fontSize: 25.0),
+                ),
               ),
-            ),
-            SizedBox(height: 20.0),
-            Text(
-              'Bienvenido',
-              style: TextStyle(
-                fontSize: 30.0,
-                fontWeight: FontWeight.w300,
-              ),
-            ),
-            SizedBox(height: 60.0),
-            Container(
-              width: 300.0,
-              child: Text(
-                'Cuentanos con que rol te identificas',
-                style: TextStyle(fontSize: 25.0),
-              ),
-            ),
-            SizedBox(height: 50.0),
-            _crearCheckBoxes(),
-          ],
+              SizedBox(height: 50.0),
+              _crearCheckBoxes(),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
@@ -78,6 +73,7 @@ class _WelcomePageState extends State<WelcomePage> {
       child: Column(
         children: <Widget>[
           RadioListTile(
+            activeColor: CustomColors.foodBackground,
             value: 0,
             groupValue: _value,
             onChanged: (value) {
@@ -90,6 +86,7 @@ class _WelcomePageState extends State<WelcomePage> {
             title: Text('Nutricionista'),
           ),
           RadioListTile(
+            activeColor: CustomColors.foodBackground,
             value: 1,
             groupValue: _value,
             onChanged: (value) {

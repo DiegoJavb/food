@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:food/src/widgets/search_users.dart';
+import 'package:food/src/components/customAppBar.dart';
 import 'package:food/src/widgets/users_list.dart';
 
 class ContactPage extends StatefulWidget {
@@ -16,11 +16,11 @@ class _ContactPageState extends State<ContactPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Usuarios'),
+      appBar: CustomAppBar(
+        title: 'Usuarios',
       ),
       body: Container(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(5.0),
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[

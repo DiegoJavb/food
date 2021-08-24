@@ -48,7 +48,7 @@ class _AddItemFormState extends State<AddItemForm> {
                   padding: const EdgeInsets.all(16.0),
                   child: CircularProgressIndicator(
                     valueColor: AlwaysStoppedAnimation<Color>(
-                      CustomColors.foodpink,
+                      CustomColors.foodProgress,
                     ),
                   ),
                 )

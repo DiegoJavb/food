@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food/src/res/custom_colors.dart';
 import 'package:get/get.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -31,6 +32,9 @@ class MyApp extends StatelessWidget {
         const Locale('en', 'US'),
         const Locale('es', 'ES'),
       ],
+      theme: ThemeData(
+        primaryColor: CustomColors.foodBackground,
+      ),
     );
   }
 }

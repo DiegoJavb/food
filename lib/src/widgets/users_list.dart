@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:food/src/controllers/database_user_controller.dart';
+import 'package:food/src/res/custom_colors.dart';
 
 class UsersList extends StatefulWidget {
   @override
@@ -9,8 +10,10 @@ class UsersList extends StatefulWidget {
 
 class _UsersListState extends State<UsersList> {
   String name = '';
-  String docId = '';
   String email = '';
+  String photoUrl = '';
+  String role = '';
+  String docId = '';
   var userInfo;
   var extradtedInfo;
 
@@ -27,14 +30,16 @@ class _UsersListState extends State<UsersList> {
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               padding: EdgeInsets.only(top: 16.0),
-              separatorBuilder: (context, index) => SizedBox(height: 16.0),
+              separatorBuilder: (context, index) => SizedBox(height: 10.0),
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (BuildContext context, int index) {
                 userInfo = snapshot.data!.docs[index];
                 docId = snapshot.data!.docs[index].id;
                 print('Id del usuario que quiero agregar: $docId');
                 email = userInfo!['email'];
-                name = userInfo['name'] == '' ? 'Usuario' : userInfo['name'];
+                name = userInfo['name'];
+                photoUrl = userInfo['photo'];
+                role = userInfo['role'];
                 if (userInfo['email'] == DatabaseUser.userUid) {
                   return SizedBox();
                 } else {
@@ -42,68 +47,80 @@ class _UsersListState extends State<UsersList> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.0),
                     ),
-                    child: _createContact(name, email, docId),
+                    child: _createContact(name, email, role, docId, photoUrl),
                   );
-                  // return ListTile(
-                  //   leading: Icon(Icons.person),
-                  //   title: Text(name),
-                  //   subtitle: Text(email),
-                  //   trailing: IconButton(
-                  //     onPressed: () {
-                  //       DatabaseUser.addContact(
-                  //         name: name,
-                  //         email: email,
-                  //         docId: docId,
-                  //       );
-                  //       setState(() {});
-                  //       Navigator.of(context).pop();
-                  //     },
-                  //     icon: Icon(
-                  //       Icons.add,
-                  //       color: Colors.blue,
-                  //     ),
-                  //   ),
-                  // );
                 }
               },
             );
           }
           return Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                CustomColors.foodProgress,
+              ),
+            ),
           );
         },
       ),
     );
   }
 
-  Widget _createContact(String name, String email, String docId) {
-    return ListTile(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
+  Widget _createContact(
+    String name,
+    String email,
+    String role,
+    String docId,
+    String photoUrl,
+  ) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(50.0),
+        color: CustomColors.foodBackground,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 3.0,
+          ),
+        ],
       ),
-      onTap: () {
-        DatabaseUser.addContact(
-          name: name,
-          email: email,
-          docId: docId,
-        );
-        Navigator.of(context).pop();
-      },
-      leading: Icon(Icons.person),
-      title: Text(
-        name,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-      ),
-      subtitle: Text(
-        email,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-      ),
-      trailing: Icon(
-        Icons.add,
-        color: Colors.blue,
-        size: 30.0,
+      child: ListTile(
+        onTap: () {
+          DatabaseUser.addContact(
+            name: name,
+            email: email,
+            photoUrl: photoUrl,
+            role: role,
+            docId: docId,
+          );
+          Navigator.of(context).pop();
+        },
+        leading: Container(
+          child: CircleAvatar(
+            radius: 25.0,
+            backgroundImage: NetworkImage(photoUrl),
+          ),
+        ),
+        title: Text(
+          name,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        isThreeLine: true,
+        subtitle: Text(
+          '$role \n $email',
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
+        trailing: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Icon(
+              Icons.add,
+              color: Colors.white,
+              size: 40.0,
+            ),
+          ],
+        ),
       ),
     );
   }

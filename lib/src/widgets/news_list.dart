@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food/src/components/customListTile.dart';
 import 'package:food/src/model/article_model.dart';
+import 'package:food/src/res/custom_colors.dart';
 import 'package:food/src/services/api_services.dart';
 
 class NewsList extends StatefulWidget {
@@ -29,7 +30,12 @@ class _NewsListState extends State<NewsList> {
             },
           );
         }
-        return Center(child: CircularProgressIndicator());
+        return Center(
+            child: CircularProgressIndicator(
+          valueColor: AlwaysStoppedAnimation<Color>(
+            CustomColors.foodProgress,
+          ),
+        ));
       },
     );
   }

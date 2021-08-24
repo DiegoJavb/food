@@ -30,7 +30,6 @@ class ItemList extends StatelessWidget {
 
               return Ink(
                 decoration: BoxDecoration(
-                  color: CustomColors.firebaseGrey.withOpacity(1.0),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: _createItem(title, description, contact, docID),
@@ -39,34 +38,51 @@ class ItemList extends StatelessWidget {
           );
         }
         return Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(
+              CustomColors.foodProgress,
+            ),
+          ),
         );
       },
     );
   }
 
   Widget _createItem(String title, String description, String contact, docID) {
-    return ListTile(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(50.0),
+        color: CustomColors.foodBackground,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 3.0,
+          ),
+        ],
       ),
-      onTap: () => Get.to(
-        () => EditAppointmentPage(
-          currentDescription: description,
-          currentTitle: title,
-          currentContact: contact,
-          documentId: docID,
+      child: ListTile(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
         ),
-      ),
-      title: Text(
-        title,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-      ),
-      subtitle: Text(
-        description,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
+        onTap: () => Get.to(
+          () => EditAppointmentPage(
+            currentDescription: description,
+            currentTitle: title,
+            currentContact: contact,
+            documentId: docID,
+          ),
+        ),
+        isThreeLine: true,
+        title: Text(
+          title,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        subtitle: Text(
+          '$description\n$contact',
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
       ),
     );
   }

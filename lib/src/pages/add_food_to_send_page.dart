@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food/src/components/customAppBar.dart';
 import 'package:food/src/widgets/add_foods_review.dart';
 
 class AddFoodToSendPage extends StatelessWidget {
@@ -19,7 +20,9 @@ class AddFoodToSendPage extends StatelessWidget {
         _snackFocusNode.unfocus();
       },
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: CustomAppBar(
+          title: 'Comidas',
+        ),
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.all(16.0),

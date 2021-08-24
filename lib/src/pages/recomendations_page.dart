@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:food/src/components/customAppBar.dart';
 import 'package:food/src/controllers/database_user_controller.dart';
 import 'package:food/src/res/custom_colors.dart';
 
@@ -19,9 +20,8 @@ class _RecomendationsPageState extends State<RecomendationsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: CustomColors.foodNavy,
-        title: Text('Recomendaciones'),
+      appBar: CustomAppBar(
+        title: 'Recomendaciones',
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -197,6 +197,7 @@ class Header extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
+          SizedBox(height: 20.0),
           Text(
             'Nivel aceptado de consumo',
             style: TextStyle(
@@ -248,13 +249,16 @@ class RecomemendationsList extends StatelessWidget {
           return DataTable(
             columns: [
               DataColumn(label: Text('Alimento')),
-              DataColumn(label: Text('Nivel aceptado')),
+              DataColumn(label: Text('Nivel ')),
+              DataColumn(label: Text('')),
             ],
             rows: _createRows(snapshot.data!),
           );
         }
         return Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator(
+            backgroundColor: CustomColors.foodProgress,
+          ),
         );
       },
     );
@@ -276,6 +280,15 @@ class RecomemendationsList extends StatelessWidget {
             ),
           ),
         ),
+        DataCell(
+          IconButton(
+            icon: Icon(
+              Icons.delete,
+              color: Colors.red[400],
+            ),
+            onPressed: () {},
+          ),
+        )
       ]);
     }).toList();
     return newList;

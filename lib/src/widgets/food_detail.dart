@@ -128,7 +128,7 @@ class _FoodDetailState extends State<FoodDetail> {
                   padding: const EdgeInsets.all(16.0),
                   child: CircularProgressIndicator(
                     valueColor: AlwaysStoppedAnimation<Color>(
-                      CustomColors.foodpink,
+                      CustomColors.foodBackground,
                     ),
                   ),
                 )

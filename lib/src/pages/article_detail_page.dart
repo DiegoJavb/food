@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food/src/components/customAppBar.dart';
 import 'package:food/src/model/article_model.dart';
 
 import 'package:url_launcher/url_launcher.dart';
@@ -13,7 +14,7 @@ class ArticleDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     print(article.url);
     return Scaffold(
-      appBar: AppBar(title: Text(article.title!)),
+      appBar: CustomAppBar(title: article.title!),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(10),

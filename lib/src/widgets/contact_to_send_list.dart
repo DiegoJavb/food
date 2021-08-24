@@ -60,7 +60,9 @@ class _ContactToSendListState extends State<ContactToSendList> {
           );
         }
         return Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator(
+            backgroundColor: CustomColors.foodBackground,
+          ),
         );
       },
     );
