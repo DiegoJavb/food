@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
+import 'package:food/src/components/customAppBar.dart';
 import 'package:food/src/controllers/login_controller.dart';
 import 'package:get/get.dart';
 
@@ -18,16 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        title: Text("Inicio de sesión", style: TextStyle(color: Colors.black)),
-        centerTitle: true,
-      ),
-      drawer: Drawer(),
+      appBar: CustomAppBar(title: ''),
       body: GetBuilder<LoginController>(
         init: LoginController(),
         //este guion bajo hara referancia a los controladores de login

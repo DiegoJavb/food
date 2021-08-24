@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food/src/components/customAppBar.dart';
 import 'package:food/src/widgets/notifications_user_list.dart';
 
 class NotificationDetailsPage extends StatelessWidget {
@@ -11,8 +12,8 @@ class NotificationDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(userName),
+      appBar: CustomAppBar(
+        title: userName,
       ),
       body: SafeArea(
         child: Container(

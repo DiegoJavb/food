@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food/src/res/custom_colors.dart';
+import 'package:food/src/components/customAppBar.dart';
 import 'package:food/src/widgets/add_item_form.dart';
 
 class AddAppointmentPage extends StatelessWidget {
@@ -16,8 +16,8 @@ class AddAppointmentPage extends StatelessWidget {
         _contactFocusNode.unfocus();
       },
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: CustomColors.foodNavy,
+        appBar: CustomAppBar(
+          title: 'Citas',
         ),
         body: SafeArea(
           child: Padding(

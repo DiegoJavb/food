@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:food/src/components/customAppBar.dart';
 import 'package:food/src/controllers/register_controller.dart';
-import 'package:food/src/res/custom_colors.dart';
 import 'package:get/get.dart';
 import 'package:food/src/providers/role_pass.dart' as role;
 
@@ -24,8 +24,8 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     print(role.rolUser);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: CustomColors.foodAppbar,
+      appBar: CustomAppBar(
+        title: '',
       ),
       body: GetBuilder<RegisterController>(
         builder: (_) {
@@ -98,7 +98,11 @@ class _RegisterPageState extends State<RegisterPage> {
       width: 200.0,
       padding: const EdgeInsets.all(10.0),
       child: FloatingActionButton.extended(
-        label: const Text('Registrarse', style: TextStyle(fontSize: 15.0)),
+        label: const Text('Registrarse',
+            style: TextStyle(
+              fontSize: 15.0,
+              color: Colors.black,
+            )),
         backgroundColor: Colors.white,
         onPressed: () async {
           _.registerUserWithEmailAndPassword();

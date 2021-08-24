@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
+import 'package:food/src/components/customAppBar.dart';
 import 'package:food/src/controllers/login_controller.dart';
 import 'package:food/src/pages/register_page.dart';
-import 'package:food/src/res/custom_colors.dart';
 import 'package:get/get.dart';
 import 'package:food/src/providers/role_pass.dart' as role;
 
@@ -22,7 +22,9 @@ class _RegisterOpccionPageState extends State<RegisterOpccionPage> {
   Widget build(BuildContext context) {
     print(role.rolUser);
     return Scaffold(
-      appBar: AppBar(backgroundColor: CustomColors.foodAppbar),
+      appBar: CustomAppBar(
+        title: '',
+      ),
       body: GetBuilder<LoginController>(
         init: LoginController(),
         builder: (_) {

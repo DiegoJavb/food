@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food/src/components/customAppBar.dart';
 import 'package:food/src/widgets/contact_to_send_list.dart';
 
 class SelectContactToSendPage extends StatefulWidget {
@@ -25,7 +26,9 @@ class _SelectContactToSendPageState extends State<SelectContactToSendPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: CustomAppBar(
+        title: '',
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),

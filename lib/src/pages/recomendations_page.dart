@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:food/src/components/customAppBar.dart';
 import 'package:food/src/controllers/database_user_controller.dart';
 import 'package:food/src/res/custom_colors.dart';
 
@@ -19,9 +20,8 @@ class _RecomendationsPageState extends State<RecomendationsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: CustomColors.foodNavy,
-        title: Text('Recomendaciones'),
+      appBar: CustomAppBar(
+        title: 'Recomendaciones',
       ),
       body: SingleChildScrollView(
         child: Container(

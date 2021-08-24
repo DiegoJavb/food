@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:food/src/controllers/database_controller.dart';
-import 'package:food/src/res/custom_colors.dart';
 import 'package:food/src/widgets/edit_item_form.dart';
 import 'package:get/get.dart';
 
@@ -35,7 +34,16 @@ class _EditAppointmentPageState extends State<EditAppointmentPage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: CustomColors.foodNavy,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: <Color>[
+                  Colors.pink,
+                  Colors.blue,
+                ])),
+          ),
           actions: [
             _isDeleting
                 ? Padding(

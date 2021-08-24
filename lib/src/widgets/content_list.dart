@@ -8,14 +8,12 @@ class Contentlist extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverList(
-      delegate: SliverChildListDelegate(
-        [
-          _cardHistorial(),
-          _cardRecomendaciones(),
-          _cardNoticias(),
-        ],
-      ),
+    return ListView(
+      children: [
+        _cardHistorial(),
+        _cardRecomendaciones(),
+        _cardNoticias(),
+      ],
     );
   }
 

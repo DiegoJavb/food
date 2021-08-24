@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food/src/components/customAppBar.dart';
 import 'package:food/src/pages/register_option_page.dart';
 import 'package:food/src/res/custom_colors.dart';
 import 'package:get/get.dart';
@@ -18,8 +19,8 @@ class _WelcomePageState extends State<WelcomePage> {
   Widget build(BuildContext context) {
     print(role.rolUser);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: CustomColors.foodAppbar,
+      appBar: CustomAppBar(
+        title: 'Bienvenido',
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -34,14 +35,6 @@ class _WelcomePageState extends State<WelcomePage> {
                 child: Image(
                   image: AssetImage('images/Healthy.png'),
                   fit: BoxFit.cover,
-                ),
-              ),
-              SizedBox(height: 20.0),
-              Text(
-                'Bienvenido',
-                style: TextStyle(
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.w300,
                 ),
               ),
               SizedBox(height: 60.0),

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:food/src/components/customAppBar.dart';
 import 'package:food/src/controllers/database_user_controller.dart';
 import 'package:food/src/res/custom_colors.dart';
 import 'package:image_picker/image_picker.dart';
@@ -70,8 +71,8 @@ class _EditUserPageState extends State<EditUserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: CustomColors.foodAppbar,
+      appBar: CustomAppBar(
+        title: '',
       ),
       body: ListView(
         children: [

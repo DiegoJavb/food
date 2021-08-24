@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food/src/components/customAppBar.dart';
 import 'package:food/src/widgets/news_list.dart';
 
 class NewsPage extends StatelessWidget {
@@ -7,8 +8,8 @@ class NewsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Noticias'),
+      appBar: CustomAppBar(
+        title: 'Noticias',
       ),
       body: Container(
         padding: EdgeInsets.all(5.0),

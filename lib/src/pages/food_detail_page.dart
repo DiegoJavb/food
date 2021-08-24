@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food/src/components/customAppBar.dart';
 import 'package:food/src/widgets/food_detail.dart';
 
 class FoodDetailPage extends StatelessWidget {
@@ -27,8 +28,8 @@ class FoodDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final FocusNode _evaluationFocusNode = FocusNode();
     return Scaffold(
-      appBar: AppBar(
-        title: Text('detalle de comida'),
+      appBar: CustomAppBar(
+        title: 'Detalle de comida',
       ),
       body: SafeArea(
         child: Container(
