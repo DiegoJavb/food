@@ -198,4 +198,16 @@ class DatabaseUser {
         _mainCollection.doc(userUid).collection('recomendations');
     return userCollection.snapshots();
   }
+
+  static Future<void> deleteFood({
+    required String foodId,
+  }) async {
+    DocumentReference documentReferencer =
+        _mainCollection.doc(userUid).collection('recomendations').doc(foodId);
+    print('documentReferencer: $documentReferencer');
+    await documentReferencer
+        .delete()
+        .whenComplete(() => print('Note item deleted from the database'))
+        .catchError((e) => print(e));
+  }
 }
