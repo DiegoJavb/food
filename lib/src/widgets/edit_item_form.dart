@@ -135,56 +135,51 @@ class _EditItemFormState extends State<EditItemForm> {
                     ),
                   ),
                 )
-              : Container(
-                  width: double.maxFinite,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      // backgroundColor: MaterialStateProperty.all(
-                      //   CustomColors.firebaseOrange,
-                      // ),
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      width: 200.0,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                        ),
+                        onPressed: () async {
+                          widget.titleFocusNode.unfocus();
+                          widget.descriptionFocusNode.unfocus();
+                          widget.contactFocusNode.unfocus();
+
+                          if (_editItemFormKey.currentState!.validate()) {
+                            setState(() => _isProcessing = true);
+                            await Database.updateItem(
+                              docId: widget.documentId,
+                              title: _titleController.text,
+                              description: _descriptionController.text,
+                              contact: _contactController.text,
+                            );
+                            setState(() => _isProcessing = false);
+
+                            Navigator.of(context).pop();
+                          }
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
+                          child: Text(
+                            'Actualizar',
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 2,
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                    onPressed: () async {
-                      widget.titleFocusNode.unfocus();
-                      widget.descriptionFocusNode.unfocus();
-                      widget.contactFocusNode.unfocus();
-
-                      if (_editItemFormKey.currentState!.validate()) {
-                        setState(() {
-                          _isProcessing = true;
-                        });
-
-                        await Database.updateItem(
-                          docId: widget.documentId,
-                          title: _titleController.text,
-                          description: _descriptionController.text,
-                          contact: _contactController.text,
-                        );
-
-                        setState(() {
-                          _isProcessing = false;
-                        });
-
-                        Navigator.of(context).pop();
-                      }
-                    },
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
-                      child: Text(
-                        'Actualizar',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          // color: CustomColors.firebaseGrey,
-                          letterSpacing: 2,
-                        ),
-                      ),
-                    ),
-                  ),
+                  ],
                 ),
         ],
       ),

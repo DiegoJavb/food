@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:food/src/controllers/database_user_controller.dart';
 import 'package:food/src/res/custom_colors.dart';
+import 'package:get/get.dart';
+import 'package:food/src/providers/currentUser.dart' as userInformation;
 
 class UsersList extends StatefulWidget {
   @override
@@ -19,6 +21,7 @@ class _UsersListState extends State<UsersList> {
 
   @override
   Widget build(BuildContext context) {
+    print('Nobre del usuario actual: ${userInformation.nameUser}');
     return Container(
       child: StreamBuilder<QuerySnapshot>(
         stream: DatabaseUser.readUsersOfListUsers(),
@@ -85,14 +88,19 @@ class _UsersListState extends State<UsersList> {
       ),
       child: ListTile(
         onTap: () {
-          DatabaseUser.addContact(
-            name: name,
-            email: email,
-            photoUrl: photoUrl,
-            role: role,
-            docId: docId,
-          );
-          Navigator.of(context).pop();
+          userInformation.nameUser == '' || userInformation.nameUser == null
+              ? Get.snackbar(
+                  'Actualice',
+                  'Su informacion personal para poder continuar',
+                  snackPosition: SnackPosition.BOTTOM,
+                )
+              : DatabaseUser.addContact(
+                  name: name,
+                  email: email,
+                  photoUrl: photoUrl,
+                  role: role,
+                  docId: docId,
+                );
         },
         leading: Container(
           child: CircleAvatar(

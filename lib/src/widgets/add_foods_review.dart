@@ -50,36 +50,41 @@ class _AddFoodsReviewState extends State<AddFoodsReview> {
                     backgroundColor: CustomColors.foodProgress,
                   ),
                 )
-              : Container(
-                  width: double.maxFinite,
-                  child: FloatingActionButton.extended(
-                    elevation: 0,
-                    label: Text(
-                      'Siguiente',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      width: 200.0,
+                      child: FloatingActionButton.extended(
+                        elevation: 0,
+                        label: Text(
+                          'Siguiente',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        onPressed: () {
+                          widget.breakfastFocusNode.unfocus();
+                          widget.lunchFocusNode.unfocus();
+                          widget.dinnerFocusNode.unfocus();
+                          widget.snackFocusNode.unfocus();
+                          if (_addFoodReviewFormKey.currentState!.validate()) {
+                            Get.to(
+                              () => SelectContactToSendPage(
+                                daysToReview: dropdownValue,
+                                breakfast: _breakfastController.text,
+                                lunch: _lunchController.text,
+                                dinner: _dinnerController.text,
+                                snack: _snackController.text,
+                                currentName: widget.currentName,
+                              ),
+                            );
+                          }
+                        },
                       ),
                     ),
-                    onPressed: () {
-                      widget.breakfastFocusNode.unfocus();
-                      widget.lunchFocusNode.unfocus();
-                      widget.dinnerFocusNode.unfocus();
-                      widget.snackFocusNode.unfocus();
-                      if (_addFoodReviewFormKey.currentState!.validate()) {
-                        Get.to(
-                          () => SelectContactToSendPage(
-                            daysToReview: dropdownValue,
-                            breakfast: _breakfastController.text,
-                            lunch: _lunchController.text,
-                            dinner: _dinnerController.text,
-                            snack: _snackController.text,
-                            currentName: widget.currentName,
-                          ),
-                        );
-                      }
-                    },
-                  ),
+                  ],
                 ),
         ],
       ),

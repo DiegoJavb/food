@@ -27,6 +27,13 @@ class NotificationUserList extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               var notificationInfo = snapshot.data!.docs[index];
               String notificationID = snapshot.data!.docs[index].id;
+
+              ///datos personales
+              String peso = notificationInfo['peso'];
+              String estatura = notificationInfo['estatura'];
+              String edad = notificationInfo['edad'];
+
+              ///alimentacion
               String desayuno = notificationInfo['desayuno'];
               String almuerzo = notificationInfo['almuerzo'];
               String cena = notificationInfo['cena'];
@@ -35,12 +42,19 @@ class NotificationUserList extends StatelessWidget {
               String enviado = notificationInfo['enviado'];
               String evaluacion = notificationInfo['evaluation'];
               return Ink(
-                decoration: BoxDecoration(
-                  color: CustomColors.firebaseGrey.withOpacity(1.0),
-                  borderRadius: BorderRadius.circular(8.0),
+                child: _createNotification(
+                  peso,
+                  estatura,
+                  edad,
+                  desayuno,
+                  almuerzo,
+                  cena,
+                  aperitivos,
+                  dias,
+                  enviado,
+                  notificationID,
+                  evaluacion,
                 ),
-                child: _createNotification(desayuno, almuerzo, cena, aperitivos,
-                    dias, enviado, notificationID, evaluacion),
               );
             },
           );
@@ -58,21 +72,39 @@ class NotificationUserList extends StatelessWidget {
   }
 
   Widget _createNotification(
-      String desayuno,
-      String almuerzo,
-      String cena,
-      String aperitivos,
-      String dias,
-      String enviado,
-      String notificationID,
-      String evaluacion) {
-    return ListTile(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
+    String peso,
+    String estatura,
+    String edad,
+    String desayuno,
+    String almuerzo,
+    String cena,
+    String aperitivos,
+    String dias,
+    String enviado,
+    String notificationID,
+    String evaluacion,
+  ) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(50.0),
+        color: CustomColors.foodBackground,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 3.0,
+          ),
+        ],
       ),
-      onTap: () {
-        Get.to(
-          () => FoodDetailPage(
+      child: ListTile(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        onTap: () {
+          Get.to(
+            () => FoodDetailPage(
+              peso: peso,
+              estatura: estatura,
+              edad: edad,
               desayuno: desayuno,
               almuerzo: almuerzo,
               cena: cena,
@@ -80,14 +112,15 @@ class NotificationUserList extends StatelessWidget {
               dias: dias,
               enviado: enviado,
               notificationID: notificationID,
-              currentEvaluation: evaluacion),
-        );
-      },
-      leading: Icon(Icons.notification_important),
-      title: Text(
-        notificationID,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
+              currentEvaluation: evaluacion,
+            ),
+          );
+        },
+        title: Text(
+          notificationID,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
       ),
     );
   }

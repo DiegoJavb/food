@@ -52,38 +52,42 @@ class _AddItemFormState extends State<AddItemForm> {
                     ),
                   ),
                 )
-              : Container(
-                  width: double.maxFinite,
-                  child: ElevatedButton(
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
-                      child: Text(
-                        'Registrar cita',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          // color: CustomColors.firebaseGrey,
-                          letterSpacing: 2,
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      width: 200.0,
+                      child: ElevatedButton(
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
+                          child: Text(
+                            'Registrar',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 2,
+                            ),
+                          ),
                         ),
+                        onPressed: () async {
+                          widget.titleFocusNode.unfocus();
+                          widget.descriptionFocusNode.unfocus();
+                          widget.contactFocusNode.unfocus();
+
+                          if (_addItemFormKey.currentState!.validate()) {
+                            setState(() => _isProcessing = true);
+                            await Database.addItem(
+                              title: _titleController.text,
+                              description: _descriptionController.text,
+                              contact: _contactController.text,
+                            );
+                            setState(() => _isProcessing = false);
+                            Navigator.of(context).pop();
+                          }
+                        },
                       ),
                     ),
-                    onPressed: () async {
-                      widget.titleFocusNode.unfocus();
-                      widget.descriptionFocusNode.unfocus();
-                      widget.contactFocusNode.unfocus();
-
-                      if (_addItemFormKey.currentState!.validate()) {
-                        setState(() => _isProcessing = true);
-                        await Database.addItem(
-                          title: _titleController.text,
-                          description: _descriptionController.text,
-                          contact: _contactController.text,
-                        );
-                        setState(() => _isProcessing = false);
-                        Navigator.of(context).pop();
-                      }
-                    },
-                  ),
+                  ],
                 ),
         ],
       ),

@@ -5,6 +5,7 @@ import 'package:food/src/controllers/database_evaluation.dart';
 import 'package:food/src/controllers/database_user_controller.dart';
 import 'package:food/src/res/custom_colors.dart';
 import 'package:get/get.dart';
+import 'package:food/src/providers/currentUser.dart' as userInformation;
 
 class ContactToSendList extends StatefulWidget {
   final String daysToReview;
@@ -46,14 +47,11 @@ class _ContactToSendListState extends State<ContactToSendList> {
               var userInfo = snapshot.data!.docs[index];
               String userId = snapshot.data!.docs[index].id;
               String email = userInfo['email'];
+              String photo = userInfo['photoUrl'];
               userInfo['name'] == null ? name = '' : name = userInfo['name'];
               return Ink(
-                decoration: BoxDecoration(
-                  color: CustomColors.firebaseGrey.withOpacity(1.0),
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
                 child: InkWell(
-                  child: _createUser(userId, email, name),
+                  child: _createUser(userId, photo, email, name),
                 ),
               );
             },
@@ -68,31 +66,48 @@ class _ContactToSendListState extends State<ContactToSendList> {
     );
   }
 
-  Widget _createUser(String userId, String email, String name) {
-    return ListTile(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
+  Widget _createUser(String userId, String photo, String email, String name) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(50.0),
+        color: CustomColors.foodBackground,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 3.0,
+          ),
+        ],
       ),
-      onTap: () => _createDialog(
-        context,
-        email,
-        widget.daysToReview,
-        widget.breakfast,
-        widget.lunch,
-        widget.dinner,
-        widget.snack,
-        widget.currentName,
-      ),
-      leading: Icon(Icons.person),
-      title: Text(
-        name,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-      ),
-      subtitle: Text(
-        email,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
+      child: ListTile(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        onTap: () => _createDialog(
+          context,
+          email,
+          widget.daysToReview,
+          widget.breakfast,
+          widget.lunch,
+          widget.dinner,
+          widget.snack,
+          widget.currentName,
+        ),
+        leading: Container(
+          child: CircleAvatar(
+            radius: 25.0,
+            backgroundImage: NetworkImage(photo),
+          ),
+        ),
+        title: Text(
+          name,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        subtitle: Text(
+          email,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
       ),
     );
   }
@@ -134,6 +149,9 @@ void _createDialog(
             child: Text('Si'),
             onPressed: () {
               DatabaseEvaluations.addFood(
+                myWeight: userInformation.weightUser!,
+                myHeight: userInformation.heightUser!,
+                myAge: userInformation.ageUser!,
                 days: daysToReview,
                 breakfast: breakfast,
                 lunch: lunch,

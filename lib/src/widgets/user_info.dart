@@ -50,6 +50,7 @@ class _UserInfoState extends State<UserInfo> {
           docId = snapshot.id;
           photo = (userInfo as dynamic)['photo'];
           name = (userInfo as dynamic)['name'];
+          print('hay algun nombre: $name');
           weight = (userInfo as dynamic)['weight'];
           height = (userInfo as dynamic)['height'];
           age = (userInfo as dynamic)['age'];
@@ -67,7 +68,7 @@ class _UserInfoState extends State<UserInfo> {
 
   @override
   Widget build(BuildContext context) {
-    print('nombre del usuario actual: $name');
+    print('nombre del usuario actual: $name o no');
     return Drawer(
         child: ListView(
       children: [
