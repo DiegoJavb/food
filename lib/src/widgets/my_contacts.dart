@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:food/src/controllers/database_user_controller.dart';
+import 'package:food/src/pages/my_contact_detail_page.dart';
 import 'package:food/src/res/custom_colors.dart';
+import 'package:get/get.dart';
 
 class MyContacts extends StatefulWidget {
   @override
@@ -97,16 +99,27 @@ class _MyContactsState extends State<MyContacts> {
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
-        // trailing: Column(
-        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        //   children: [
-        //     Icon(
-        //       Icons.arrow_right,
-        //       color: Colors.blue,
-        //       size: 30.0,
-        //     ),
-        //   ],
-        // ),
+        trailing: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            IconButton(
+              icon: Icon(
+                Icons.arrow_right,
+                color: Colors.green,
+                size: 30.0,
+              ),
+              onPressed: () {
+                Get.to(
+                  () => MyContactPage(
+                    contactName: name[0].toUpperCase() + name.substring(1),
+                    contactPhoto: photoUrl,
+                    contactEmail: email,
+                  ),
+                );
+              },
+            )
+          ],
+        ),
       ),
     );
   }

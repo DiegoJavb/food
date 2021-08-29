@@ -9,7 +9,7 @@ class CustomColors {
   static final Color firebaseGrey = Color(0xFFECEFF1);
   // static final Color foodBackground = Color(0xFFB8B5FF);
 //-------------------------------------------------------------
-  static final Color foodBackground = Color(0xFFB8B5FF);
+  static final Color foodBackground = Color(0xFFECEFF1);
   static final Color foodProgress = Color(0xFF7868E6);
   static final Color foodProgress2 = Color(0xFFF6A9A9);
 }
