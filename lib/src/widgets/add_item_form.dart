@@ -57,16 +57,17 @@ class _AddItemFormState extends State<AddItemForm> {
                   children: [
                     Container(
                       width: 200.0,
-                      child: ElevatedButton(
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
-                          child: Text(
-                            'Registrar',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 2,
-                            ),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0)),
+                      child: FloatingActionButton.extended(
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.black,
+                        label: Text(
+                          'Registrar',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 2,
                           ),
                         ),
                         onPressed: () async {

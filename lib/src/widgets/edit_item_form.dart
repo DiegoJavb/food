@@ -9,6 +9,7 @@ class EditItemForm extends StatefulWidget {
   final FocusNode titleFocusNode;
   final FocusNode descriptionFocusNode;
   final FocusNode contactFocusNode;
+
   //ESTOS SON LOS QUE ME TRAIGO
   final String currentTitle;
   final String currentDescription;
@@ -24,6 +25,7 @@ class EditItemForm extends StatefulWidget {
     required this.currentContact,
     required this.documentId,
   });
+
   @override
   _EditItemFormState createState() => _EditItemFormState();
 }
@@ -139,13 +141,18 @@ class _EditItemFormState extends State<EditItemForm> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25)),
                       width: 200.0,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
+                      child: FloatingActionButton.extended(
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.black,
+                        label: Text(
+                          'Actualizar',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 2,
                           ),
                         ),
                         onPressed: () async {
@@ -166,19 +173,8 @@ class _EditItemFormState extends State<EditItemForm> {
                             Navigator.of(context).pop();
                           }
                         },
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
-                          child: Text(
-                            'Actualizar',
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 2,
-                            ),
-                          ),
-                        ),
                       ),
-                    ),
+                    )
                   ],
                 ),
         ],

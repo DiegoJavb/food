@@ -73,7 +73,7 @@ class _WelcomePageState extends State<WelcomePage> {
       child: Column(
         children: <Widget>[
           RadioListTile(
-            activeColor: CustomColors.foodBackground,
+            activeColor: CustomColors.foodProgress2,
             value: 0,
             groupValue: _value,
             onChanged: (value) {
@@ -86,7 +86,7 @@ class _WelcomePageState extends State<WelcomePage> {
             title: Text('Nutricionista'),
           ),
           RadioListTile(
-            activeColor: CustomColors.foodBackground,
+            activeColor: CustomColors.foodProgress2,
             value: 1,
             groupValue: _value,
             onChanged: (value) {
