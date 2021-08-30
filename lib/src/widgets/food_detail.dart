@@ -8,6 +8,12 @@ import 'custom_form_field.dart';
 import 'package:food/src/providers/currentUser.dart' as userInformation;
 
 class FoodDetail extends StatefulWidget {
+  ///
+  final String peso;
+  final String estatura;
+  final String edad;
+
+  ///
   final String desayuno;
   final String almuerzo;
   final String cena;
@@ -15,10 +21,17 @@ class FoodDetail extends StatefulWidget {
   final String dias;
   final String enviado;
   final String notificacionID;
-  //evaluacion alimenticia
+
+  /// evaluacion alimenticia
   final FocusNode evaluationFocusNode;
   final String currentEvaluation;
   const FoodDetail({
+    ///
+    required this.peso,
+    required this.estatura,
+    required this.edad,
+
+    ///
     required this.desayuno,
     required this.almuerzo,
     required this.cena,
@@ -61,8 +74,34 @@ class _FoodDetailState extends State<FoodDetail> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 20.0),
+                Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text('${widget.edad} '),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text('${widget.peso} Kg '),
+                            SizedBox(height: 15.0),
+                            Text('${widget.estatura} Cm '),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(height: 20.0),
                 Text(
-                  'Alimentacion',
+                  'Alimentación',
                   style: TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
@@ -74,23 +113,35 @@ class _FoodDetailState extends State<FoodDetail> {
                   style: TextStyle(fontSize: 18.0),
                 ),
                 SizedBox(height: 15.0),
+                Text('Desayuno',
+                    style:
+                        TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
                 Text(
-                  'Desayuno\n${widget.desayuno}',
+                  '${widget.desayuno}',
                   style: TextStyle(fontSize: 18.0),
                 ),
                 SizedBox(height: 15.0),
+                Text('Almuerzo',
+                    style:
+                        TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
                 Text(
-                  'Almuerzo\n${widget.almuerzo}',
+                  '${widget.almuerzo}',
                   style: TextStyle(fontSize: 18.0),
                 ),
                 SizedBox(height: 15.0),
+                Text('Cena',
+                    style:
+                        TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
                 Text(
-                  'Cena\n${widget.cena}',
+                  '${widget.cena}',
                   style: TextStyle(fontSize: 18.0),
                 ),
                 SizedBox(height: 15.0),
+                Text('Aperitivos',
+                    style:
+                        TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
                 Text(
-                  'Aperitivos\n${widget.aperitivos}',
+                  '${widget.aperitivos}',
                   style: TextStyle(fontSize: 18.0),
                 ),
                 SizedBox(height: 20.0),
@@ -132,44 +183,53 @@ class _FoodDetailState extends State<FoodDetail> {
                     ),
                   ),
                 )
-              : Container(
-                  child: userInformation.roleUser == 'Nutricionista'
-                      ? FloatingActionButton.extended(
-                          label: Text('Enviar'),
-                          onPressed: () async {
-                            if (_editItemFormKey.currentState!.validate()) {
-                              setState(() => _isProcessing = true);
-                              DatabaseEvaluations.addFoodEvaluated(
-                                days: widget.dias,
-                                breakfast: widget.desayuno,
-                                lunch: widget.almuerzo,
-                                dinner: widget.cena,
-                                snack: widget.aperitivos,
-                                toUser: widget.enviado,
-                                carriedEvaluationId: widget.notificacionID,
-                                evaluation: _evaluationController.text,
-                              );
-                              // DatabaseEvaluations.updateFoodEvaluated(
-                              //   days: widget.dias,
-                              //   breakfast: widget.desayuno,
-                              //   lunch: widget.almuerzo,
-                              //   dinner: widget.cena,
-                              //   snack: widget.aperitivos,
-                              //   toUser: widget.enviado,
-                              //   carriedEvaluationId: widget.notificacionID,
-                              //   evaluation: _evaluationController.text,
-                              // );
-                              DatabaseEvaluations.addContact(
-                                fromUser: userInformation.nameUser!,
-                                emailFromUser: Database.userUid!,
-                                toUser: widget.enviado,
-                              );
-                              setState(() => _isProcessing = false);
-                              Navigator.of(context).pop();
-                            }
-                          },
-                        )
-                      : SizedBox(),
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      width: 200.0,
+                      child: userInformation.roleUser == 'Nutricionista'
+                          ? FloatingActionButton.extended(
+                              label: Text(
+                                'Enviar',
+                                style: TextStyle(fontSize: 17.0),
+                              ),
+                              onPressed: () async {
+                                if (_editItemFormKey.currentState!.validate()) {
+                                  setState(() => _isProcessing = true);
+                                  DatabaseEvaluations.addFoodEvaluated(
+                                    days: widget.dias,
+                                    breakfast: widget.desayuno,
+                                    lunch: widget.almuerzo,
+                                    dinner: widget.cena,
+                                    snack: widget.aperitivos,
+                                    toUser: widget.enviado,
+                                    carriedEvaluationId: widget.notificacionID,
+                                    evaluation: _evaluationController.text,
+                                  );
+                                  DatabaseEvaluations.updateFoodEvaluated(
+                                    days: widget.dias,
+                                    breakfast: widget.desayuno,
+                                    lunch: widget.almuerzo,
+                                    dinner: widget.cena,
+                                    snack: widget.aperitivos,
+                                    toUser: widget.enviado,
+                                    carriedEvaluationId: widget.notificacionID,
+                                    evaluation: _evaluationController.text,
+                                  );
+                                  DatabaseEvaluations.addContact(
+                                    fromUser: userInformation.nameUser!,
+                                    emailFromUser: Database.userUid!,
+                                    toUser: widget.enviado,
+                                  );
+                                  setState(() => _isProcessing = false);
+                                  Navigator.of(context).pop();
+                                }
+                              },
+                            )
+                          : SizedBox(),
+                    ),
+                  ],
                 ),
         ],
       ),

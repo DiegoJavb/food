@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final CollectionReference _mainCollection =
@@ -8,6 +9,12 @@ class DatabaseEvaluations {
   static String? userUid;
   //Ingresar alimentación
   static Future<void> addFood({
+    /// datos dek usuario con sesion activa
+    required String myWeight,
+    required String myHeight,
+    required String myAge,
+
+    /// alimentación
     required String days,
     required String breakfast,
     required String lunch,
@@ -15,15 +22,22 @@ class DatabaseEvaluations {
     required String snack,
     required String? toUser,
   }) async {
-    var timeKey = DateTime.now();
+    var dbTimeKey = DateTime.now();
+    var formatDate = DateFormat('MMM d, yyyy');
+    var formatTime = DateFormat('EEEE, hh:mm aaa');
+    String date = formatDate.format(dbTimeKey);
+    String time = formatTime.format(dbTimeKey);
     DocumentReference documentReferencer = _mainCollection
         .doc(toUser)
         .collection('contacts')
         .doc(userUid)
         .collection('evaluations')
-        .doc(timeKey.toString());
+        .doc('$date - $time');
     print('documentReferencer: $documentReferencer');
     Map<String, dynamic> data = <String, dynamic>{
+      "peso": myWeight,
+      "estatura": myHeight,
+      "edad": myAge,
       "dias": days,
       "desayuno": breakfast,
       "almuerzo": lunch,
@@ -72,38 +86,38 @@ class DatabaseEvaluations {
         .catchError((e) => print(e));
   }
 
-  // static Future<void> updateFoodEvaluated({
-  //   required String days,
-  //   required String breakfast,
-  //   required String lunch,
-  //   required String dinner,
-  //   required String snack,
-  //   required String? toUser,
-  //   required String carriedEvaluationId,
-  //   required String evaluation,
-  // }) async {
-  //   DocumentReference documentReferencer = _mainCollection
-  //       .doc(userUid)
-  //       .collection('contacts')
-  //       .doc(toUser)
-  //       .collection('evaluations')
-  //       .doc(carriedEvaluationId);
-  //   print('documentReferencer: $documentReferencer');
-  //   Map<String, dynamic> data = <String, dynamic>{
-  //     "dias": days,
-  //     "desayuno": breakfast,
-  //     "almuerzo": lunch,
-  //     "cena": dinner,
-  //     "aperitivos": snack,
-  //     "enviado": userUid,
-  //     "evaluation": evaluation,
-  //   };
+  static Future<void> updateFoodEvaluated({
+    required String days,
+    required String breakfast,
+    required String lunch,
+    required String dinner,
+    required String snack,
+    required String? toUser,
+    required String carriedEvaluationId,
+    required String evaluation,
+  }) async {
+    DocumentReference documentReferencer = _mainCollection
+        .doc(userUid)
+        .collection('contacts')
+        .doc(toUser)
+        .collection('evaluations')
+        .doc(carriedEvaluationId);
+    print('documentReferencer: $documentReferencer');
+    Map<String, dynamic> data = <String, dynamic>{
+      "dias": days,
+      "desayuno": breakfast,
+      "almuerzo": lunch,
+      "cena": dinner,
+      "aperitivos": snack,
+      "enviado": userUid,
+      "evaluation": evaluation,
+    };
 
-  //   await documentReferencer
-  //       .set(data)
-  //       .whenComplete(() => print("Note item added to the database"))
-  //       .catchError((e) => print(e));
-  // }
+    await documentReferencer
+        .update(data)
+        .whenComplete(() => print("Note item added to the database"))
+        .catchError((e) => print(e));
+  }
 
   static Future<void> addContact({
     required String fromUser,

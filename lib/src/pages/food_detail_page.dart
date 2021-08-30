@@ -3,6 +3,11 @@ import 'package:food/src/components/customAppBar.dart';
 import 'package:food/src/widgets/food_detail.dart';
 
 class FoodDetailPage extends StatelessWidget {
+  // datos del usuario
+  final String peso;
+  final String estatura;
+  final String edad;
+  //datos de la alimentacion
   final String desayuno;
   final String almuerzo;
   final String cena;
@@ -13,6 +18,12 @@ class FoodDetailPage extends StatelessWidget {
   final String currentEvaluation;
 
   FoodDetailPage({
+    ///
+    required this.peso,
+    required this.estatura,
+    required this.edad,
+
+    ///
     required this.desayuno,
     required this.almuerzo,
     required this.cena,
@@ -20,7 +31,8 @@ class FoodDetailPage extends StatelessWidget {
     required this.dias,
     required this.enviado,
     required this.notificationID,
-    //currentEvaluation
+
+    ///currentEvaluation
     required this.currentEvaluation,
   });
 
@@ -35,6 +47,12 @@ class FoodDetailPage extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.all(16.0),
           child: FoodDetail(
+            ///
+            peso: this.peso,
+            estatura: this.estatura,
+            edad: this.edad,
+
+            ///
             desayuno: this.desayuno,
             almuerzo: this.almuerzo,
             cena: this.cena,
@@ -42,7 +60,8 @@ class FoodDetailPage extends StatelessWidget {
             dias: this.dias,
             enviado: this.enviado,
             notificacionID: this.notificationID,
-            //evaluacion
+
+            ///evaluacion
             currentEvaluation: this.currentEvaluation,
             evaluationFocusNode: _evaluationFocusNode,
           ),

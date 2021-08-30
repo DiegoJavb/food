@@ -27,10 +27,6 @@ class NotificationsList extends StatelessWidget {
               String email = noteInfo['email'];
               //El userId y el email son los mismos para todos los usuarios
               return Ink(
-                decoration: BoxDecoration(
-                  color: CustomColors.firebaseGrey.withOpacity(1.0),
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
                 child: InkWell(
                   child: _createNotification(name, email, userId),
                 ),
@@ -50,28 +46,39 @@ class NotificationsList extends StatelessWidget {
   }
 
   Widget _createNotification(String name, String email, userId) {
-    return ListTile(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      onTap: () {
-        Get.to(
-          () => NotificationDetailsPage(
-            userId: userId,
-            userName: name,
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(50.0),
+        color: CustomColors.foodBackground,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 3.0,
           ),
-        );
-      },
-      leading: Icon(Icons.person),
-      title: Text(
-        name,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
+        ],
       ),
-      subtitle: Text(
-        email,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
+      child: ListTile(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        onTap: () {
+          Get.to(
+            () => NotificationDetailsPage(
+              userId: userId,
+              userName: name,
+            ),
+          );
+        },
+        title: Text(
+          name,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        subtitle: Text(
+          email,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
       ),
     );
   }

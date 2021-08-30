@@ -12,7 +12,8 @@ class LoginController extends GetxController {
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-
+  bool _loggedIn = false;
+  bool isLoggedIn() => _loggedIn;
   //Inicio de sesion con email y passwort
   void signInWithEmailAndPassword() async {
     try {
@@ -25,6 +26,7 @@ class LoginController extends GetxController {
         'Hola',
         'Ha ingresado correctamente',
       );
+      _loggedIn = true;
       DatabaseUser.userUid = emailController.text;
       DatabaseEvaluations.userUid = emailController.text;
       Database.userUid = emailController.text;
@@ -72,6 +74,7 @@ class LoginController extends GetxController {
         'Hola',
         '${user.displayName} iniciaste sesión con Google',
       );
+      _loggedIn = true;
 
       print('Ingreso bien');
       Future.delayed(

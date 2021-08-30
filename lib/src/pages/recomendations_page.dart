@@ -252,7 +252,7 @@ class RecomemendationsList extends StatelessWidget {
               DataColumn(label: Text('Nivel ')),
               DataColumn(label: Text('')),
             ],
-            rows: _createRows(snapshot.data!),
+            rows: _createRows(snapshot.data!, context),
           );
         }
         return Center(
@@ -264,13 +264,12 @@ class RecomemendationsList extends StatelessWidget {
     );
   }
 
-  List<DataRow> _createRows(QuerySnapshot snapshot) {
+  List<DataRow> _createRows(QuerySnapshot snapshot, BuildContext context) {
     List<DataRow> newList =
         snapshot.docs.map((DocumentSnapshot documentSnapshot) {
+      print('id de la recomendacion: ${documentSnapshot.id}');
       String color = documentSnapshot['colorLevel'].replaceAll('#', '0xff');
-
-      print('color que viene: $color');
-      return new DataRow(cells: [
+      return DataRow(cells: [
         DataCell(Text(documentSnapshot['food'])),
         DataCell(
           Text(
@@ -286,7 +285,9 @@ class RecomemendationsList extends StatelessWidget {
               Icons.delete,
               color: Colors.red[400],
             ),
-            onPressed: () {},
+            onPressed: () {
+              DatabaseUser.deleteFood(foodId: documentSnapshot.id);
+            },
           ),
         )
       ]);
@@ -294,6 +295,7 @@ class RecomemendationsList extends StatelessWidget {
     return newList;
   }
 }
+
 // COLORES HEXADECIMALES
 // #CD0722 = red
 // #28A60F = green

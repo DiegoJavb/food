@@ -5,6 +5,7 @@ import 'package:food/src/controllers/database_user_controller.dart';
 import 'package:food/src/res/custom_colors.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:intl/intl.dart';
 
 class EditUserPage extends StatefulWidget {
   final String currentName;
@@ -295,7 +296,7 @@ class _EditUserPageState extends State<EditUserPage> {
           color: CustomColors.foodBackground,
           fontSize: 20.0,
         ),
-        labelText: 'Altura en Metros',
+        labelText: 'Altura',
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
       ),
       onChanged: (valor) {
@@ -369,7 +370,8 @@ class _EditUserPageState extends State<EditUserPage> {
       lastDate: new DateTime.now(),
       locale: Locale('es', 'ES'),
     ))!;
-    age = picked.toString();
+    var formatDate = DateFormat('MMM d, yyyy');
+    age = formatDate.format(picked);
     _ageController.text = age;
   }
 }

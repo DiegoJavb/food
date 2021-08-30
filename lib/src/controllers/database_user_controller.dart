@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final CollectionReference _mainCollection = _firestore.collection('users');
@@ -111,6 +112,50 @@ class DatabaseUser {
         .catchError((e) => print(e));
   }
 
+  static Future<void> addContactAppointment({
+    required String email,
+    required String detail,
+  }) async {
+    DocumentReference documentReference = _mainCollection
+        .doc(userUid)
+        .collection('contacts')
+        .doc(email)
+        .collection('appointments')
+        .doc();
+
+    var dbDate = DateTime.now();
+    var formatDate = DateFormat('MMM d, yyyy');
+    String date = formatDate.format(dbDate);
+    Map<String, dynamic> data = <String, dynamic>{'name': detail, 'date': date};
+    await documentReference
+        .set(data)
+        .whenComplete(() => print("User added to the database"))
+        .catchError((e) => print(e));
+  }
+
+  static Stream<QuerySnapshot> readContactAppointment({
+    required String contactId,
+  }) {
+    CollectionReference userCollection = _mainCollection
+        .doc(userUid)
+        .collection('contacts')
+        .doc(contactId)
+        .collection('appointments');
+    return userCollection.snapshots();
+  }
+
+  static Future<void> deleteContact({
+    required String docId,
+  }) async {
+    DocumentReference documentReferencer =
+        _mainCollection.doc(userUid).collection('contacts').doc(docId);
+    print('documentReferencer: $documentReferencer');
+    await documentReferencer
+        .delete()
+        .whenComplete(() => print('Note item deleted from the database'))
+        .catchError((e) => print(e));
+  }
+
   //Leer mis usuarios
   static Stream<QuerySnapshot> readMyContacts() {
     CollectionReference userCollection =
@@ -197,5 +242,17 @@ class DatabaseUser {
     CollectionReference userCollection =
         _mainCollection.doc(userUid).collection('recomendations');
     return userCollection.snapshots();
+  }
+
+  static Future<void> deleteFood({
+    required String foodId,
+  }) async {
+    DocumentReference documentReferencer =
+        _mainCollection.doc(userUid).collection('recomendations').doc(foodId);
+    print('documentReferencer: $documentReferencer');
+    await documentReferencer
+        .delete()
+        .whenComplete(() => print('Note item deleted from the database'))
+        .catchError((e) => print(e));
   }
 }

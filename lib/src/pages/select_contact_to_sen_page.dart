@@ -27,7 +27,7 @@ class _SelectContactToSendPageState extends State<SelectContactToSendPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: '',
+        title: 'Enviar a',
       ),
       body: SafeArea(
         child: Padding(
