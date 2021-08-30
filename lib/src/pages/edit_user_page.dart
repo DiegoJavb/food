@@ -222,6 +222,8 @@ class _EditUserPageState extends State<EditUserPage> {
 
                                     setState(() => _isProcessing = false);
                                     Navigator.of(context).pop();
+                                    Navigator.of(context).pop();
+                                    Navigator.of(context).pop();
                                   }
                                 },
                               ),

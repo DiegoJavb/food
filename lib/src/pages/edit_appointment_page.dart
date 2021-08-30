@@ -121,7 +121,9 @@ class _EditAppointmentPageState extends State<EditAppointmentPage> {
                   docId: widget.documentId,
                 );
                 setState(() => _isDeleting = false);
-                Get.toNamed('record');
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
               },
             )
           ],
