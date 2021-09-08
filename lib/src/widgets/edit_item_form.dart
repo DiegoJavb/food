@@ -9,6 +9,7 @@ class EditItemForm extends StatefulWidget {
   final FocusNode titleFocusNode;
   final FocusNode descriptionFocusNode;
   final FocusNode contactFocusNode;
+
   //ESTOS SON LOS QUE ME TRAIGO
   final String currentTitle;
   final String currentDescription;
@@ -24,6 +25,7 @@ class EditItemForm extends StatefulWidget {
     required this.currentContact,
     required this.documentId,
   });
+
   @override
   _EditItemFormState createState() => _EditItemFormState();
 }
@@ -139,6 +141,8 @@ class _EditItemFormState extends State<EditItemForm> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25)),
                       width: 200.0,
                       child: FloatingActionButton.extended(
                         backgroundColor: Colors.white,
@@ -170,7 +174,7 @@ class _EditItemFormState extends State<EditItemForm> {
                           }
                         },
                       ),
-                    ),
+                    )
                   ],
                 ),
         ],

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food/src/controllers/database_controller.dart';
 import 'package:food/src/widgets/edit_item_form.dart';
-import 'package:get/get.dart';
 
 class EditAppointmentPage extends StatefulWidget {
   final String currentTitle;
@@ -121,7 +120,9 @@ class _EditAppointmentPageState extends State<EditAppointmentPage> {
                   docId: widget.documentId,
                 );
                 setState(() => _isDeleting = false);
-                Get.toNamed('record');
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
               },
             )
           ],

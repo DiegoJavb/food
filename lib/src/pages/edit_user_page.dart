@@ -227,11 +227,13 @@ class _EditUserPageState extends State<EditUserPage> {
                                       height = _heightController.text,
                                     );
                                     setState(() => _isProcessing = false);
+
                                     Get.snackbar(
                                       'Ha actualizado su información con éxito',
                                       '',
                                     );
                                     Get.toNamed('home');
+
                                   }
                                 },
                               ),
