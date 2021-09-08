@@ -170,8 +170,6 @@ void _createDialog(
               );
               Future.delayed(Duration(seconds: 2), () {
                 Navigator.of(context).pop();
-                Navigator.of(context).pop();
-                Navigator.of(context).pop();
               });
             },
           ),

@@ -211,8 +211,8 @@ class _EditUserPageState extends State<EditUserPage> {
                                       .validate()) {
                                     sampleImage == null
                                         ? Get.snackbar(
-                                            'Agregue una nueva imagen',
-                                            '',
+                                            'Recordatorio',
+                                            'Acompañe su cambio con \nuna nueva imagen.',
                                             snackPosition: SnackPosition.BOTTOM,
                                           )
                                         : setState(() => _isProcessing = true);
@@ -227,9 +227,13 @@ class _EditUserPageState extends State<EditUserPage> {
                                       weight = _weightController.text,
                                       height = _heightController.text,
                                     );
-
                                     setState(() => _isProcessing = false);
-                                    Get.toNamed("home");
+
+                                    Get.snackbar(
+                                      'Ha actualizado su información con éxito',
+                                      '',
+                                    );
+                                    Get.toNamed('home');
                                   }
                                 },
                               ),
@@ -262,8 +266,8 @@ class _EditUserPageState extends State<EditUserPage> {
     });
   }
 
-  TextField _createName() {
-    return TextField(
+  TextFormField _createName() {
+    return TextFormField(
       controller: _nameController,
       autofocus: false,
       textCapitalization: TextCapitalization.sentences,
@@ -276,7 +280,7 @@ class _EditUserPageState extends State<EditUserPage> {
           ),
         ),
         labelStyle: TextStyle(
-          color: CustomColors.foodBackground,
+          color: CustomColors.foodProgress,
           fontSize: 20.0,
         ),
         labelText: 'Nombre',
@@ -284,6 +288,11 @@ class _EditUserPageState extends State<EditUserPage> {
       ),
       onChanged: (valor) {
         name = valor;
+      },
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Este Campo es obligatorio';
+        }
       },
     );
   }
@@ -293,7 +302,6 @@ class _EditUserPageState extends State<EditUserPage> {
       controller: _heightController,
       keyboardType: TextInputType.number,
       autofocus: false,
-      textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
@@ -303,7 +311,7 @@ class _EditUserPageState extends State<EditUserPage> {
           ),
         ),
         labelStyle: TextStyle(
-          color: CustomColors.foodBackground,
+          color: CustomColors.foodProgress,
           fontSize: 20.0,
         ),
         labelText: 'Altura',
@@ -332,7 +340,7 @@ class _EditUserPageState extends State<EditUserPage> {
           ),
         ),
         labelStyle: TextStyle(
-          color: CustomColors.foodBackground,
+          color: CustomColors.foodProgress,
           fontSize: 20.0,
         ),
         labelText: 'Peso',
@@ -359,7 +367,7 @@ class _EditUserPageState extends State<EditUserPage> {
           ),
         ),
         labelStyle: TextStyle(
-          color: CustomColors.foodBackground,
+          color: CustomColors.foodProgress,
           fontSize: 20.0,
         ),
         labelText: 'Fecha de nacimiento',

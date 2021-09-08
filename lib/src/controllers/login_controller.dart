@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:food/src/controllers/database_controller.dart';
 import 'package:food/src/controllers/database_evaluation.dart';
 import 'package:food/src/controllers/database_user_controller.dart';
@@ -9,27 +8,24 @@ import 'package:food/src/providers/role_pass.dart' as role;
 
 class LoginController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  // GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
+  // final emailController = TextEditingController();
+  // final passwordController = TextEditingController();
   bool _loggedIn = false;
   bool isLoggedIn() => _loggedIn;
   //Inicio de sesion con email y passwort
-  void signInWithEmailAndPassword() async {
+  void signInWithEmailAndPassword(String email, String password) async {
     try {
-      (await _auth.signInWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text,
-      ))
+      (await _auth.signInWithEmailAndPassword(email: email, password: password))
           .user;
       Get.snackbar(
         'Hola',
         'Ha ingresado correctamente',
       );
       _loggedIn = true;
-      DatabaseUser.userUid = emailController.text;
-      DatabaseEvaluations.userUid = emailController.text;
-      Database.userUid = emailController.text;
+      DatabaseUser.userUid = email;
+      DatabaseEvaluations.userUid = email;
+      Database.userUid = email;
       Future.delayed(
         Duration(seconds: 2),
         () {
@@ -41,7 +37,7 @@ class LoginController extends GetxController {
     } catch (e) {
       Get.snackbar(
         'Fallo',
-        'No puede ingresar',
+        'La combinación de usuario y contraseña no coinciden',
         snackPosition: SnackPosition.BOTTOM,
       );
     }

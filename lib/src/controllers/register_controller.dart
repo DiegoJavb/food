@@ -23,37 +23,46 @@ class RegisterController extends GetxController {
   }
 
   void registerUserWithEmailAndPassword() async {
-    final User? user = (await _auth.createUserWithEmailAndPassword(
-      email: emailController.text,
-      password: passwordController.text,
-    ))
-        .user!;
-    if (user != null) {
-      print(role.rolUser);
-      DatabaseUser.userUid = user.email;
-      DatabaseEvaluations.userUid = user.email;
-      Database.userUid = user.email;
-      await DatabaseUser.addUser(
-        email: user.email!,
-        role: role.rolUser,
-        docId: user.uid,
-      );
+    try {
+      final User? user = (await _auth.createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      ))
+          .user!;
+      if (user != null) {
+        print(role.rolUser);
+        DatabaseUser.userUid = user.email;
+        DatabaseEvaluations.userUid = user.email;
+        Database.userUid = user.email;
+        await DatabaseUser.addUser(
+          email: user.email!,
+          role: role.rolUser,
+          docId: user.uid,
+        );
+        Get.snackbar(
+          'Hola',
+          'Ha ingresado correctamente',
+        );
+        success = true;
+        Future.delayed(
+          Duration(seconds: 2),
+          () {
+            Get.toNamed(
+              'home',
+            );
+          },
+        );
+        userEmail = user.email!;
+      } else {
+        success = false;
+      }
+    } catch (e) {
       Get.snackbar(
-        'Hola',
-        'Ha ingresado correctamente',
+        'Fallo',
+        'El correo es usado por otro usuario',
+        duration: Duration(seconds: 3),
+        snackPosition: SnackPosition.BOTTOM,
       );
-      success = true;
-      Future.delayed(
-        Duration(seconds: 2),
-        () {
-          Get.toNamed(
-            'home',
-          );
-        },
-      );
-      userEmail = user.email!;
-    } else {
-      success = false;
     }
   }
 }

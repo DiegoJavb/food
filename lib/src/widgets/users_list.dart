@@ -101,6 +101,10 @@ class _UsersListState extends State<UsersList> {
                   role: role,
                   docId: docId,
                 );
+          Get.snackbar(
+            'Usuario añadido a tus contactos',
+            '',
+          );
         },
         leading: Container(
           child: CircleAvatar(

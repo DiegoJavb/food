@@ -12,9 +12,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // final TextEditingController _uidController = TextEditingController();
-  final _controller = Get.put(LoginController());
+  GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   FirebaseAuth auth = FirebaseAuth.instance;
+  bool _isObscure = true;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
         builder: (_) {
           return SingleChildScrollView(
             child: Form(
-              key: _controller.loginFormKey,
+              key: loginFormKey,
               child: Column(
                 children: <Widget>[
                   Container(
@@ -75,16 +77,19 @@ class _LoginPageState extends State<LoginPage> {
     return Container(
       padding: const EdgeInsets.all(10.0),
       child: TextFormField(
-        controller: _controller.emailController,
+        controller: emailController,
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
           hintText: 'Ingresar con correo',
           icon: Icon(Icons.person),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)),
         ),
-        validator: (String? value) {
-          if (value != null) return 'Ingrese un correo';
-          return null;
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'Este Campo es obligatorio';
+          } else if (!RegExp("^[^@]+@[^@]+\.[a-zA-Z]{2,}\$").hasMatch(value)) {
+            return 'correo no válido';
+          }
         },
         // onChanged: (value) => setState(() => _user = value),
       ),
@@ -95,16 +100,30 @@ class _LoginPageState extends State<LoginPage> {
     return Container(
       padding: const EdgeInsets.all(10.0),
       child: TextFormField(
-        controller: _controller.passwordController,
-        obscureText: true,
+        controller: passwordController,
+        obscureText: _isObscure,
         decoration: InputDecoration(
           hintText: 'Contraseña',
           icon: Icon(Icons.lock),
+          suffixIcon: Padding(
+            padding: EdgeInsets.only(right: 10.0),
+            child: IconButton(
+              icon: Icon(Icons.remove_red_eye),
+              onPressed: () {
+                setState(() {
+                  _isObscure = !_isObscure;
+                });
+              },
+            ),
+          ),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)),
         ),
-        validator: (String? value) {
-          if (value != null) return 'porfavor ingrese una contraseña';
-          return null;
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'La contraseña es necesaria';
+          } else if (value.length < 6) {
+            return 'La contraseña debe tener al menos 6 \ncaracteres';
+          }
         },
         // onChanged: (value) => setState(() => _password = value),
       ),
@@ -125,7 +144,12 @@ class _LoginPageState extends State<LoginPage> {
         ),
         backgroundColor: Colors.white,
         onPressed: () async {
-          _.signInWithEmailAndPassword();
+          if (loginFormKey.currentState!.validate()) {
+            _.signInWithEmailAndPassword(
+              email: emailController.text,
+              password: passwordController.text,
+            );
+          }
         },
       ),
     );

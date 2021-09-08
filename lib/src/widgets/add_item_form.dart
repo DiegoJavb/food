@@ -58,13 +58,14 @@ class _AddItemFormState extends State<AddItemForm> {
                     Container(
                       width: 200.0,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0)),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
                       child: FloatingActionButton.extended(
                         backgroundColor: Colors.white,
-                        foregroundColor: Colors.black,
                         label: Text(
                           'Registrar',
                           style: TextStyle(
+                            color: Colors.black,
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                             letterSpacing: 2,
@@ -172,7 +173,7 @@ class _AddItemFormState extends State<AddItemForm> {
         value: value,
       ),
       label: 'Nutricionista',
-      hint: 'Ingrese el nombre del nutricionista',
+      hint: 'Ingrese el nombre de su contacto',
     );
   }
 }
