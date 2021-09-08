@@ -54,6 +54,12 @@ class DatabaseEvaluations {
   }
 
   static Future<void> addFoodEvaluated({
+    ///
+    required String weight,
+    required String height,
+    required String age,
+
+    ///
     required String days,
     required String breakfast,
     required String lunch,
@@ -71,6 +77,9 @@ class DatabaseEvaluations {
         .doc(carriedEvaluationId);
     print('documentReferencer: $documentReferencer');
     Map<String, dynamic> data = <String, dynamic>{
+      "peso": weight,
+      "estatura": height,
+      "edad": age,
       "dias": days,
       "desayuno": breakfast,
       "almuerzo": lunch,
@@ -109,7 +118,7 @@ class DatabaseEvaluations {
       "almuerzo": lunch,
       "cena": dinner,
       "aperitivos": snack,
-      "enviado": userUid,
+      "enviado": toUser,
       "evaluation": evaluation,
     };
 
