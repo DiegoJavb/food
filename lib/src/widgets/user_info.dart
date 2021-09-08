@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:food/src/controllers/database_controller.dart';
 import 'package:food/src/controllers/logout_controller.dart';
 import 'package:food/src/pages/add_food_to_send_page.dart';
 import 'package:food/src/pages/contactos_page.dart';
@@ -7,68 +6,40 @@ import 'package:food/src/pages/edit_user_page.dart';
 import 'package:food/src/pages/my_contacts_page.dart';
 import 'package:food/src/pages/notifications_page.dart';
 import 'package:get/get.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-//Seteo de variables globales
-import 'package:food/src/providers/currentUser.dart' as userInformation;
-
-//llamada principal al la informacion del usuario
-final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-final CollectionReference _mainCollection = _firestore.collection('users');
 
 class UserInfo extends StatefulWidget {
+  ///Informacion basica del usuario
   late final String email;
   late final String role;
+
+  ///informacion completa del usuario
+  late final String photo;
+  late final String name;
+  late final String age;
+  late final String height;
+  late final String weight;
   UserInfo({
     required this.email,
     required this.role,
+    required this.photo,
+    required this.name,
+    required this.age,
+    required this.height,
+    required this.weight,
   });
   @override
   _UserInfoState createState() => _UserInfoState();
 }
 
 class _UserInfoState extends State<UserInfo> {
-  String docId = '';
-  String photo = '';
-  String name = '';
-  String weight = '';
-  String height = '';
-  String age = '';
-
   @override
   void initState() {
     super.initState();
-    DocumentReference userDocument = _mainCollection
-        .doc(Database.userUid)
-        .collection('information')
-        .doc(Database.userUid);
-
-    userDocument.get().then((snapshot) {
-      setState(() {
-        var userInfo = snapshot.data();
-        print('toda la informacion: $userInfo');
-        setState(() {
-          docId = snapshot.id;
-          photo = (userInfo as dynamic)['photo'];
-          name = (userInfo as dynamic)['name'];
-          print('hay algun nombre: $name');
-          weight = (userInfo as dynamic)['weight'];
-          height = (userInfo as dynamic)['height'];
-          age = (userInfo as dynamic)['age'];
-          userInformation.nameUser = name;
-          userInformation.photoUser = photo;
-          userInformation.weightUser = weight;
-          userInformation.heightUser = height;
-          userInformation.ageUser = age;
-          userInformation.emailUser = widget.email;
-          userInformation.roleUser = widget.role;
-        });
-      });
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    print('nombre del usuario actual: $name o no');
+    print('nombre del usuario actual: ${widget.name} o no');
     return Drawer(
         child: ListView(
       children: [
@@ -84,7 +55,7 @@ class _UserInfoState extends State<UserInfo> {
           child: Container(
             child: Column(
               children: <Widget>[
-                photo == ''
+                widget.photo == ''
                     ? CircleAvatar(
                         radius: 40.0,
                         backgroundColor: Colors.blueGrey[100],
@@ -95,7 +66,7 @@ class _UserInfoState extends State<UserInfo> {
                       )
                     : CircleAvatar(
                         radius: 40.0,
-                        backgroundImage: NetworkImage(photo),
+                        backgroundImage: NetworkImage(widget.photo),
                         backgroundColor: Colors.transparent,
                       ),
                 SizedBox(height: 10.0),
@@ -121,11 +92,11 @@ class _UserInfoState extends State<UserInfo> {
               () => EditUserPage(
                 currentEmail: widget.email,
                 currentRole: widget.role,
-                currentage: this.age,
-                currentheight: this.height,
-                currentName: this.name,
-                currentPhoto: this.photo,
-                currentweight: this.weight,
+                currentage: widget.age,
+                currentheight: widget.height,
+                currentName: widget.name,
+                currentPhoto: widget.photo,
+                currentweight: widget.weight,
               ),
             );
           },
@@ -162,7 +133,7 @@ class _UserInfoState extends State<UserInfo> {
                       leading: Icon(Icons.send),
                       title: Text('Realizar consulta'),
                       onTap: () => Get.to(
-                        () => AddFoodToSendPage(currentName: name),
+                        () => AddFoodToSendPage(currentName: widget.name),
                       ),
                     ),
                     Divider()

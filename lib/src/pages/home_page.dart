@@ -6,6 +6,7 @@ import 'package:food/src/components/customAppBar.dart';
 import 'package:food/src/controllers/database_controller.dart';
 import 'package:food/src/widgets/content_list.dart';
 import 'package:food/src/widgets/user_info.dart' as user_info;
+import 'package:food/src/providers/currentUser.dart' as userInformation;
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final CollectionReference _mainCollection = _firestore.collection('users');
@@ -16,9 +17,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  FirebaseAuth auth = FirebaseAuth.instance;
+  ///Informacion basica del usuario
   String email = '';
   String role = '';
+
+  ///Informacion completa del usuario
+  String docId = '';
+  String photo = '';
+  String name = '';
+  String weight = '';
+  String height = '';
+  String age = '';
 
   @override
   void initState() {
@@ -34,14 +43,48 @@ class _HomePageState extends State<HomePage> {
         });
       });
     });
+    DocumentReference userDocumentComplete = _mainCollection
+        .doc(Database.userUid)
+        .collection('information')
+        .doc(Database.userUid);
+
+    userDocumentComplete.get().then((snapshot) {
+      setState(() {
+        var userInfo = snapshot.data();
+        print('toda la informacion: $userInfo');
+        setState(() {
+          docId = snapshot.id;
+          photo = (userInfo as dynamic)['photo'];
+          name = (userInfo as dynamic)['name'];
+          weight = (userInfo as dynamic)['weight'];
+          height = (userInfo as dynamic)['height'];
+          age = (userInfo as dynamic)['age'];
+          userInformation.nameUser = name;
+          userInformation.photoUser = photo;
+          userInformation.weightUser = weight;
+          userInformation.heightUser = height;
+          userInformation.ageUser = age;
+          userInformation.emailUser = email;
+          userInformation.roleUser = role;
+        });
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         drawer: user_info.UserInfo(
+          ///
           email: this.email,
           role: this.role,
+
+          ///]
+          photo: this.photo,
+          name: this.name,
+          weight: this.weight,
+          height: this.height,
+          age: this.age,
         ),
         appBar: CustomAppBar(title: 'Contenido'),
         body: Contentlist()
