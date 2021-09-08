@@ -209,7 +209,13 @@ class _EditUserPageState extends State<EditUserPage> {
                                 onPressed: () async {
                                   if (_editUserInfoFormKey.currentState!
                                       .validate()) {
-                                    setState(() => _isProcessing = true);
+                                    sampleImage == null
+                                        ? Get.snackbar(
+                                            'Agregue una nueva imagen',
+                                            '',
+                                            snackPosition: SnackPosition.BOTTOM,
+                                          )
+                                        : setState(() => _isProcessing = true);
                                     uploadStatusImage(
                                       sampleImage!,
                                       nameChecker = widget.currentName,
