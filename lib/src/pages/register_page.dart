@@ -15,6 +15,7 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final _controller = Get.put(RegisterController());
   FirebaseAuth auth = FirebaseAuth.instance;
+  bool _isObscure = true;
 
   @override
   void initState() {
@@ -66,9 +67,12 @@ class _RegisterPageState extends State<RegisterPage> {
           icon: Icon(Icons.person),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)),
         ),
-        validator: (String? value) {
-          if (value != null) return 'Ingrese correo';
-          return null;
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'Este Campo es obligatorio';
+          } else if (!RegExp("^[^@]+@[^@]+\.[a-zA-Z]{2,}\$").hasMatch(value)) {
+            return 'correo no válido';
+          }
         },
       ),
     );
@@ -79,15 +83,29 @@ class _RegisterPageState extends State<RegisterPage> {
       padding: const EdgeInsets.all(10.0),
       child: TextFormField(
         controller: _controller.passwordController,
-        obscureText: true,
+        obscureText: _isObscure,
         decoration: InputDecoration(
           hintText: 'Contraseña',
           icon: Icon(Icons.lock),
+          suffixIcon: Padding(
+            padding: EdgeInsets.only(right: 10.0),
+            child: IconButton(
+              icon: Icon(Icons.remove_red_eye),
+              onPressed: () {
+                setState(() {
+                  _isObscure = !_isObscure;
+                });
+              },
+            ),
+          ),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)),
         ),
-        validator: (String? value) {
-          if (value != null) return 'porfavor ingrese una contraseña';
-          return null;
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'Este Campo es obligatorio';
+          } else if (value.length < 6) {
+            return 'La contraseña debe tener al menos 6 \ncaracteres';
+          }
         },
       ),
     );
