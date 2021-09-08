@@ -57,16 +57,18 @@ class _AddItemFormState extends State<AddItemForm> {
                   children: [
                     Container(
                       width: 200.0,
-                      child: ElevatedButton(
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
-                          child: Text(
-                            'Registrar',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 2,
-                            ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: FloatingActionButton.extended(
+                        backgroundColor: Colors.white,
+                        label: Text(
+                          'Registrar',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 2,
                           ),
                         ),
                         onPressed: () async {
@@ -171,7 +173,7 @@ class _AddItemFormState extends State<AddItemForm> {
         value: value,
       ),
       label: 'Nutricionista',
-      hint: 'Ingrese el nombre del nutricionista',
+      hint: 'Ingrese el nombre de su contacto',
     );
   }
 }

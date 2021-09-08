@@ -17,7 +17,7 @@ class AddAppointmentPage extends StatelessWidget {
       },
       child: Scaffold(
         appBar: CustomAppBar(
-          title: 'Citas',
+          title: 'Registro de citas',
         ),
         body: SafeArea(
           child: Padding(

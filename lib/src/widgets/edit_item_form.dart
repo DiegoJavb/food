@@ -140,12 +140,15 @@ class _EditItemFormState extends State<EditItemForm> {
                   children: [
                     Container(
                       width: 200.0,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
+                      child: FloatingActionButton.extended(
+                        backgroundColor: Colors.white,
+                        label: Text(
+                          'Actualizar',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 2,
                           ),
                         ),
                         onPressed: () async {
@@ -166,17 +169,6 @@ class _EditItemFormState extends State<EditItemForm> {
                             Navigator.of(context).pop();
                           }
                         },
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
-                          child: Text(
-                            'Actualizar',
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 2,
-                            ),
-                          ),
-                        ),
                       ),
                     ),
                   ],
