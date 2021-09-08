@@ -146,11 +146,11 @@ class _EditItemFormState extends State<EditItemForm> {
                       width: 200.0,
                       child: FloatingActionButton.extended(
                         backgroundColor: Colors.white,
-                        foregroundColor: Colors.black,
                         label: Text(
                           'Actualizar',
                           style: TextStyle(
-                            fontSize: 18,
+                            color: Colors.black,
+                            fontSize: 24,
                             fontWeight: FontWeight.bold,
                             letterSpacing: 2,
                           ),

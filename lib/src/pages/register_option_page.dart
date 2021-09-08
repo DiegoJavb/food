@@ -15,7 +15,7 @@ class RegisterOpccionPage extends StatefulWidget {
 }
 
 class _RegisterOpccionPageState extends State<RegisterOpccionPage> {
-  final _controller = Get.put(LoginController());
+  GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
@@ -30,7 +30,7 @@ class _RegisterOpccionPageState extends State<RegisterOpccionPage> {
         builder: (_) {
           return SingleChildScrollView(
             child: Form(
-              key: _controller.loginFormKey,
+              key: loginFormKey,
               child: Column(
                 children: <Widget>[
                   SizedBox(height: 20.0),
@@ -45,14 +45,28 @@ class _RegisterOpccionPageState extends State<RegisterOpccionPage> {
                     ),
                   ),
                   SizedBox(height: 20.0),
-                  _googleRegister(_),
-                  Center(
-                    child: Text(
-                      'Ó',
-                      style: TextStyle(fontSize: 20.0),
-                    ),
-                  ),
-                  _crearCuenta(),
+                  role.rolUser == 'Paciente'
+                      ? Container(
+                          child: Column(
+                            children: [
+                              _googleRegister(_),
+                              Center(
+                                child: Text(
+                                  'Ó',
+                                  style: TextStyle(fontSize: 20.0),
+                                ),
+                              ),
+                              _crearCuenta(),
+                            ],
+                          ),
+                        )
+                      : Container(
+                          child: Column(
+                            children: [
+                              _crearCuenta(),
+                            ],
+                          ),
+                        )
                 ],
               ),
             ),

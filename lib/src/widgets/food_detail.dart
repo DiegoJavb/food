@@ -198,6 +198,9 @@ class _FoodDetailState extends State<FoodDetail> {
                                 if (_editItemFormKey.currentState!.validate()) {
                                   setState(() => _isProcessing = true);
                                   DatabaseEvaluations.addFoodEvaluated(
+                                    height: widget.estatura,
+                                    weight: widget.peso,
+                                    age: widget.edad,
                                     days: widget.dias,
                                     breakfast: widget.desayuno,
                                     lunch: widget.almuerzo,

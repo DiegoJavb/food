@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:food/src/components/customAppBar.dart';
 import 'package:food/src/controllers/database_user_controller.dart';
 import 'package:food/src/res/custom_colors.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:intl/intl.dart';
@@ -207,7 +208,13 @@ class _EditUserPageState extends State<EditUserPage> {
                                 onPressed: () async {
                                   if (_editUserInfoFormKey.currentState!
                                       .validate()) {
-                                    setState(() => _isProcessing = true);
+                                    sampleImage == null
+                                        ? Get.snackbar(
+                                            'Recordatorio',
+                                            'Acompañe su cambio con \nuna nueva imagen.',
+                                            snackPosition: SnackPosition.BOTTOM,
+                                          )
+                                        : setState(() => _isProcessing = true);
                                     uploadStatusImage(
                                       sampleImage!,
                                       nameChecker = widget.currentName,
@@ -219,11 +226,14 @@ class _EditUserPageState extends State<EditUserPage> {
                                       weight = _weightController.text,
                                       height = _heightController.text,
                                     );
-
                                     setState(() => _isProcessing = false);
-                                    Navigator.of(context).pop();
-                                    Navigator.of(context).pop();
-                                    Navigator.of(context).pop();
+
+                                    Get.snackbar(
+                                      'Ha actualizado su información con éxito',
+                                      '',
+                                    );
+                                    Get.toNamed('home');
+
                                   }
                                 },
                               ),
@@ -254,8 +264,8 @@ class _EditUserPageState extends State<EditUserPage> {
     });
   }
 
-  TextField _createName() {
-    return TextField(
+  TextFormField _createName() {
+    return TextFormField(
       controller: _nameController,
       autofocus: false,
       textCapitalization: TextCapitalization.sentences,
@@ -268,7 +278,7 @@ class _EditUserPageState extends State<EditUserPage> {
           ),
         ),
         labelStyle: TextStyle(
-          color: CustomColors.foodBackground,
+          color: CustomColors.foodProgress,
           fontSize: 20.0,
         ),
         labelText: 'Nombre',
@@ -276,6 +286,11 @@ class _EditUserPageState extends State<EditUserPage> {
       ),
       onChanged: (valor) {
         name = valor;
+      },
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Este Campo es obligatorio';
+        }
       },
     );
   }
@@ -285,7 +300,6 @@ class _EditUserPageState extends State<EditUserPage> {
       controller: _heightController,
       keyboardType: TextInputType.number,
       autofocus: false,
-      textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
@@ -295,7 +309,7 @@ class _EditUserPageState extends State<EditUserPage> {
           ),
         ),
         labelStyle: TextStyle(
-          color: CustomColors.foodBackground,
+          color: CustomColors.foodProgress,
           fontSize: 20.0,
         ),
         labelText: 'Altura',
@@ -324,7 +338,7 @@ class _EditUserPageState extends State<EditUserPage> {
           ),
         ),
         labelStyle: TextStyle(
-          color: CustomColors.foodBackground,
+          color: CustomColors.foodProgress,
           fontSize: 20.0,
         ),
         labelText: 'Peso',
@@ -351,7 +365,7 @@ class _EditUserPageState extends State<EditUserPage> {
           ),
         ),
         labelStyle: TextStyle(
-          color: CustomColors.foodBackground,
+          color: CustomColors.foodProgress,
           fontSize: 20.0,
         ),
         labelText: 'Fecha de nacimiento',
