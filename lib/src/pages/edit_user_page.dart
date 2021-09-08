@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:food/src/components/customAppBar.dart';
 import 'package:food/src/controllers/database_user_controller.dart';
 import 'package:food/src/res/custom_colors.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:intl/intl.dart';
@@ -71,6 +72,7 @@ class _EditUserPageState extends State<EditUserPage> {
 
   @override
   Widget build(BuildContext context) {
+    print("rol del current user: ${widget.currentRole}");
     return Scaffold(
       appBar: CustomAppBar(
         title: '',
@@ -221,9 +223,7 @@ class _EditUserPageState extends State<EditUserPage> {
                                     );
 
                                     setState(() => _isProcessing = false);
-                                    Navigator.of(context).pop();
-                                    Navigator.of(context).pop();
-                                    Navigator.of(context).pop();
+                                    Get.toNamed("home");
                                   }
                                 },
                               ),
@@ -242,15 +242,17 @@ class _EditUserPageState extends State<EditUserPage> {
 
   Future getImage() async {
     var tempImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+    print("como se ve el sample image ${tempImage!.path}");
     setState(() {
-      sampleImage = File(tempImage!.path);
+      sampleImage = File(tempImage.path);
     });
   }
 
   Future getPhoto() async {
     var tempImage = await ImagePicker().pickImage(source: ImageSource.camera);
+    print("como se ve el sample image ${tempImage!.path}");
     setState(() {
-      sampleImage = File(tempImage!.path);
+      sampleImage = File(tempImage.path);
     });
   }
 
