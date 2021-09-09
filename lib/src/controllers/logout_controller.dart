@@ -28,6 +28,7 @@ class LogoutController extends GetxController {
       uid + ' ha salido con exito ',
       snackPosition: SnackPosition.TOP,
     );
+    borraUsuario();
     Future.delayed(
       Duration(seconds: 3),
       () {
@@ -37,4 +38,9 @@ class LogoutController extends GetxController {
       },
     );
   }
+}
+
+Future<void> borraUsuario() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.remove('email');
 }
