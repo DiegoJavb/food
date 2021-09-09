@@ -4,6 +4,7 @@ import 'package:food/src/controllers/database_evaluation.dart';
 import 'package:food/src/controllers/database_user_controller.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:food/src/providers/role_pass.dart' as role;
 
 class LoginController extends GetxController {
@@ -11,8 +12,7 @@ class LoginController extends GetxController {
   // GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   // final emailController = TextEditingController();
   // final passwordController = TextEditingController();
-  bool _loggedIn = false;
-  bool isLoggedIn() => _loggedIn;
+
   //Inicio de sesion con email y passwort
   void signInWithEmailAndPassword(String email, String password) async {
     try {
@@ -22,7 +22,7 @@ class LoginController extends GetxController {
         'Hola',
         'Ha ingresado correctamente',
       );
-      _loggedIn = true;
+      guardarUsuario(email);
       DatabaseUser.userUid = email;
       DatabaseEvaluations.userUid = email;
       Database.userUid = email;
@@ -58,6 +58,7 @@ class LoginController extends GetxController {
       userCredential = await _auth.signInWithCredential(googleAuthCredential);
       final user = userCredential.user;
       print('UID del usuario que quiere ingresar: ${user!.uid}');
+      guardarUsuario(user.email!);
       DatabaseUser.userUid = user.email;
       Database.userUid = user.email;
       DatabaseEvaluations.userUid = user.email;
@@ -70,7 +71,6 @@ class LoginController extends GetxController {
         'Hola',
         '${user.displayName} iniciaste sesión con Google',
       );
-      _loggedIn = true;
 
       print('Ingreso bien');
       Future.delayed(
@@ -90,36 +90,9 @@ class LoginController extends GetxController {
       );
     }
   }
+}
 
-  //salir
-  void _signOut() async {
-    // ignore: await_only_futures
-    await _auth.signOut;
-  }
-
-  void signOut() async {
-    final User? user = _auth.currentUser;
-    if (user == null) {
-      Get.snackbar(
-        'Salir',
-        'Nadie ha salido',
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    }
-    _signOut();
-    final String uid = user!.email!;
-    Get.snackbar(
-      'Salir',
-      uid + ' ha salido con exito ',
-      snackPosition: SnackPosition.TOP,
-    );
-    Future.delayed(
-      Duration(seconds: 3),
-      () {
-        Get.toNamed(
-          '/',
-        );
-      },
-    );
-  }
+Future<void> guardarUsuario(String email) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString('email', email);
 }

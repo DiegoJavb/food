@@ -3,8 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:food/src/controllers/database_evaluation.dart';
 import 'package:food/src/controllers/database_user_controller.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:food/src/providers/role_pass.dart' as role;
-
 import 'database_controller.dart';
 
 class RegisterController extends GetxController {
@@ -39,6 +39,7 @@ class RegisterController extends GetxController {
           role: role.rolUser,
           docId: user.uid,
         );
+        guardarUsuario(user.email!);
         Get.snackbar(
           'Hola',
           'Ha ingresado correctamente',
@@ -65,4 +66,9 @@ class RegisterController extends GetxController {
       );
     }
   }
+}
+
+Future<void> guardarUsuario(String email) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString('email', email);
 }
