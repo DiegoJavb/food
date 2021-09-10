@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food/src/pages/tutorial_page.dart';
 import 'package:get/get.dart';
 
 class InformationPage extends StatefulWidget {
@@ -10,14 +11,15 @@ class _InformationPageState extends State<InformationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('images/info.jpg'),
-            fit: BoxFit.cover,
+      body: Padding(
+        padding: const EdgeInsets.all(0.0),
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('images/info.jpg'),
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        child: SingleChildScrollView(
           child: Column(
             children: [
               SizedBox(height: 100.0),
@@ -26,10 +28,22 @@ class _InformationPageState extends State<InformationPage> {
               ),
               SizedBox(height: 20.0),
               _card(),
+              SizedBox(height: 20.0),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-                height: 250.0,
-              ),
+                width: 200.0,
+                child: FloatingActionButton.extended(
+                  heroTag: 'login button',
+                  label: Text(
+                    'Tutorial',
+                    style: TextStyle(fontSize: 15.0),
+                  ),
+                  foregroundColor: Colors.black,
+                  backgroundColor: Colors.white,
+                  onPressed: () {
+                    Get.to(() => TutorialPage());
+                  },
+                ),
+              )
             ],
           ),
         ),
