@@ -55,11 +55,15 @@ class _AddFoodsReviewState extends State<AddFoodsReview> {
                   children: [
                     Container(
                       width: 200.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
                       child: FloatingActionButton.extended(
-                        elevation: 0,
+                        backgroundColor: Colors.white,
                         label: Text(
                           'Siguiente',
                           style: TextStyle(
+                            color: Colors.black,
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
