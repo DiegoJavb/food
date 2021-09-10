@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LogoutController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -27,6 +28,7 @@ class LogoutController extends GetxController {
       uid + ' ha salido con exito ',
       snackPosition: SnackPosition.TOP,
     );
+    borraUsuario();
     Future.delayed(
       Duration(seconds: 3),
       () {
@@ -36,4 +38,9 @@ class LogoutController extends GetxController {
       },
     );
   }
+}
+
+Future<void> borraUsuario() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.remove('email');
 }

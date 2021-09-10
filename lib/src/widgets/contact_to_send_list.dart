@@ -48,10 +48,11 @@ class _ContactToSendListState extends State<ContactToSendList> {
               String userId = snapshot.data!.docs[index].id;
               String email = userInfo['email'];
               String photo = userInfo['photoUrl'];
+              String role = userInfo['role'];
               userInfo['name'] == null ? name = '' : name = userInfo['name'];
               return Ink(
                 child: InkWell(
-                  child: _createUser(userId, photo, email, name),
+                  child: _createUser(userId, photo, email, name, role),
                 ),
               );
             },
@@ -66,7 +67,13 @@ class _ContactToSendListState extends State<ContactToSendList> {
     );
   }
 
-  Widget _createUser(String userId, String photo, String email, String name) {
+  Widget _createUser(
+    String userId,
+    String photo,
+    String email,
+    String name,
+    String role,
+  ) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50.0),
@@ -82,16 +89,25 @@ class _ContactToSendListState extends State<ContactToSendList> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
         ),
-        onTap: () => _createDialog(
-          context,
-          email,
-          widget.daysToReview,
-          widget.breakfast,
-          widget.lunch,
-          widget.dinner,
-          widget.snack,
-          widget.currentName,
-        ),
+        onTap: role == 'Paciente'
+            ? () {
+                Get.snackbar(
+                  'Espere',
+                  'El usuario al que quiere enviar no es un Nutricionista',
+                );
+              }
+            : () {
+                _createDialog(
+                  context,
+                  email,
+                  widget.daysToReview,
+                  widget.breakfast,
+                  widget.lunch,
+                  widget.dinner,
+                  widget.snack,
+                  widget.currentName,
+                );
+              },
         leading: Container(
           child: CircleAvatar(
             radius: 25.0,
@@ -164,13 +180,15 @@ void _createDialog(
                 emailFromUser: Database.userUid!,
                 toUser: email,
               );
+              Future.delayed(Duration(seconds: 2), () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              });
               Get.snackbar(
                 'Envio',
                 'Su registro se ha enviado con éxito',
               );
-              Future.delayed(Duration(seconds: 2), () {
-                Navigator.of(context).pop();
-              });
             },
           ),
         ],

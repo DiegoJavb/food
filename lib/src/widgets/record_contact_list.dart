@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food/src/controllers/database_user_controller.dart';
+import 'package:food/src/pages/edit_meet_page.dart';
 import 'package:food/src/res/custom_colors.dart';
+import 'package:get/get.dart';
 
 class RecordList extends StatelessWidget {
   final String contactEmail;
@@ -24,15 +26,16 @@ class RecordList extends StatelessWidget {
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (BuildContext context, int index) {
                 var noteInfo = snapshot.data!.docs[index];
-                // String docID = snapshot.data!.docs[index].id;
+                String docID = snapshot.data!.docs[index].id;
                 String date = noteInfo['date'];
-                String description = noteInfo['name'];
+                String description = noteInfo['detail'];
+                String title = noteInfo['title'];
                 print(date);
                 return Ink(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
-                  child: _createItem(description, date),
+                  child: _createItem(title, description, date, docID),
                 );
               },
             );
@@ -41,7 +44,12 @@ class RecordList extends StatelessWidget {
         });
   }
 
-  Widget _createItem(String description, String date) {
+  Widget _createItem(
+    String title,
+    String description,
+    String date,
+    docID,
+  ) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50.0),
@@ -54,11 +62,19 @@ class RecordList extends StatelessWidget {
         ],
       ),
       child: ListTile(
+        onTap: () => Get.to(
+          () => EditMeetPage(
+            currentDescription: description,
+            currentTitle: title,
+            documentId: docID,
+            contactId: contactEmail,
+          ),
+        ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
         ),
         title: Text(
-          description,
+          title,
         ),
         subtitle: Text(
           date,

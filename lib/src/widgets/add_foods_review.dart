@@ -179,7 +179,7 @@ class _AddFoodsReviewState extends State<AddFoodsReview> {
 
   Widget _createBreakfast() {
     return CustomFormField(
-      maxLines: 10,
+      maxLines: 5,
       isLabelEnabled: false,
       controller: _breakfastController,
       focusNode: widget.breakfastFocusNode,
@@ -195,7 +195,7 @@ class _AddFoodsReviewState extends State<AddFoodsReview> {
 
   Widget _createLunch() {
     return CustomFormField(
-      maxLines: 10,
+      maxLines: 5,
       isLabelEnabled: false,
       controller: _lunchController,
       focusNode: widget.lunchFocusNode,
@@ -211,7 +211,7 @@ class _AddFoodsReviewState extends State<AddFoodsReview> {
 
   Widget _createDinner() {
     return CustomFormField(
-      maxLines: 10,
+      maxLines: 5,
       isLabelEnabled: false,
       controller: _dinnerController,
       focusNode: widget.dinnerFocusNode,
@@ -227,7 +227,7 @@ class _AddFoodsReviewState extends State<AddFoodsReview> {
 
   Widget _createSnacks() {
     return CustomFormField(
-      maxLines: 10,
+      maxLines: 5,
       isLabelEnabled: false,
       controller: _snackController,
       focusNode: widget.snackFocusNode,

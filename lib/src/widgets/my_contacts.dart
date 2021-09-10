@@ -38,12 +38,12 @@ class _MyContactsState extends State<MyContacts> {
                 name = userInfo['name'];
                 photoUrl = userInfo['photoUrl'];
                 role = userInfo['role'];
-                print(name);
+                print('foto del contacto: $photoUrl');
                 return Ink(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
-                  child: _createUser(userId, name, email, role),
+                  child: _createUser(userId, name, email, role, photoUrl),
                 );
               },
             );
@@ -65,6 +65,7 @@ class _MyContactsState extends State<MyContacts> {
     String name,
     String email,
     String role,
+    String photoUrl,
   ) {
     return Container(
       decoration: BoxDecoration(
@@ -110,7 +111,7 @@ class _MyContactsState extends State<MyContacts> {
               ),
               onPressed: () {
                 Get.to(
-                  () => MyContactPage(
+                  () => MyContactDetailPage(
                     contactName: name[0].toUpperCase() + name.substring(1),
                     contactPhoto: photoUrl,
                     contactEmail: email,

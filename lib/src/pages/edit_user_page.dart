@@ -72,6 +72,7 @@ class _EditUserPageState extends State<EditUserPage> {
 
   @override
   Widget build(BuildContext context) {
+    print("rol del current user: ${widget.currentRole}");
     return Scaffold(
       appBar: CustomAppBar(
         title: '',
@@ -233,7 +234,6 @@ class _EditUserPageState extends State<EditUserPage> {
                                       '',
                                     );
                                     Get.toNamed('home');
-
                                   }
                                 },
                               ),
@@ -252,15 +252,17 @@ class _EditUserPageState extends State<EditUserPage> {
 
   Future getImage() async {
     var tempImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+    print("como se ve el sample image ${tempImage!.path}");
     setState(() {
-      sampleImage = File(tempImage!.path);
+      sampleImage = File(tempImage.path);
     });
   }
 
   Future getPhoto() async {
     var tempImage = await ImagePicker().pickImage(source: ImageSource.camera);
+    print("como se ve el sample image ${tempImage!.path}");
     setState(() {
-      sampleImage = File(tempImage!.path);
+      sampleImage = File(tempImage.path);
     });
   }
 

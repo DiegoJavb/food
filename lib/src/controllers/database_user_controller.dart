@@ -114,6 +114,7 @@ class DatabaseUser {
 
   static Future<void> addContactAppointment({
     required String email,
+    required String title,
     required String detail,
   }) async {
     DocumentReference documentReference = _mainCollection
@@ -126,7 +127,11 @@ class DatabaseUser {
     var dbDate = DateTime.now();
     var formatDate = DateFormat('MMM d, yyyy');
     String date = formatDate.format(dbDate);
-    Map<String, dynamic> data = <String, dynamic>{'name': detail, 'date': date};
+    Map<String, dynamic> data = <String, dynamic>{
+      'detail': detail,
+      'title': title,
+      'date': date,
+    };
     await documentReference
         .set(data)
         .whenComplete(() => print("User added to the database"))
@@ -142,6 +147,48 @@ class DatabaseUser {
         .doc(contactId)
         .collection('appointments');
     return userCollection.snapshots();
+  }
+
+  static Future<void> deleteContactAppointment({
+    required String docId,
+    required String contactId,
+  }) async {
+    DocumentReference documentReferencer = _mainCollection
+        .doc(userUid)
+        .collection('contacts')
+        .doc(contactId)
+        .collection('appointments')
+        .doc(docId);
+    print('documentReferencer: $documentReferencer');
+    await documentReferencer
+        .delete()
+        .whenComplete(() => print('Note item deleted from the database'))
+        .catchError((e) => print(e));
+  }
+
+  static Future<void> updateContactAppointment({
+    required String title,
+    required String detail,
+    required String docId,
+    required String contactId,
+  }) async {
+    print(userUid);
+    DocumentReference documentReferencer = _mainCollection
+        .doc(userUid)
+        .collection('contacts')
+        .doc(contactId)
+        .collection('appointments')
+        .doc(docId);
+    print('documentReferencer: $documentReferencer');
+    Map<String, dynamic> data = <String, dynamic>{
+      "title": title,
+      "detail": detail,
+    };
+
+    await documentReferencer
+        .update(data)
+        .whenComplete(() => print("Note item updated in the database"))
+        .catchError((e) => print(e));
   }
 
   static Future<void> deleteContact({
