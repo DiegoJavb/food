@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:food/src/controllers/database_evaluation.dart';
 import 'package:food/src/controllers/database_infoUser.dart';
@@ -10,24 +9,15 @@ import 'database_controller.dart';
 
 class RegisterController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
 
   late bool success;
   late String userEmail;
 
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
-
-  void registerUserWithEmailAndPassword() async {
+  void registerUserWithEmailAndPassword(String email, String password) async {
     try {
       final User? user = (await _auth.createUserWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text,
+        email: email,
+        password: password,
       ))
           .user!;
       if (user != null) {
@@ -62,7 +52,7 @@ class RegisterController extends GetxController {
     } catch (e) {
       Get.snackbar(
         'Fallo',
-        'El correo es usado por otro usuario',
+        '$e',
         duration: Duration(seconds: 3),
         snackPosition: SnackPosition.BOTTOM,
       );

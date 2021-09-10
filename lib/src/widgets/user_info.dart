@@ -149,8 +149,14 @@ class _UserInfoState extends State<UserInfo> {
   }
 }
 
-class Logout extends StatelessWidget {
-  final _controller = Get.put(LogoutController());
+class Logout extends StatefulWidget {
+  @override
+  _LogoutState createState() => _LogoutState();
+}
+
+class _LogoutState extends State<Logout> {
+  GlobalKey<FormState> logoutFormKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -158,7 +164,7 @@ class Logout extends StatelessWidget {
       init: LogoutController(),
       builder: (_) {
         return FloatingActionButton.extended(
-          key: _controller.logoutFormKey,
+          key: logoutFormKey,
           heroTag: 'boton salir',
           label: const Text('Salir'),
           foregroundColor: Colors.white,

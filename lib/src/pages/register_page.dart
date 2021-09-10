@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:food/src/components/customAppBar.dart';
 import 'package:food/src/controllers/register_controller.dart';
 import 'package:get/get.dart';
@@ -13,8 +12,9 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final _controller = Get.put(RegisterController());
-  FirebaseAuth auth = FirebaseAuth.instance;
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
   bool _isObscure = true;
 
   @override
@@ -32,7 +32,7 @@ class _RegisterPageState extends State<RegisterPage> {
         builder: (_) {
           return SingleChildScrollView(
             child: Form(
-              key: _controller.formKey,
+              key: _formKey,
               child: Column(
                 children: <Widget>[
                   SizedBox(height: 20.0),
@@ -60,7 +60,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Container(
       padding: const EdgeInsets.all(10.0),
       child: TextFormField(
-        controller: _controller.emailController,
+        controller: _emailController,
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
           hintText: 'Ingrese correo',
@@ -70,7 +70,9 @@ class _RegisterPageState extends State<RegisterPage> {
         validator: (value) {
           if (value!.isEmpty) {
             return 'Este Campo es obligatorio';
-          } else if (!RegExp("^[^@]+@[^@]+\.[a-zA-Z]{2,}\$").hasMatch(value)) {
+          } else if (RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+          ).hasMatch(value)) {
             return 'correo no válido';
           }
         },
@@ -82,7 +84,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Container(
       padding: const EdgeInsets.all(10.0),
       child: TextFormField(
-        controller: _controller.passwordController,
+        controller: _passwordController,
         obscureText: _isObscure,
         decoration: InputDecoration(
           hintText: 'Contraseña',
@@ -123,7 +125,10 @@ class _RegisterPageState extends State<RegisterPage> {
             )),
         backgroundColor: Colors.white,
         onPressed: () async {
-          _.registerUserWithEmailAndPassword();
+          _.registerUserWithEmailAndPassword(
+            _emailController.text,
+            _passwordController.text,
+          );
         },
       ),
     );

@@ -32,7 +32,7 @@ class _InformationPageState extends State<InformationPage> {
               Container(
                 width: 200.0,
                 child: FloatingActionButton.extended(
-                  heroTag: 'login button',
+                  heroTag: 'tutorialButton',
                   label: Text(
                     'Tutorial',
                     style: TextStyle(fontSize: 15.0),
@@ -60,7 +60,7 @@ class _InformationPageState extends State<InformationPage> {
           width: 30.0,
         ),
         FloatingActionButton.extended(
-          heroTag: 'login button',
+          heroTag: 'loginButton',
           label: const Text(
             'Iniciar sesión',
             style: TextStyle(fontSize: 15.0),
@@ -75,7 +75,7 @@ class _InformationPageState extends State<InformationPage> {
           child: SizedBox(),
         ),
         FloatingActionButton.extended(
-          heroTag: 'register button',
+          heroTag: 'registerButton',
           label: const Text(
             'Registrarse',
             style: TextStyle(fontSize: 15.0),
