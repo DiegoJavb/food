@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:food/src/controllers/database_controller.dart';
 import 'package:food/src/controllers/database_evaluation.dart';
+import 'package:food/src/controllers/database_infoUser.dart';
 import 'package:food/src/controllers/database_user_controller.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -9,9 +10,6 @@ import 'package:food/src/providers/role_pass.dart' as role;
 
 class LoginController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  // GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
-  // final emailController = TextEditingController();
-  // final passwordController = TextEditingController();
 
   //Inicio de sesion con email y passwort
   void signInWithEmailAndPassword(String email, String password) async {
@@ -24,6 +22,7 @@ class LoginController extends GetxController {
       );
       guardarUsuario(email);
       DatabaseUser.userUid = email;
+      DatabaseUserInfo.userUid = email;
       DatabaseEvaluations.userUid = email;
       Database.userUid = email;
       Future.delayed(
@@ -62,6 +61,7 @@ class LoginController extends GetxController {
       DatabaseUser.userUid = user.email;
       Database.userUid = user.email;
       DatabaseEvaluations.userUid = user.email;
+      DatabaseUserInfo.userUid = user.email;
       await DatabaseUser.addUser(
         email: user.email!,
         role: role.rolUser,

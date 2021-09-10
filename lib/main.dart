@@ -51,7 +51,7 @@ class _MyAppState extends State<MyApp> {
     //si utulizamos get, SERIA UNA GETMATERIALAPP
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Material App',
+      title: 'eat healthy',
       // initialRoute: isLoggedIn ? 'home' : '/',
       navigatorKey: Get.key,
       getPages: getAplicationRoutes(),

@@ -6,12 +6,12 @@ import 'package:food/src/res/custom_colors.dart';
 import 'package:food/src/widgets/record_contact_list.dart';
 import 'package:get/get.dart';
 
-class MyContactPage extends StatelessWidget {
+class MyContactDetailPage extends StatelessWidget {
   final String contactName;
   final String contactEmail;
   final String contactPhoto;
 
-  const MyContactPage({
+  const MyContactDetailPage({
     required this.contactName,
     required this.contactPhoto,
     required this.contactEmail,
@@ -20,6 +20,7 @@ class MyContactPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('photo del contacto: ${this.contactPhoto}');
     return Scaffold(
       appBar: CustomAppBar(
         title: this.contactName,

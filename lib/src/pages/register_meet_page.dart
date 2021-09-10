@@ -17,10 +17,18 @@ class RegisterMeetPage extends StatefulWidget {
 }
 
 class _RegisterMeetPageState extends State<RegisterMeetPage> {
-  FocusNode descriptionFocusNode = FocusNode();
   final _addItemFormKey = GlobalKey<FormState>();
+  FocusNode titleFocusNode = FocusNode();
+  FocusNode descriptionFocusNode = FocusNode();
+
+  ///
   bool _isProcessing = false;
+
+  ///
+  final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
+
+  ///
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,16 +58,15 @@ class _RegisterMeetPageState extends State<RegisterMeetPage> {
                       Container(
                         width: 200.0,
                         height: 50.0,
-                        child: ElevatedButton(
-                          child: Padding(
-                            padding: EdgeInsets.all(10.0),
-                            child: Text(
-                              'Agregar',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 2,
-                              ),
+                        child: FloatingActionButton.extended(
+                          backgroundColor: Colors.white,
+                          label: Text(
+                            'Agregar',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 2,
                             ),
                           ),
                           onPressed: () async {
@@ -69,6 +76,7 @@ class _RegisterMeetPageState extends State<RegisterMeetPage> {
                               await DatabaseUser.addContactAppointment(
                                 email: widget.contactEmail,
                                 detail: _descriptionController.text,
+                                title: _titleController.text,
                               );
                               setState(() => _isProcessing = false);
                               Navigator.of(context).pop();
@@ -90,7 +98,16 @@ class _RegisterMeetPageState extends State<RegisterMeetPage> {
       children: [
         SizedBox(height: 20.0),
         Text(
-          'Detalle',
+          'Asunto',
+          style: TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        _createAsunto(),
+        SizedBox(height: 20.0),
+        Text(
+          'Descripción',
           style: TextStyle(
             fontSize: 20.0,
             fontWeight: FontWeight.bold,
@@ -98,6 +115,22 @@ class _RegisterMeetPageState extends State<RegisterMeetPage> {
         ),
         _createDescription(),
       ],
+    );
+  }
+
+  Widget _createAsunto() {
+    return CustomFormField(
+      maxLines: 5,
+      isLabelEnabled: false,
+      controller: _titleController,
+      focusNode: descriptionFocusNode,
+      keyboardType: TextInputType.text,
+      inputAction: TextInputAction.done,
+      validator: (value) => Validator.validateField(
+        value: value,
+      ),
+      label: 'Asunto',
+      hint: 'Detalle',
     );
   }
 
@@ -113,7 +146,7 @@ class _RegisterMeetPageState extends State<RegisterMeetPage> {
         value: value,
       ),
       label: 'Description',
-      hint: 'Detalle del asunto',
+      hint: 'Detalle',
     );
   }
 }
