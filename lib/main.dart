@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food/src/controllers/database_controller.dart';
 import 'package:food/src/controllers/database_evaluation.dart';
+import 'package:food/src/controllers/database_infoUser.dart';
 import 'package:food/src/controllers/database_user_controller.dart';
 import 'package:food/src/res/custom_colors.dart';
 import 'package:get/get.dart';
@@ -34,6 +35,7 @@ Future<void> obtenerDatos() async {
     DatabaseUser.userUid = email;
     DatabaseEvaluations.userUid = email;
     Database.userUid = email;
+    DatabaseUserInfo.userUid = email;
   }
 }
 
@@ -51,8 +53,7 @@ class _MyAppState extends State<MyApp> {
     //si utulizamos get, SERIA UNA GETMATERIALAPP
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'eat healthy',
-      // initialRoute: isLoggedIn ? 'home' : '/',
+      title: 'Eat Healthy',
       navigatorKey: Get.key,
       getPages: getAplicationRoutes(),
       localizationsDelegates: [
