@@ -14,6 +14,7 @@ class UserInfo extends StatefulWidget {
 
   ///informacion completa del usuario
   late final String photo;
+  late final String photoPath;
   late final String name;
   late final String age;
   late final String height;
@@ -22,6 +23,7 @@ class UserInfo extends StatefulWidget {
     required this.email,
     required this.role,
     required this.photo,
+    required this.photoPath,
     required this.name,
     required this.age,
     required this.height,
@@ -39,7 +41,6 @@ class _UserInfoState extends State<UserInfo> {
 
   @override
   Widget build(BuildContext context) {
-    print('nombre del usuario actual: ${widget.name} o no');
     return Drawer(
         child: ListView(
       children: [
@@ -96,6 +97,7 @@ class _UserInfoState extends State<UserInfo> {
                 currentheight: widget.height,
                 currentName: widget.name,
                 currentPhoto: widget.photo,
+                currentPhotoPath: widget.photoPath,
                 currentweight: widget.weight,
               ),
             );

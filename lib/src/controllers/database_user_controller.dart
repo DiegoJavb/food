@@ -32,6 +32,7 @@ class DatabaseUser {
   //utilizamos el (SET) en el await de la función
   static Future<void> addUserInfo({
     required String photo,
+    required String imagePath,
     required String name,
     required String email,
     required String role,
@@ -45,6 +46,7 @@ class DatabaseUser {
 
     Map<String, dynamic> data = <String, dynamic>{
       "photo": photo,
+      "photoPath": imagePath,
       "name": name,
       "weight": weight,
       "height": height,
@@ -62,6 +64,7 @@ class DatabaseUser {
   //utilizamos el (UPDATE) en el await de la función
   static Future<void> updateUserInfo({
     required String photo,
+    required String imagePath,
     required String name,
     required String email,
     required String role,
@@ -75,6 +78,7 @@ class DatabaseUser {
 
     Map<String, dynamic> data = <String, dynamic>{
       "photo": photo,
+      "photoPath": imagePath,
       "name": name,
       "weight": weight,
       "height": height,
@@ -217,6 +221,7 @@ class DatabaseUser {
   //Añadir usuario a la base de datos de usuarios totales
   static Future<void> addUserOnListUsers({
     required String photo,
+    required String imagePath,
     required String name,
     required String email,
     required String role,
@@ -226,6 +231,7 @@ class DatabaseUser {
 
     Map<String, dynamic> data = <String, dynamic>{
       'photo': photo,
+      'photoPath': imagePath,
       'name': name,
       'email': email,
       'userUid': docId,
@@ -239,6 +245,7 @@ class DatabaseUser {
 
   static Future<void> updateUserOnListUsers({
     required String photo,
+    required String imagePath,
     required String name,
     required String email,
     required String role,
@@ -248,6 +255,7 @@ class DatabaseUser {
 
     Map<String, dynamic> data = <String, dynamic>{
       'photo': photo,
+      'photoPath': imagePath,
       'name': name,
       'email': email,
       'userUid': docId,

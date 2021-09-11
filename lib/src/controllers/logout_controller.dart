@@ -24,7 +24,7 @@ class LogoutController extends GetxController {
     final String uid = user!.email!;
     Get.snackbar(
       'Salir',
-      uid + ' ha salido con exito ',
+      uid + ' ha salido con éxito ',
       snackPosition: SnackPosition.TOP,
     );
     borraUsuario();

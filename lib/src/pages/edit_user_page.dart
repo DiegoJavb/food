@@ -12,6 +12,7 @@ class EditUserPage extends StatefulWidget {
   final String currentName;
   final String currentRole;
   final String currentPhoto;
+  final String currentPhotoPath;
   final String currentweight;
   final String currentheight;
   final String currentage;
@@ -21,6 +22,7 @@ class EditUserPage extends StatefulWidget {
     required this.currentName,
     required this.currentRole,
     required this.currentPhoto,
+    required this.currentPhotoPath,
     required this.currentweight,
     required this.currentheight,
     required this.currentage,
@@ -32,8 +34,9 @@ class EditUserPage extends StatefulWidget {
 
 class _EditUserPageState extends State<EditUserPage> {
   final _editUserInfoFormKey = GlobalKey<FormState>();
-  File? sampleImage;
+  // File sampleImage = File(widget.currentPhoto);
   late String photo;
+  late String imagePath;
   late String nameChecker;
   late String name;
   late String email;
@@ -44,6 +47,8 @@ class _EditUserPageState extends State<EditUserPage> {
   late String docId;
 
   bool _isProcessing = false;
+  late String _photoPath;
+  late File _image;
   late TextEditingController _photoController;
   late TextEditingController _nameController;
   late TextEditingController _weightController;
@@ -52,6 +57,10 @@ class _EditUserPageState extends State<EditUserPage> {
 
   @override
   void initState() {
+    _image = File(
+      widget.currentPhotoPath,
+    );
+    _photoPath = widget.currentPhotoPath;
     _photoController = TextEditingController(
       text: widget.currentPhoto,
     );
@@ -72,7 +81,7 @@ class _EditUserPageState extends State<EditUserPage> {
 
   @override
   Widget build(BuildContext context) {
-    print("rol del current user: ${widget.currentRole}");
+    print("rol del current user: ${widget.currentPhotoPath}");
     return Scaffold(
       appBar: CustomAppBar(
         title: '',
@@ -94,7 +103,7 @@ class _EditUserPageState extends State<EditUserPage> {
                     ),
                   ),
                   // child: _photoController.text == ''
-                  child: sampleImage == null
+                  child: widget.currentPhotoPath == ''
                       ? Container(
                           width: 200,
                           height: 200,
@@ -124,7 +133,7 @@ class _EditUserPageState extends State<EditUserPage> {
                           child: CircleAvatar(
                             radius: 100.0,
                             backgroundImage: FileImage(
-                              sampleImage!,
+                              _image,
                             ),
                             backgroundColor: Colors.transparent,
                           ),
@@ -209,15 +218,10 @@ class _EditUserPageState extends State<EditUserPage> {
                                 onPressed: () async {
                                   if (_editUserInfoFormKey.currentState!
                                       .validate()) {
-                                    sampleImage == null
-                                        ? Get.snackbar(
-                                            'Recordatorio',
-                                            'Acompañe su cambio con \nuna nueva imagen.',
-                                            snackPosition: SnackPosition.BOTTOM,
-                                          )
-                                        : setState(() => _isProcessing = true);
+                                    setState(() => _isProcessing = true);
                                     uploadStatusImage(
-                                      sampleImage!,
+                                      _image,
+                                      imagePath = widget.currentPhotoPath,
                                       nameChecker = widget.currentName,
                                       docId = widget.currentEmail,
                                       age = _ageController.text,
@@ -233,7 +237,6 @@ class _EditUserPageState extends State<EditUserPage> {
                                       'Ha actualizado su información con éxito',
                                       '',
                                     );
-                                    Get.toNamed('home');
                                   }
                                 },
                               ),
@@ -254,7 +257,8 @@ class _EditUserPageState extends State<EditUserPage> {
     var tempImage = await ImagePicker().pickImage(source: ImageSource.gallery);
     print("como se ve el sample image ${tempImage!.path}");
     setState(() {
-      sampleImage = File(tempImage.path);
+      _image = File(tempImage.path);
+      _photoPath = tempImage.path;
     });
   }
 
@@ -262,7 +266,8 @@ class _EditUserPageState extends State<EditUserPage> {
     var tempImage = await ImagePicker().pickImage(source: ImageSource.camera);
     print("como se ve el sample image ${tempImage!.path}");
     setState(() {
-      sampleImage = File(tempImage.path);
+      _image = File(tempImage.path);
+      _photoPath = tempImage.path;
     });
   }
 
@@ -396,6 +401,7 @@ class _EditUserPageState extends State<EditUserPage> {
 
 Future<void> uploadStatusImage(
   File sampleImage,
+  String imagePath,
   String nameChecker,
   String docId,
   String age,
@@ -418,6 +424,7 @@ Future<void> uploadStatusImage(
     url = imageUrl.toString();
     await DatabaseUser.addUserInfo(
       photo: url,
+      imagePath: imagePath,
       age: age,
       docId: docId,
       height: height,
@@ -428,6 +435,7 @@ Future<void> uploadStatusImage(
     );
     await DatabaseUser.addUserOnListUsers(
       photo: url,
+      imagePath: imagePath,
       name: name,
       email: email,
       role: role,
@@ -443,6 +451,7 @@ Future<void> uploadStatusImage(
     url = imageUrl.toString();
     await DatabaseUser.updateUserInfo(
       photo: url,
+      imagePath: imagePath,
       age: age,
       docId: docId,
       height: height,
@@ -453,6 +462,7 @@ Future<void> uploadStatusImage(
     );
     await DatabaseUser.updateUserOnListUsers(
       photo: url,
+      imagePath: imagePath,
       name: name,
       email: email,
       role: role,

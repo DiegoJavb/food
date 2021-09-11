@@ -23,6 +23,7 @@ class _HomePageState extends State<HomePage> {
   ///Informacion completa del usuario
   String docId = '';
   String photo = '';
+  String photoPath = '';
   String name = '';
   String weight = '';
   String height = '';
@@ -54,6 +55,7 @@ class _HomePageState extends State<HomePage> {
         setState(() {
           docId = snapshot.id;
           photo = (userInfo as dynamic)['photo'];
+          photoPath = (userInfo as dynamic)['photoPath'];
           name = (userInfo as dynamic)['name'];
           weight = (userInfo as dynamic)['weight'];
           height = (userInfo as dynamic)['height'];
@@ -81,6 +83,7 @@ class _HomePageState extends State<HomePage> {
 
           ///]
           photo: this.photo,
+          photoPath: this.photoPath,
           name: this.name,
           weight: this.weight,
           height: this.height,
