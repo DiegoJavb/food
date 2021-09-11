@@ -36,7 +36,7 @@ class LoginController extends GetxController {
     } catch (e) {
       Get.snackbar(
         'Fallo',
-        'La combinación de usuario y contraseña no coinciden',
+        '$e',
         snackPosition: SnackPosition.BOTTOM,
       );
     }

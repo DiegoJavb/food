@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food/src/pages/tutorial_page.dart';
 import 'package:get/get.dart';
+import 'package:food/src/providers/role_pass.dart' as role;
 
 class InformationPage extends StatefulWidget {
   @override
@@ -69,6 +70,9 @@ class _InformationPageState extends State<InformationPage> {
           backgroundColor: Colors.white,
           onPressed: () {
             Get.toNamed('login');
+            setState(() {
+              role.rolUser = 'Paciente';
+            });
           },
         ),
         Expanded(
