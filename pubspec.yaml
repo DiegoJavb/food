@@ -58,7 +58,6 @@ flutter:
   uses-material-design: true
 
   assets:
-    - data/menu_opts.json
     - assets/
     - images/
   # fonts:
