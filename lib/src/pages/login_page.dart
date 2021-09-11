@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:food/src/components/customAppBar.dart';
@@ -15,7 +14,6 @@ class _LoginPageState extends State<LoginPage> {
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  FirebaseAuth auth = FirebaseAuth.instance;
   bool _isObscure = true;
 
   @override

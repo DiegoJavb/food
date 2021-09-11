@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:food/src/components/customAppBar.dart';
 import 'package:food/src/controllers/register_controller.dart';
 import 'package:get/get.dart';
-import 'package:food/src/providers/role_pass.dart' as role;
 
 class RegisterPage extends StatefulWidget {
   RegisterPage();
@@ -12,9 +11,9 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   bool _isObscure = true;
 
   @override
@@ -23,16 +22,16 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Widget build(BuildContext context) {
-    print(role.rolUser);
     return Scaffold(
       appBar: CustomAppBar(
         title: '',
       ),
       body: GetBuilder<RegisterController>(
+        init: RegisterController(),
         builder: (_) {
           return SingleChildScrollView(
             child: Form(
-              key: _formKey,
+              key: registerFormKey,
               child: Column(
                 children: <Widget>[
                   SizedBox(height: 20.0),

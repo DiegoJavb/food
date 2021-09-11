@@ -1,49 +1,49 @@
 {
   "project_info": {
-    "project_number": "82731679726",
-    "project_id": "food-49938",
-    "storage_bucket": "food-49938.appspot.com"
+    "project_number": "676243014550",
+    "project_id": "eat-healthy-8d9b5",
+    "storage_bucket": "eat-healthy-8d9b5.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:82731679726:android:10121a5ba3aef4ac1158ff",
+        "mobilesdk_app_id": "1:676243014550:android:09f5df7aa6dc062f7313b7",
         "android_client_info": {
-          "package_name": "com.healthy.food"
+          "package_name": "com.eatHealthy.food"
         }
       },
       "oauth_client": [
         {
-          "client_id": "82731679726-1rh71qqsmll06aeac7n3ajlrruerau09.apps.googleusercontent.com",
+          "client_id": "676243014550-isb9rprphtr62tb06pj3nskdc9u8v2dt.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.healthy.food",
-            "certificate_hash": "e821c396e41b1cb0abb73695375d98d6783358f0"
-          }
-        },
-        {
-          "client_id": "82731679726-liggnfvncr6rsc5dkntgu0ar3g748hha.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.healthy.food",
+            "package_name": "com.eatHealthy.food",
             "certificate_hash": "fa2556d33a8f1f56146f70ddffe41d305097179b"
           }
         },
         {
-          "client_id": "82731679726-5nlpsoc7d5viahks7rqnc96mskin8mas.apps.googleusercontent.com",
+          "client_id": "676243014550-mcgk2p7aud7n02dalms8ujofehfaq63l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.eatHealthy.food",
+            "certificate_hash": "e821c396e41b1cb0abb73695375d98d6783358f0"
+          }
+        },
+        {
+          "client_id": "676243014550-cio6p9c52bpgbpeqr2nim3odgk5n4f6c.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBgz0tF19xRyczovuZgyq2Be2Wveey4qD4"
+          "current_key": "AIzaSyCF0K5W-fIANtsai7DrpL3jMBMndkcXD4k"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "82731679726-5nlpsoc7d5viahks7rqnc96mskin8mas.apps.googleusercontent.com",
+              "client_id": "676243014550-cio6p9c52bpgbpeqr2nim3odgk5n4f6c.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

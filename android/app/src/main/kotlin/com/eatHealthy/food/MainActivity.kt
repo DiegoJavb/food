@@ -1,4 +1,4 @@
-package com.healthy.food
+package com.eatHealthy.food
 
 import io.flutter.embedding.android.FlutterActivity
 
