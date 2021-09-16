@@ -20,11 +20,14 @@ Firebase es una plataforma cuya función es desarrollar y facilitar la creación
 
 ## 2. Estructura y arquitectura
 ### - Arquitectura
-La arquitectura de la aplicación movil se muestra en la siguiente imagen
-![image](https://user-images.githubusercontent.com/42130200/127058102-7a10a3ef-a83e-4e89-ab96-dbe9dc32c24a.png)
+La arquitectura de la aplicación movil se muestra en la siguiente imagen.
+
+![image](https://user-images.githubusercontent.com/42130200/133679064-1b9e78d3-c58c-4ad2-a74b-8c676d680b02.png)
+
 
 ### - Estructura
 La estructura de la base de datos, se muestra en la siguiente imagen.
+
 ![image](https://user-images.githubusercontent.com/42130200/131374137-56c6a25d-a291-4325-a84f-43e3348a6eff.png)
 
 ## 3. Funcionalidades principales
