@@ -17,12 +17,6 @@ La aplicación móvil será nativa híbrida por lo que Flutter es un buen framew
 
 Firebase es una plataforma cuya función es desarrollar y facilitar la creación de apps de elevada calidad de una forma rápida, ya que provee una gran cantidad de micro-servicios que permiten el desarrollo de la aplicación en su totalidad. Entre las herramientas, que ofrece firebase se utilizo el almacenamiento de datos firestore, storage para las imagenes y hosting para su despliegue.
 
-### 1.1 BurnDown chart
-
-A continuacion se muestra como ha ido creciendo el proyecto desde su inicio
-
-![image](https://user-images.githubusercontent.com/42130200/127097020-f8b794ed-8f27-4f16-ac0f-d5cf6e0c83d9.png)
-![image](https://user-images.githubusercontent.com/42130200/127097026-4ebb99ce-cdda-4cf3-a9d6-6e74ca3eeb9a.png)
 
 ## 2. Estructura y arquitectura
 ### - Arquitectura
@@ -94,12 +88,3 @@ Posteriormente depuraremos la aplicación
 ## 5. Anexos
 En el siguiente link, se encuentra toda la documentación como Manual Técnico, Manual de Instalación, Informe Técnico y los diferentes anexos del proyecto. [Documentación](https://github.com/DiegoJavb/Documentacion_Tesis.git)
 
-
-For help getting started with Flutter, view our
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
