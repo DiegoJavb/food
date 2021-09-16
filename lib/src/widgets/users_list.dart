@@ -75,6 +75,7 @@ class _UsersListState extends State<UsersList> {
     String docId,
     String photoUrl,
   ) {
+    print('${userInformation.nameUser}');
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50.0),
@@ -88,23 +89,26 @@ class _UsersListState extends State<UsersList> {
       ),
       child: ListTile(
         onTap: () {
-          userInformation.nameUser == '' || userInformation.nameUser == null
-              ? Get.snackbar(
-                  'Actualice',
-                  'Su informacion personal para poder continuar',
-                  snackPosition: SnackPosition.BOTTOM,
-                )
-              : DatabaseUser.addContact(
-                  name: name,
-                  email: email,
-                  photoUrl: photoUrl,
-                  role: role,
-                  docId: docId,
-                );
-          Get.snackbar(
-            'Usuario añadido a tus contactos',
-            '',
-          );
+          if (userInformation.nameUser == '' ||
+              userInformation.nameUser == null) {
+            Get.snackbar(
+              'Actualice',
+              'Su informacion personal para poder continuar',
+              snackPosition: SnackPosition.BOTTOM,
+            );
+          } else {
+            DatabaseUser.addContact(
+              name: name,
+              email: email,
+              photoUrl: photoUrl,
+              role: role,
+              docId: docId,
+            );
+            Get.snackbar(
+              'Usuario añadido a tus contactos',
+              '',
+            );
+          }
         },
         leading: Container(
           child: CircleAvatar(

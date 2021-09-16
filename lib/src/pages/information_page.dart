@@ -12,40 +12,48 @@ class _InformationPageState extends State<InformationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(0.0),
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('images/info.jpg'),
-              fit: BoxFit.cover,
-            ),
-          ),
-          child: Column(
-            children: [
-              SizedBox(height: 100.0),
-              Image(
-                image: AssetImage('images/Healthy.png'),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(0.0),
+          child: Container(
+            width: double.infinity,
+            // height: double.infinity,
+            height: MediaQuery.of(context).size.height,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('images/info.jpg'),
+                fit: BoxFit.cover,
               ),
-              SizedBox(height: 20.0),
-              _card(),
-              SizedBox(height: 20.0),
-              Container(
-                width: 200.0,
-                child: FloatingActionButton.extended(
-                  heroTag: 'tutorialButton',
-                  label: Text(
-                    'Tutorial',
-                    style: TextStyle(fontSize: 15.0),
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(height: 100.0),
+                  Image(
+                    image: AssetImage('images/Healthy.png'),
                   ),
-                  foregroundColor: Colors.black,
-                  backgroundColor: Colors.white,
-                  onPressed: () {
-                    Get.to(() => TutorialPage());
-                  },
-                ),
-              )
-            ],
+                  SizedBox(height: 20.0),
+                  _card(),
+                  SizedBox(height: 20.0),
+                  Container(
+                    width: 200.0,
+                    child: FloatingActionButton.extended(
+                      heroTag: 'tutorialButton',
+                      label: Text(
+                        'Tutorial',
+                        style: TextStyle(fontSize: 15.0),
+                      ),
+                      foregroundColor: Colors.black,
+                      backgroundColor: Colors.white,
+                      onPressed: () {
+                        Get.to(() => TutorialPage());
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 20.0),
+                ],
+              ),
+            ),
           ),
         ),
       ),

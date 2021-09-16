@@ -81,7 +81,7 @@ class _EditUserPageState extends State<EditUserPage> {
 
   @override
   Widget build(BuildContext context) {
-    print("rol del current user: ${widget.currentPhotoPath}");
+    print("rol del current user: ${_photoController.text}");
     return Scaffold(
       appBar: CustomAppBar(
         title: '',
@@ -103,38 +103,21 @@ class _EditUserPageState extends State<EditUserPage> {
                     ),
                   ),
                   // child: _photoController.text == ''
-                  child: widget.currentPhotoPath == ''
+                  child: _photoPath == ''
                       ? Container(
                           width: 200,
                           height: 200,
-                          child: _photoController.text == ''
-                              // child: sampleImage == null
-                              ? Center(
-                                  child: Text(
-                                    widget.currentEmail[0].toUpperCase(),
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(fontSize: 60.0),
-                                  ),
-                                )
-                              : Container(
-                                  width: 200,
-                                  height: 200,
-                                  child: Center(
-                                    child: CircleAvatar(
-                                      radius: 100.0,
-                                      backgroundImage:
-                                          NetworkImage(_photoController.text),
-                                      backgroundColor: Colors.transparent,
-                                    ),
-                                  ),
-                                ),
+                          child: Center(
+                            child: CircleAvatar(
+                                radius: 100.0,
+                                child: Icon(Icons.person),
+                                backgroundColor: Colors.transparent),
+                          ),
                         )
                       : Center(
                           child: CircleAvatar(
                             radius: 100.0,
-                            backgroundImage: FileImage(
-                              _image,
-                            ),
+                            backgroundImage: FileImage(File(_photoPath)),
                             backgroundColor: Colors.transparent,
                           ),
                         ),
@@ -216,27 +199,36 @@ class _EditUserPageState extends State<EditUserPage> {
                                   style: TextStyle(fontSize: 15.0),
                                 ),
                                 onPressed: () async {
-                                  if (_editUserInfoFormKey.currentState!
-                                      .validate()) {
-                                    setState(() => _isProcessing = true);
-                                    uploadStatusImage(
-                                      _image,
-                                      imagePath = widget.currentPhotoPath,
-                                      nameChecker = widget.currentName,
-                                      docId = widget.currentEmail,
-                                      age = _ageController.text,
-                                      name = _nameController.text,
-                                      email = widget.currentEmail,
-                                      role = widget.currentRole,
-                                      weight = _weightController.text,
-                                      height = _heightController.text,
-                                    );
-                                    setState(() => _isProcessing = false);
-
+                                  if (_photoPath == '') {
                                     Get.snackbar(
-                                      'Ha actualizado su información con éxito',
+                                      'Agregue una imagen',
                                       '',
+                                      snackPosition: SnackPosition.BOTTOM,
                                     );
+                                  } else {
+                                    if (_editUserInfoFormKey.currentState!
+                                        .validate()) {
+                                      setState(() => _isProcessing = true);
+                                      uploadStatusImage(
+                                        _image,
+                                        imagePath = _photoPath,
+                                        nameChecker = widget.currentName,
+                                        docId = widget.currentEmail,
+                                        age = _ageController.text,
+                                        name = _nameController.text,
+                                        email = widget.currentEmail,
+                                        role = widget.currentRole,
+                                        weight = _weightController.text,
+                                        height = _heightController.text,
+                                      );
+                                      setState(() => _isProcessing = false);
+
+                                      Get.snackbar(
+                                        'Ha actualizado su información con éxito',
+                                        '',
+                                      );
+                                    }
+                                    Get.toNamed('home');
                                   }
                                 },
                               ),

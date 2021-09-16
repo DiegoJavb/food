@@ -14,25 +14,30 @@ class LoginController extends GetxController {
   //Inicio de sesion con email y passwort
   void signInWithEmailAndPassword(String email, String password) async {
     try {
-      (await _auth.signInWithEmailAndPassword(email: email, password: password))
-          .user;
-      Get.snackbar(
-        'Hola',
-        'Ha ingresado correctamente',
-      );
-      guardarUsuario(email);
-      DatabaseUser.userUid = email;
-      DatabaseUserInfo.userUid = email;
-      DatabaseEvaluations.userUid = email;
-      Database.userUid = email;
-      Future.delayed(
-        Duration(seconds: 2),
-        () {
-          Get.toNamed(
-            'home',
-          );
-        },
-      );
+      final User? user = (await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      ))
+          .user!;
+      if (user != null) {
+        guardarUsuario(email);
+        DatabaseUser.userUid = email;
+        DatabaseUserInfo.userUid = email;
+        DatabaseEvaluations.userUid = email;
+        Database.userUid = email;
+        Get.snackbar(
+          'Hola',
+          'Ha ingresado correctamente',
+        );
+        Future.delayed(
+          Duration(seconds: 2),
+          () {
+            Get.toNamed(
+              'home',
+            );
+          },
+        );
+      } else {}
     } catch (e) {
       Get.snackbar(
         'Fallo',

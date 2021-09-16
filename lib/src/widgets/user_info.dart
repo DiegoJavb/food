@@ -6,6 +6,7 @@ import 'package:food/src/pages/edit_user_page.dart';
 import 'package:food/src/pages/my_contacts_page.dart';
 import 'package:food/src/pages/notifications_page.dart';
 import 'package:get/get.dart';
+import 'package:food/src/providers/currentUser.dart' as userInformation;
 
 class UserInfo extends StatefulWidget {
   ///Informacion basica del usuario
@@ -41,6 +42,7 @@ class _UserInfoState extends State<UserInfo> {
 
   @override
   Widget build(BuildContext context) {
+    print('trae photo: ${widget.photo}');
     return Drawer(
         child: ListView(
       children: [
@@ -59,12 +61,10 @@ class _UserInfoState extends State<UserInfo> {
                 widget.photo == ''
                     ? CircleAvatar(
                         radius: 40.0,
-                        backgroundColor: Colors.blueGrey[100],
-                        child: Text(
-                          widget.email[0].toUpperCase(),
-                          style: TextStyle(fontSize: 40),
-                        ),
-                      )
+                        backgroundColor: Colors.transparent,
+                        child: Icon(
+                          Icons.person,
+                        ))
                     : CircleAvatar(
                         radius: 40.0,
                         backgroundImage: NetworkImage(widget.photo),
@@ -173,6 +173,15 @@ class _LogoutState extends State<Logout> {
           backgroundColor: Colors.red[200],
           onPressed: () async {
             _.signOut();
+            setState(() {
+              userInformation.ageUser = '';
+              userInformation.emailUser = '';
+              userInformation.heightUser = '';
+              userInformation.nameUser = '';
+              userInformation.photoUser = '';
+              userInformation.roleUser = '';
+              userInformation.weightUser = '';
+            });
           },
         );
       },
