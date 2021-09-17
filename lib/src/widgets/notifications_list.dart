@@ -6,7 +6,11 @@ import 'package:food/src/res/custom_colors.dart';
 import 'package:get/get.dart';
 
 class NotificationsList extends StatelessWidget {
-  const NotificationsList({Key? key}) : super(key: key);
+  final String role;
+  const NotificationsList({
+    required this.role,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +70,7 @@ class NotificationsList extends StatelessWidget {
             () => NotificationDetailsPage(
               userId: userId,
               userName: name,
+              role: role,
             ),
           );
         },

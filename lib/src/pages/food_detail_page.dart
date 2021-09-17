@@ -16,6 +16,8 @@ class FoodDetailPage extends StatelessWidget {
   final String enviado;
   final String notificationID;
   final String currentEvaluation;
+  //role del usuario activo
+  final String role;
 
   FoodDetailPage({
     ///
@@ -34,6 +36,9 @@ class FoodDetailPage extends StatelessWidget {
 
     ///currentEvaluation
     required this.currentEvaluation,
+
+    ///
+    required this.role,
   });
 
   @override
@@ -64,6 +69,9 @@ class FoodDetailPage extends StatelessWidget {
             ///evaluacion
             currentEvaluation: this.currentEvaluation,
             evaluationFocusNode: _evaluationFocusNode,
+
+            ///role
+            role: this.role,
           ),
         ),
       ),

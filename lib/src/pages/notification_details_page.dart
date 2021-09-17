@@ -5,9 +5,11 @@ import 'package:food/src/widgets/notifications_user_list.dart';
 class NotificationDetailsPage extends StatelessWidget {
   final String userId;
   final String userName;
+  final String role;
   NotificationDetailsPage({
     required this.userId,
     required this.userName,
+    required this.role,
   });
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,7 @@ class NotificationDetailsPage extends StatelessWidget {
           padding: EdgeInsets.all(16.0),
           child: NotificationUserList(
             userId: this.userId,
+            role: role,
           ),
         ),
       ),

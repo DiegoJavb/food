@@ -51,6 +51,7 @@ class DatabaseUser {
       "weight": weight,
       "height": height,
       "age": age,
+      "role": role,
     };
 
     await documentReferencer
@@ -89,6 +90,12 @@ class DatabaseUser {
         .update(data)
         .whenComplete(() => print("usuario actualizado en la BDD"))
         .catchError((e) => print(e));
+  }
+
+  static Stream<DocumentSnapshot> readUserInfo(userEmail) {
+    DocumentReference documentReference =
+        _mainCollection.doc(userEmail).collection('information').doc(userEmail);
+    return documentReference.snapshots();
   }
 
   //BASE DE DATOS PARA CONTACTOS

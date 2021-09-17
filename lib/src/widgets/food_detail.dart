@@ -25,6 +25,8 @@ class FoodDetail extends StatefulWidget {
   /// evaluacion alimenticia
   final FocusNode evaluationFocusNode;
   final String currentEvaluation;
+  //
+  final String role;
   const FoodDetail({
     ///
     required this.peso,
@@ -42,6 +44,8 @@ class FoodDetail extends StatefulWidget {
     //Evaluacion alimenticia
     required this.evaluationFocusNode,
     required this.currentEvaluation,
+    //
+    required this.role,
     Key? key,
   }) : super(key: key);
 
@@ -64,6 +68,7 @@ class _FoodDetailState extends State<FoodDetail> {
 
   @override
   Widget build(BuildContext context) {
+    print("este es mi rol: ${widget.role}");
     return Form(
       key: _editItemFormKey,
       child: ListView(
@@ -153,7 +158,7 @@ class _FoodDetailState extends State<FoodDetail> {
                   ),
                 ),
                 SizedBox(height: 20.0),
-                userInformation.roleUser == 'Nutricionista'
+                widget.role == 'Nutricionista'
                     ? CustomFormField(
                         maxLines: 5,
                         isLabelEnabled: false,
@@ -188,47 +193,55 @@ class _FoodDetailState extends State<FoodDetail> {
                   children: [
                     Container(
                       width: 200.0,
-                      child: userInformation.roleUser == 'Nutricionista'
-                          ? FloatingActionButton.extended(
-                              label: Text(
-                                'Enviar',
-                                style: TextStyle(fontSize: 17.0),
+                      child: widget.role == 'Nutricionista'
+                          ? Container(
+                              width: 200.0,
+                              child: FloatingActionButton.extended(
+                                backgroundColor: Colors.white,
+                                label: Text(
+                                  'Enviar',
+                                  style: TextStyle(
+                                      fontSize: 17.0, color: Colors.black),
+                                ),
+                                onPressed: () async {
+                                  if (_editItemFormKey.currentState!
+                                      .validate()) {
+                                    setState(() => _isProcessing = true);
+                                    DatabaseEvaluations.addFoodEvaluated(
+                                      height: widget.estatura,
+                                      weight: widget.peso,
+                                      age: widget.edad,
+                                      days: widget.dias,
+                                      breakfast: widget.desayuno,
+                                      lunch: widget.almuerzo,
+                                      dinner: widget.cena,
+                                      snack: widget.aperitivos,
+                                      toUser: widget.enviado,
+                                      carriedEvaluationId:
+                                          widget.notificacionID,
+                                      evaluation: _evaluationController.text,
+                                    );
+                                    DatabaseEvaluations.updateFoodEvaluated(
+                                      days: widget.dias,
+                                      breakfast: widget.desayuno,
+                                      lunch: widget.almuerzo,
+                                      dinner: widget.cena,
+                                      snack: widget.aperitivos,
+                                      toUser: widget.enviado,
+                                      carriedEvaluationId:
+                                          widget.notificacionID,
+                                      evaluation: _evaluationController.text,
+                                    );
+                                    DatabaseEvaluations.addContact(
+                                      fromUser: userInformation.nameUser!,
+                                      emailFromUser: Database.userUid!,
+                                      toUser: widget.enviado,
+                                    );
+                                    setState(() => _isProcessing = false);
+                                    Navigator.of(context).pop();
+                                  }
+                                },
                               ),
-                              onPressed: () async {
-                                if (_editItemFormKey.currentState!.validate()) {
-                                  setState(() => _isProcessing = true);
-                                  DatabaseEvaluations.addFoodEvaluated(
-                                    height: widget.estatura,
-                                    weight: widget.peso,
-                                    age: widget.edad,
-                                    days: widget.dias,
-                                    breakfast: widget.desayuno,
-                                    lunch: widget.almuerzo,
-                                    dinner: widget.cena,
-                                    snack: widget.aperitivos,
-                                    toUser: widget.enviado,
-                                    carriedEvaluationId: widget.notificacionID,
-                                    evaluation: _evaluationController.text,
-                                  );
-                                  DatabaseEvaluations.updateFoodEvaluated(
-                                    days: widget.dias,
-                                    breakfast: widget.desayuno,
-                                    lunch: widget.almuerzo,
-                                    dinner: widget.cena,
-                                    snack: widget.aperitivos,
-                                    toUser: widget.enviado,
-                                    carriedEvaluationId: widget.notificacionID,
-                                    evaluation: _evaluationController.text,
-                                  );
-                                  DatabaseEvaluations.addContact(
-                                    fromUser: userInformation.nameUser!,
-                                    emailFromUser: Database.userUid!,
-                                    toUser: widget.enviado,
-                                  );
-                                  setState(() => _isProcessing = false);
-                                  Navigator.of(context).pop();
-                                }
-                              },
                             )
                           : SizedBox(),
                     ),

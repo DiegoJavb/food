@@ -7,8 +7,10 @@ import 'package:get/get.dart';
 
 class NotificationUserList extends StatelessWidget {
   final String userId;
+  final String role;
   NotificationUserList({
     required this.userId,
+    required this.role,
   });
 
   @override
@@ -113,6 +115,7 @@ class NotificationUserList extends StatelessWidget {
               enviado: enviado,
               notificationID: notificationID,
               currentEvaluation: evaluacion,
+              role: role,
             ),
           );
         },
