@@ -20,7 +20,7 @@ class NotificationsPage extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(16.0),
-          child: NotificationsList(role: role),
+          child: NotificationsList(role: this.role),
         ),
       ),
     );

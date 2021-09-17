@@ -25,7 +25,6 @@ class FoodDetail extends StatefulWidget {
   /// evaluacion alimenticia
   final FocusNode evaluationFocusNode;
   final String currentEvaluation;
-  //
   final String role;
   const FoodDetail({
     ///
@@ -44,7 +43,6 @@ class FoodDetail extends StatefulWidget {
     //Evaluacion alimenticia
     required this.evaluationFocusNode,
     required this.currentEvaluation,
-    //
     required this.role,
     Key? key,
   }) : super(key: key);
@@ -68,7 +66,6 @@ class _FoodDetailState extends State<FoodDetail> {
 
   @override
   Widget build(BuildContext context) {
-    print("este es mi rol: ${widget.role}");
     return Form(
       key: _editItemFormKey,
       child: ListView(
@@ -201,7 +198,9 @@ class _FoodDetailState extends State<FoodDetail> {
                                 label: Text(
                                   'Enviar',
                                   style: TextStyle(
-                                      fontSize: 17.0, color: Colors.black),
+                                    fontSize: 17.0,
+                                    color: Colors.black,
+                                  ),
                                 ),
                                 onPressed: () async {
                                   if (_editItemFormKey.currentState!

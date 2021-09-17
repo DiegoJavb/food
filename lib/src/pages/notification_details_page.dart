@@ -22,7 +22,7 @@ class NotificationDetailsPage extends StatelessWidget {
           padding: EdgeInsets.all(16.0),
           child: NotificationUserList(
             userId: this.userId,
-            role: role,
+            role: this.role,
           ),
         ),
       ),

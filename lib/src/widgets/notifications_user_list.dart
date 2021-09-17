@@ -115,7 +115,7 @@ class NotificationUserList extends StatelessWidget {
               enviado: enviado,
               notificationID: notificationID,
               currentEvaluation: evaluacion,
-              role: role,
+              role: this.role,
             ),
           );
         },

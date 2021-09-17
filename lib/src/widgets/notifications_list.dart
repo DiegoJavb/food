@@ -70,7 +70,7 @@ class NotificationsList extends StatelessWidget {
             () => NotificationDetailsPage(
               userId: userId,
               userName: name,
-              role: role,
+              role: this.role,
             ),
           );
         },

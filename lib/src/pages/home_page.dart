@@ -5,6 +5,7 @@ import 'package:food/src/components/customAppBar.dart';
 import 'package:food/src/controllers/database_controller.dart';
 import 'package:food/src/widgets/content_list.dart';
 import 'package:food/src/widgets/user_info.dart' as user_info;
+import 'package:food/src/providers/currentUser.dart' as userInformation;
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final CollectionReference _mainCollection = _firestore.collection('users');
@@ -42,34 +43,33 @@ class _HomePageState extends State<HomePage> {
         });
       });
     });
-    // DocumentReference userDocumentComplete = _mainCollection
-    //     .doc(Database.userUid)
-    //     .collection('information')
-    //     .doc(Database.userUid);
+    DocumentReference userDocumentComplete = _mainCollection
+        .doc(Database.userUid)
+        .collection('information')
+        .doc(Database.userUid);
 
-    // userDocumentComplete.get().then((snapshot) {
-    //   setState(() {
-    //     var userInfo = snapshot.data();
-    //     print('toda la informacion: $userInfo');
-    //     setState(() {
-    //       docId = snapshot.id;
-    //       photo = (userInfo as dynamic)['photo'];
-    //       photoPath = (userInfo as dynamic)['photoPath'];
-    //       name = (userInfo as dynamic)['name'];
-    //       weight = (userInfo as dynamic)['weight'];
-    //       height = (userInfo as dynamic)['height'];
-    //       age = (userInfo as dynamic)['age'];
-    //       role = (userInfo as dynamic)['role'];
-    //       userInformation.nameUser = name;
-    //       userInformation.photoUser = photo;
-    //       userInformation.weightUser = weight;
-    //       userInformation.heightUser = height;
-    //       userInformation.ageUser = age;
-    //       userInformation.emailUser = email;
-    //       userInformation.roleUser = role;
-    //     });
-    //   });
-    // });
+    userDocumentComplete.get().then((snapshot) {
+      setState(() {
+        var userInfo = snapshot.data();
+        print('toda la informacion: $userInfo');
+        setState(() {
+          docId = snapshot.id;
+          photo = (userInfo as dynamic)['photo'];
+          photoPath = (userInfo as dynamic)['photoPath'];
+          name = (userInfo as dynamic)['name'];
+          weight = (userInfo as dynamic)['weight'];
+          height = (userInfo as dynamic)['height'];
+          age = (userInfo as dynamic)['age'];
+          userInformation.nameUser = name;
+          userInformation.photoUser = photo;
+          userInformation.weightUser = weight;
+          userInformation.heightUser = height;
+          userInformation.ageUser = age;
+          userInformation.emailUser = email;
+          userInformation.roleUser = role;
+        });
+      });
+    });
   }
 
   @override
@@ -82,12 +82,12 @@ class _HomePageState extends State<HomePage> {
           role: this.role,
 
           ///]
-          // photo: this.photo,
-          // photoPath: this.photoPath,
-          // name: this.name,
-          // weight: this.weight,
-          // height: this.height,
-          // age: this.age,
+          photo: this.photo,
+          photoPath: this.photoPath,
+          name: this.name,
+          weight: this.weight,
+          height: this.height,
+          age: this.age,
         ),
         appBar: CustomAppBar(title: 'Contenido'),
         body: Contentlist());
