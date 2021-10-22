@@ -2,7 +2,6 @@
 
 El siguiente proyecto muestra el desarrollo de una Aplicación Móvil, que permite a los usuarios llevar un registro sobre los alimentos que ingieren en base a un análisis elaborado por un Nutricionista.
 
-**Video demostrativo**
 
 **Realizado por:**
 
@@ -11,11 +10,10 @@ El siguiente proyecto muestra el desarrollo de una Aplicación Móvil, que permi
 ## 1. Herramientas de Desarrollo
 ### FLUTTER
 
-La aplicación móvil será nativa híbrida por lo que Flutter es un buen framework para este tipo de aplicaciones. Al ser modular, permite separar la lógica del negocio de las interfaces de usuario.
-
+La aplicación móvil será nativa híbrida por lo que Flutter es un buen framework para este tipo de aplicaciones. Gracias a sus widgets pre-contruidos, el desarrollo de aplicaciones tiene un aspecto atractivo. Ademas, permite integrar o separar su la lógica y sus respectivos componentes.
 ### FIREBASE
 
-Firebase es una plataforma cuya función es desarrollar y facilitar la creación de apps de elevada calidad de una forma rápida, ya que provee una gran cantidad de micro-servicios que permiten el desarrollo de la aplicación en su totalidad. Entre las herramientas, que ofrece firebase se utilizo el almacenamiento de datos firestore, storage para las imagenes y hosting para su despliegue.
+Firebase es una plataforma cuya función es desarrollar y facilitar la creación de apps de elevada calidad de una forma rápida, ya que provee una gran cantidad de micro-servicios que permiten el desarrollo de la aplicación en su totalidad. Entre las herramientas, que ofrece firebase se utilizo el almacenamiento de datos firestore y storage para las imagenes.
 
 
 ## 2. Estructura y arquitectura
