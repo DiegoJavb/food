@@ -22,7 +22,7 @@ Firebase es una plataforma cuya función es desarrollar y facilitar la creación
 ### - Arquitectura
 La arquitectura de la aplicación movil se muestra en la siguiente imagen.
 
-![image](https://user-images.githubusercontent.com/42130200/133679064-1b9e78d3-c58c-4ad2-a74b-8c676d680b02.png)
+![image](https://user-images.githubusercontent.com/42130200/133742471-3aa16f66-3e8e-4c0c-900e-841b6f8463ae.png)
 
 
 ### - Estructura
