@@ -39,11 +39,11 @@ class _LoginPageState extends State<LoginPage> {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  _googleLogin(_),
-                  Center(
-                      child: Container(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Text('Ó'))),
+                  // _googleLogin(_),
+                  // Center(
+                  //     child: Container(
+                  //         padding: const EdgeInsets.all(10.0),
+                  //         child: Text('Ó'))),
                   _insertUser(),
                   _insertPassword(),
                   _loginButton(_),

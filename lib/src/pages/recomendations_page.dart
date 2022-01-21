@@ -285,15 +285,51 @@ class RecomemendationsList extends StatelessWidget {
               Icons.delete,
               color: Colors.red[400],
             ),
-            onPressed: () {
-              DatabaseUser.deleteFood(foodId: documentSnapshot.id);
-            },
+            onPressed: () => _showAlert(context, documentSnapshot.id),
+            // onPressed: () {
+            //   DatabaseUser.deleteFood(foodId: documentSnapshot.id);
+            // },
           ),
         )
       ]);
     }).toList();
     return newList;
   }
+}
+
+void _showAlert(BuildContext context, String id) {
+  showDialog(
+    context: context,
+    barrierDismissible: true,
+    builder: (context) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text('Realmente quiere eliminar este registro'),
+          ],
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: Text('Cancelar'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          TextButton(
+            child: Text('Aceptar'),
+            onPressed: () {
+              DatabaseUser.deleteFood(foodId: id);
+              Navigator.of(context).pop();
+            },
+          )
+        ],
+      );
+    },
+  );
 }
 
 // COLORES HEXADECIMALES

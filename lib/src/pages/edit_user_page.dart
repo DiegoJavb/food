@@ -315,9 +315,15 @@ class _EditUserPageState extends State<EditUserPage> {
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
       ),
       onChanged: (valor) {
-        setState(() {
-          height = valor;
-        });
+        var h = int.parse(valor);
+        if (h < 220) {
+          setState(() {
+            height = valor;
+          });
+        } else {
+          Get.snackbar('Agregue una altura correcta', '',
+              snackPosition: SnackPosition.BOTTOM);
+        }
       },
     );
   }
@@ -344,9 +350,15 @@ class _EditUserPageState extends State<EditUserPage> {
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
       ),
       onChanged: (valor) {
-        setState(() {
-          weight = valor;
-        });
+        var n = int.parse(valor);
+        if (n < 200) {
+          setState(() {
+            weight = valor;
+          });
+        } else {
+          Get.snackbar('El peso no puede ser mayor a 200', '',
+              snackPosition: SnackPosition.BOTTOM);
+        }
       },
     );
   }
@@ -382,7 +394,9 @@ class _EditUserPageState extends State<EditUserPage> {
       context: context,
       initialDate: new DateTime(1980),
       firstDate: new DateTime(1920),
-      lastDate: new DateTime.now(),
+      lastDate: widget.currentRole == 'Paciente'
+          ? new DateTime(2015)
+          : new DateTime(2000),
       locale: Locale('es', 'ES'),
     ))!;
     var formatDate = DateFormat('MMM d, yyyy');

@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "676243014550-1bm5hedcbpft6sshkek1o17tukdg5ni5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.eatHealthy.food",
+            "certificate_hash": "b8e72eb78dbffec06a2a8cd3a76d881dd446d7e1"
+          }
+        },
+        {
           "client_id": "676243014550-isb9rprphtr62tb06pj3nskdc9u8v2dt.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
